@@ -1,0 +1,17 @@
+apiVersion: v2
+name: argocd
+description: ArgoCD for Unerror Network
+type: application
+version: 0.2.2
+appVersion: "0.2.2"
+
+dependencies:
+  - name: cert-manager
+    version: 1.5.3
+    repository: https://charts.jetstack.io
+  - name: external-dns
+    version: 5.4.8
+    repository: https://charts.bitnami.com/bitnami
+  - name: ingress-nginx
+    version: 4.0.2
+    repository: https://kubernetes.github.io/ingress-nginx

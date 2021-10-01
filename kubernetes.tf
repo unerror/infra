@@ -1,0 +1,108 @@
+provider "kubernetes" {
+  host  = digitalocean_kubernetes_cluster.une-k8s.endpoint
+  token = digitalocean_kubernetes_cluster.une-k8s.kube_config[0].token
+  cluster_ca_certificate = base64decode(
+    digitalocean_kubernetes_cluster.une-k8s.kube_config[0].cluster_ca_certificate
+  )
+
+}
+
+provider "helm" {
+  kubernetes {
+    host  = digitalocean_kubernetes_cluster.une-k8s.endpoint
+    token = digitalocean_kubernetes_cluster.une-k8s.kube_config[0].token
+    cluster_ca_certificate = base64decode(
+      digitalocean_kubernetes_cluster.une-k8s.kube_config[0].cluster_ca_certificate
+    )
+  }
+}
+
+resource "digitalocean_kubernetes_cluster" "une-k8s" {
+  name = "une-k8s"
+
+  region = var.do_region
+  # Grab the latest version slug from `doctl kubernetes options versions`
+  version      = var.kubernetes_version
+  tags         = var.kubernetes_tags
+  vpc_uuid     = digitalocean_vpc.kubernetes-tor1.id
+  auto_upgrade = true
+
+  maintenance_policy {
+    day        = "sunday"
+    start_time = "13:00"
+  }
+
+  dynamic "node_pool" {
+    for_each = var.kubernetes_node_pools
+    content {
+      name       = node_pool.value["name"]
+      size       = node_pool.value["size"]
+      node_count = node_pool.value["node_count"]
+    }
+  }
+}
+
+resource "helm_release" "base" {
+  name = "base"
+
+  chart             = "./charts/base"
+  namespace         = "default"
+  timeout           = 900
+  dependency_update = true
+  skip_crds         = false
+  cleanup_on_fail   = true
+
+  values = [
+    file("./charts/base/values.yaml")
+  ]
+
+  dynamic "set_sensitive" {
+    for_each = data.sops_file.base-chart-values.data
+
+    content {
+      name  = set_sensitive.key
+      value = set_sensitive.value
+      type  = "auto"
+    }
+  }
+}
+
+resource "time_sleep" "base-chart-install" {
+  depends_on = [
+    helm_release.base
+  ]
+
+  create_duration = "20s"
+}
+
+resource "helm_release" "argocd" {
+  name = "argocd"
+
+  chart             = "./charts/argocd"
+  namespace         = "default"
+  dependency_update = true
+
+  values = [
+    file("./charts/argocd/values.yaml")
+  ]
+
+  depends_on = [
+    time_sleep.base-chart-install
+  ]
+}
+
+
+resource "helm_release" "certs" {
+  name = "certs"
+
+  chart     = "./charts/certs"
+  namespace = "default"
+
+  values = [
+    file("./charts/certs/values.yaml")
+  ]
+
+  depends_on = [
+    time_sleep.base-chart-install
+  ]
+}

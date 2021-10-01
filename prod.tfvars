@@ -1,0 +1,21 @@
+do_region = "tor1"
+
+databases = {
+  homeassistant = {
+    pool      = "home-assistant"
+    pool_size = 4
+    database  = "homeassistant"
+    user      = "homeassistant"
+  }
+}
+
+database_firewall = ["158.69.126.10", "156.57.26.153"]
+
+kubernetes_vpc_cidr = "10.118.0.0/20"
+kubernetes_tags     = ["kubernetes", "unerror", "unerror-network"]
+kubernetes_version  = "1.21.3-do.0"
+kubernetes_node_pools = [{
+  name       = "worker-pool"
+  size       = "s-1vcpu-2gb"
+  node_count = 3
+}]

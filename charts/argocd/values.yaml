@@ -1,0 +1,23 @@
+argo-cd:
+    createAggregateRoles: true
+    server:
+        certificate:
+            domain: argo.unerror.network
+            enabled: true
+            issuer:
+                kind: ClusterIssuer
+                name: letsencrypt-prod
+        ingress:
+            enabled: true
+            ingressClassName: nginx
+            https: true
+            tls:
+            - hosts:
+                - argo.unerror.network
+              secretName: argo-unerror-network-cert
+            annotations:
+                cert-manager.io/cluster-issuer: letsencrypt-prod
+                nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+                nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+            hosts:
+            - argo.unerror.network

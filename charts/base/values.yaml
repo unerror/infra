@@ -1,0 +1,28 @@
+cert-manager:
+  ingressShim:
+    defaultIssuerGroup: cert-manager.io
+    defaultIssuerKind: ClusterIssuer
+    defaultIssuerName: letsencrypt-prod
+  installCRDs: true
+external-dns:
+  cloudflare:
+    proxied: true
+  provider: cloudflare
+  sources:
+  - ingress
+  - service
+ingress-nginx:
+  controller:
+    config:
+      compute-full-forwarded-for: "true"
+      forwarded-for-header: CF-Connecting-IP
+      use-forwarded-headers: "true"
+      use-proxy-protocol: "true"
+    kind: DaemonSet
+    service:
+      annotations:
+        service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: "true"
+  defaultBackend:
+    enabled: true
+  ingressClassResource:
+    default: true
