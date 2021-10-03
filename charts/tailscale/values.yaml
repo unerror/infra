@@ -2,5 +2,5 @@ tailscale-relay:
   config:
     variables:
       TAILSCALE_ADVERTISE_ROUTES: 10.0.0.0/8
-      TAILSCALE_ADVERTISE_TAGS: tag:env:une-k8s
+      TAILSCALE_ADVERTISE_TAGS: tag:une-k8s
       TAILSCALE_HOSTNAME: "une-k8s-relay"
