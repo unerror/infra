@@ -11,6 +11,11 @@ variable "do_region" {
   default = "tor1"
 }
 
+variable "do_spaces_region" {
+  type    = string
+  default = "nyc3"
+}
+
 variable "kubernetes_vpc_cidr" {
   type = string
 }
@@ -26,4 +31,20 @@ variable "kubernetes_tags" {
 
 variable "kubernetes_node_pools" {
   type = list
+}
+
+variable "argocd_server" {
+  type = string
+}
+
+variable "infra_repo" {
+  type = string
+}
+
+variable "https_infra_repo" {
+  type = string
+}
+
+variable "docker_repo_spaces_name" {
+  type = string
 }

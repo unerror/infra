@@ -7,3 +7,8 @@ data "sops_file" "base-chart-values" {
   source_file = "charts/base/secrets.yaml"
   input_type  = "yaml"
 }
+
+data "sops_file" "argocd-chart-values" {
+  source_file = "charts/argocd/secrets.yaml"
+  input_type  = "yaml"
+}

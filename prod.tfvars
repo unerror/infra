@@ -1,5 +1,6 @@
-do_region = "tor1"
-
+do_region               = "tor1"
+do_spaces_region        = "nyc3"
+docker_repo_spaces_name = "une-dkr-reg"
 databases = {
   homeassistant = {
     pool      = "home-assistant"
@@ -19,3 +20,7 @@ kubernetes_node_pools = [{
   size       = "s-1vcpu-2gb"
   node_count = 3
 }]
+
+argocd_server    = "argo.unerror.network:443"
+infra_repo       = "git@github.com:unerror/infra.git"
+https_infra_repo = "https://github.com/unerror/infra.git"

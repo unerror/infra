@@ -42,6 +42,22 @@ resource "digitalocean_kubernetes_cluster" "une-k8s" {
   }
 }
 
+resource "kubernetes_secret" "dockerlogin" {
+  metadata {
+    name = "do-docker-registry"
+  }
+
+  data = {
+    ".dockerconfigjson" = data.sops_file.secrets.data["do_registry_login"]
+  }
+
+  type = "kubernetes.io/dockerconfigjson"
+
+  depends_on = [
+    digitalocean_kubernetes_cluster.une-k8s
+  ]
+}
+
 resource "helm_release" "base" {
   name = "base"
 
@@ -55,6 +71,31 @@ resource "helm_release" "base" {
   values = [
     file("./charts/base/values.yaml")
   ]
+
+  set_sensitive {
+    name  = "docker-registry.secrets.s3.accessKey"
+    value = data.sops_file.secrets.data["do_spaces_access_id"]
+  }
+
+  set_sensitive {
+    name  = "docker-registry.secrets.s3.secretKey"
+    value = data.sops_file.secrets.data["do_spaces_secret_key"]
+  }
+
+  set {
+    name  = "docker-registry.s3.region"
+    value = digitalocean_spaces_bucket.docker-registry.region
+  }
+
+  set {
+    name  = "docker-registry.s3.regionEndpoint"
+    value = replace(digitalocean_spaces_bucket.docker-registry.bucket_domain_name, "${digitalocean_spaces_bucket.docker-registry.name}.", "")
+  }
+
+  set {
+    name  = "docker-registry.s3.bucket"
+    value = digitalocean_spaces_bucket.docker-registry.bucket_domain_name
+  }
 
   dynamic "set_sensitive" {
     for_each = data.sops_file.base-chart-values.data
@@ -85,6 +126,16 @@ resource "helm_release" "argocd" {
   values = [
     file("./charts/argocd/values.yaml")
   ]
+
+  dynamic "set_sensitive" {
+    for_each = data.sops_file.argocd-chart-values.data
+
+    content {
+      name  = replace(set_sensitive.key, "dex.config", "dex\\.config")
+      value = set_sensitive.value
+      type  = "auto"
+    }
+  }
 
   depends_on = [
     time_sleep.base-chart-install
