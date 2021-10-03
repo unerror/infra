@@ -41,3 +41,15 @@ argo-cd:
                 nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
             hosts:
             - argo.unerror.network
+    repoServer:
+        env:
+          - name: SOPS_AGE_KEY_FILE
+            value: /sops/keys.txt
+        volumeMounts:
+        - name: age-keyfile
+          mountPath: "/sops"
+          readOnly: true
+        volumes:
+        - name: age-keyfile
+          secret:
+            secretName: age-keyfile
