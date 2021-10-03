@@ -10,7 +10,7 @@ databases = {
   }
 }
 
-database_firewall = ["158.69.126.10", "156.57.26.153"]
+database_firewall = ["158.69.126.10"]
 
 kubernetes_vpc_cidr = "10.118.0.0/20"
 kubernetes_tags     = ["kubernetes", "unerror", "unerror-network"]
