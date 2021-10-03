@@ -1,9 +1,9 @@
 apiVersion: v2
-name: argocd
-description: ArgoCD for Unerror Network
+name: base-infra
+description: Base Kubernetes Infrastructure for Unerror
 type: application
-version: 0.2.2
-appVersion: "0.2.2"
+version: 0.2.3
+appVersion: "0.2.3"
 
 dependencies:
   - name: cert-manager

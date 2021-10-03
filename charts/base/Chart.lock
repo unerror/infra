@@ -1,0 +1,15 @@
+dependencies:
+- name: docker-registry
+  repository: https://helm.twun.io
+  version: 1.13.2
+- name: cert-manager
+  repository: https://charts.jetstack.io
+  version: v1.5.3
+- name: external-dns
+  repository: https://charts.bitnami.com/bitnami
+  version: 5.4.8
+- name: ingress-nginx
+  repository: https://kubernetes.github.io/ingress-nginx
+  version: 4.0.2
+digest: sha256:bd9be366647a62ee1079348472ce3834409a2c347335e18f41d28ed3767da8e0
+generated: "2021-10-02T00:39:07.248886-03:00"
