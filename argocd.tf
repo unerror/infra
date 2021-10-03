@@ -43,8 +43,11 @@ resource "argocd_application" "argocd" {
       }
 
       retry {
-        backoff = {}
-        limit   = "0"
+        backoff = {
+          duration     = ""
+          max_duration = ""
+        }
+        limit = "0"
       }
     }
 
