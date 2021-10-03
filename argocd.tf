@@ -16,9 +16,6 @@ resource "argocd_repository" "infra-git" {
 
 resource "argocd_application" "argocd" {
   metadata {
-    annotations = {
-      "argocd.argoproj.io/refresh" = "normal"
-    }
     name      = "argocd"
     namespace = "default"
   }
