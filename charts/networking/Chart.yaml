@@ -1,9 +1,9 @@
 apiVersion: v2
-name: tailscale
-description: A Helm chart for Kubernetes
+name: networking
+description: Root Kubernetes networking chart
 type: application
-version: 0.1.0
-appVersion: "0.0.14"
+version: 0.1.1
+appVersion: "0.0.15"
 
 dependencies:
   - name: tailscale-relay

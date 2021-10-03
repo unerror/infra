@@ -3,3 +3,48 @@ resource "digitalocean_vpc" "kubernetes-tor1" {
   region   = var.do_region
   ip_range = var.kubernetes_vpc_cidr
 }
+
+resource "argocd_application" "networking" {
+  metadata {
+    name      = "tailscale"
+    namespace = "default"
+  }
+
+  wait = true
+
+  spec {
+    source {
+      repo_url        = var.infra_repo
+      path            = "charts/networking"
+      target_revision = "HEAD"
+      helm {
+        value_files = ["values.yaml", "secrets://secrets.yaml"]
+      }
+    }
+
+    sync_policy {
+      automated = {
+        allow_empty = false
+        prune       = true
+        self_heal   = true
+      }
+
+      retry {
+        backoff = {
+          duration     = ""
+          max_duration = ""
+        }
+        limit = "0"
+      }
+    }
+
+    destination {
+      server    = "https://kubernetes.default.svc"
+      namespace = "default"
+    }
+  }
+
+  depends_on = [
+    helm_release.argocd
+  ]
+}
