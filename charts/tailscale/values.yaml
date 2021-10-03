@@ -1,0 +1,8 @@
+tailscale-relay:
+  config:
+    variables:
+      TAILSCALE_ADVERTISE_EXIT_NODES: "true"
+      TAILSCALE_ADVERTISE_ROUTES: 10.0.0.0/8
+      TAILSCALE_ADVERTISE_TAGS: env:une-k8s
+      TAILSCALE_HOSTNAME: "une-k8s-relay"
+      TAILSCALE_SNAT_SUBNET_ROUTES: "true"
