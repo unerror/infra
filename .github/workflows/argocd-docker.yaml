@@ -1,5 +1,8 @@
 name: Build ArgoCD docker container
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
 jobs:
   build_and_push:
     runs-on: ubuntu-latest
