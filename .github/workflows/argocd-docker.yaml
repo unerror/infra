@@ -1,0 +1,22 @@
+name: Build ArgoCD docker container
+on: [push, pull_request]
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repo 
+        uses: actions/checkout@v2
+      - name: Build image 
+        run: docker build -t core/argocd docker/argocd-helm-secrets
+      - name: Install doctl 
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      - name: Log in to DO Container Registry 
+        run: doctl registry login --expiry-seconds 600
+      - name: Tag image 
+        run:
+          docker tag core/argocd \
+          registry.digitalocean.com/une-k8s/core/argocd:${{github.event.inputs.version }}
+      - name: Push image to DO Container Registry 
+        run: docker push registry.digitalocean.com/une-k8s/core/argocd:${{ github.event.inputs.version }}
