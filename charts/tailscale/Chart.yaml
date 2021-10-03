@@ -6,6 +6,6 @@ version: 0.1.0
 appVersion: "0.0.14"
 
 dependencies:
-  - name: tailscale
+  - name: tailscale-relay
     version: 0.0.14
     repository: https://charts.visonneau.fr/
