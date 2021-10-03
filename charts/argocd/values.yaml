@@ -1,4 +1,10 @@
 argo-cd:
+    global:
+        image:
+            repository: registry.digitalocean.com/une-k8s/core/argocd
+            tag: v2.1.2
+        imagePullSecrets:
+            - name: do-docker-registry
     createAggregateRoles: true
     server:
         certificate:
@@ -32,7 +38,6 @@ argo-cd:
               secretName: argo-unerror-network-cert
             annotations:
                 cert-manager.io/cluster-issuer: letsencrypt-prod
-                nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
                 nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
             hosts:
             - argo.unerror.network
