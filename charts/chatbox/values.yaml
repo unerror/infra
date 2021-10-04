@@ -61,6 +61,6 @@ server:
     issuerRef:
       name: letsencrypt-prod
       kind: Issuer
-      group: cert-manager.ioa
+      group: cert-manager.io
   config: |
       ssz
