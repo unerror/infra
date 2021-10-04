@@ -5,4 +5,5 @@ metadata:
   labels:
     {{- include "chatbox.labels" . | nindent 4 }}
 
-data: {{- toYaml .Values.server.config | nindent 4 }}
+data:
+  ircd.conf: {{- toYaml .Values.server.config | nindent 4 }}
