@@ -17,3 +17,9 @@ spec:
       - http01:
           ingress:
             class: nginx
+      - dns01:
+          cloudflare:
+            email: {{ .Values.cloudflare.email }}
+            apiKeySecretRef:
+              name: {{ .Values.cloudflare.secretRef.name }}
+              key: {{ .Values.cloudflare.secretRef.key }}

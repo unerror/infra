@@ -1,1 +1,6 @@
 acmeEmail: enmand@gmail.com
+cloudflare:
+  email: enmand@unerror.com
+  secretRef:
+    name: base-external-dns 
+    key: cloudflare_api_token
