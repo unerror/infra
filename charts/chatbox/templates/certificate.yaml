@@ -3,6 +3,9 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: {{ include "chatbox.fullname" . }}-cert
+  labels:
+    {{- include "chatbox.labels" . | nindent 4 }}
+    use-cloudflare-solver: {{ .Values.server.tls.dns01 }}
 spec:
   secretName: {{ include "chatbox.fullname" . }}-crt-secret
 	{{- with .Values.server.tls.hostnames }}
