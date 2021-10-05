@@ -23,3 +23,6 @@ spec:
             apiKeySecretRef:
               name: {{ .Values.cloudflare.secretRef.name }}
               key: {{ .Values.cloudflare.secretRef.key }}
+        selector:
+          matchLabels:
+            "use-cloudflare-solver": "true"
