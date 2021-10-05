@@ -1,6 +1,4 @@
-do_region               = "tor1"
-do_spaces_region        = "nyc3"
-docker_repo_spaces_name = "une-dkr-reg"
+do_region = "tor1"
 databases = {
   homeassistant = {
     pool      = "home-assistant"
