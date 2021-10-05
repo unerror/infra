@@ -72,31 +72,6 @@ resource "helm_release" "base" {
     file("./charts/base/values.yaml")
   ]
 
-  set_sensitive {
-    name  = "docker-registry.secrets.s3.accessKey"
-    value = data.sops_file.secrets.data["do_spaces_access_id"]
-  }
-
-  set_sensitive {
-    name  = "docker-registry.secrets.s3.secretKey"
-    value = data.sops_file.secrets.data["do_spaces_secret_key"]
-  }
-
-  set {
-    name  = "docker-registry.s3.region"
-    value = digitalocean_spaces_bucket.docker-registry.region
-  }
-
-  set {
-    name  = "docker-registry.s3.regionEndpoint"
-    value = replace(digitalocean_spaces_bucket.docker-registry.bucket_domain_name, "${digitalocean_spaces_bucket.docker-registry.name}.", "")
-  }
-
-  set {
-    name  = "docker-registry.s3.bucket"
-    value = digitalocean_spaces_bucket.docker-registry.bucket_domain_name
-  }
-
   dynamic "set_sensitive" {
     for_each = data.sops_file.base-chart-values.data
 
