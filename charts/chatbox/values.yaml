@@ -53,6 +53,9 @@ tolerations: []
 affinity: {}
 
 server:
+  service:
+    annotations:
+      external-dns.alpha.kubernetes.io/hostname: irc2.unerror.network
   tls:
     dns01: "true"
     enabled: true
