@@ -5,9 +5,9 @@ metadata:
   labels:
     {{- include "chatbox.labels" . | nindent 4 }}
     {{- with .Values.server.service.annotations }}
-    annotations:
-      {{- toYaml . | nindent 6 }}
-    {{- end }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   type: {{ .Values.service.type }}
   ports:
