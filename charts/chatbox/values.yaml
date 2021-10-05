@@ -64,7 +64,7 @@ server:
       - irc2.unerror.network
     issuerRef:
       name: letsencrypt-prod
-      kind: Issuer
+      kind: ClusterIssuer
       group: cert-manager.io
   config: |
     ssz
