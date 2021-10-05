@@ -19,6 +19,7 @@ ingress-nginx:
       use-forwarded-headers: "true"
       use-proxy-protocol: "true"
     kind: DaemonSet
+    setAsDefaultIngress: "true"
     service:
       annotations:
         service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: "true"
