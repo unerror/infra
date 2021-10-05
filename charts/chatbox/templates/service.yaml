@@ -17,4 +17,4 @@ spec:
       name: http
   selector:
     {{- include "chatbox.selectorLabels" . | nindent 4 }}
-  type: NodePort
+  type: LoadBalancer
