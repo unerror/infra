@@ -14,15 +14,12 @@ spec:
       name: letsencrypt-prod-account-key
     # Add a single challenge solver, HTTP01 using nginx
     solvers:
-      - http01:
-          ingress:
-            class: nginx
       - dns01:
           cloudflare:
             email: {{ .Values.cloudflare.email }}
             apiKeySecretRef:
               name: {{ .Values.cloudflare.secretRef.name }}
               key: {{ .Values.cloudflare.secretRef.key }}
-        selector:
-          matchLabels:
-            "use-cloudflare-solver": "true"
+      - http01:
+          ingress:
+            class: nginx
