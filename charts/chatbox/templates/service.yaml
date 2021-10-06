@@ -9,9 +9,8 @@ metadata:
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
-  {{- if .Values.service.type }}
-  type: {{ .Values.service.type }}
-  {{- end }}
+  type: ExternalName
+  externalName: {{ .Values.service.externalName }}
   ports:
     - port: {{ .Values.service.port }}
       targetPort: 6667
