@@ -43,9 +43,12 @@ service:
 ingress:
   enabled: true
   annotations:
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+    nginx.ingress.kubernetes.io/secure-backends: "true"
+    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+
   ingressClassName: nginx
   host: irc.unerror.network
 
