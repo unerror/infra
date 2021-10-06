@@ -22,7 +22,7 @@ spec:
     - port: {{ .Values.service.tlsPort }}
       targetPort: 6697
       protocol: TCP
-      name: irc
+      name: ircs
     {{- end }}
   selector:
     {{- include "chatbox.selectorLabels" . | nindent 4 }}
