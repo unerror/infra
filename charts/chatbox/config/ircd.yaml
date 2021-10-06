@@ -12,7 +12,7 @@ server:
             proxy: true
         ":443":
             websocket: true
-            proxy: true
+            proxy: false
             tls:
                 key: /ircd/tls/tls.key
                 cert: /ircd/tls/tls.crt
