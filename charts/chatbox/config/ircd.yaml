@@ -161,7 +161,6 @@ datastore:
 languages:
     enabled: true
     default: en
-    path: languages
 limits:
     nicklen: 32
     identlen: 20
