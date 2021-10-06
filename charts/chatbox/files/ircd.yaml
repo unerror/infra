@@ -1,0 +1,249 @@
+network:
+    name: Unerror Network
+
+server:
+    name: irc2.unerror.network
+    listeners:
+        ":6667":
+        ":6697":
+            # this is a standard TLS configuration with a single certificate;
+            # see the manual for instructions on how to configure SNI
+            tls:
+                key: /ircd/tls/tls.key
+                cert: /ircd/tls/tls.crt
+            proxy: true
+        ":443":
+            websocket: true
+            tls:
+                key: /ircd/tls/tls.key
+                cert: /ircd/tls/tls.crt
+
+    unix-bind-mode: 0777
+
+    sts:
+        enabled: false
+        duration: 1mo2d5m
+        port: 6697
+        preload: false
+
+    websockets:
+        allowed-origins:
+            - "https://unerror.network"
+            - "https://*.unerror.network"
+            - "https://unerror.com"
+            - "https://*.unerror.com"
+
+    casemapping: "precis"
+    enforce-utf8: true
+    lookup-hostnames: true
+    forward-confirm-hostnames: true
+    check-ident: false
+    coerce-ident: '~u'
+    motd: /ircd/ircd.motd
+    motd-formatting: true
+
+    relaymsg:
+        enabled: true
+        separators: "/"
+        available-to-chanops: true
+
+    proxy-allowed-from:
+      - 0.0.0.0/0
+
+    max-sendq: 96k
+
+    compatibility:
+        force-trailing: true
+        send-unprefixed-sasl: true
+        allow-truncation: false
+
+    ip-limits:
+        count: true
+        max-concurrent-connections: 16
+        throttle: true
+        window: 10m
+        max-connections-per-window: 64
+        cidr-len-ipv4: 32
+        cidr-len-ipv6: 64
+        exempted:
+            - "localhost"
+            - "10.0.0.0/8"
+
+    ip-cloaking:
+        enabled: true
+        enabled-for-always-on: true
+        netname: "unerror"
+        cidr-len-ipv4: 32
+        cidr-len-ipv6: 64
+        num-bits: 64
+    secure-nets:
+        - "10.0.0.0/8"
+
+    override-services-hostname: "unerror.network"
+
+
+accounts:
+    authentication-enabled: true
+
+    registration:
+        enabled: true
+        allow-before-connect: true
+
+        throttling:
+            enabled: true
+            duration: 10m
+            max-attempts: 30
+
+        bcrypt-cost: 4
+        verify-timeout: "32h"
+
+        email-verification:
+            enabled: false
+
+    login-throttling:
+        enabled: true
+        duration:  1m
+        max-attempts: 3
+    skip-server-password: false
+    login-via-pass-command: true
+    require-sasl:
+        enabled: false
+
+    nick-reservation:
+        enabled: true
+        additional-nick-limit: 0
+        method: strict
+        allow-custom-enforcement: false
+        guest-nickname-format: "Guest-*"
+        force-guest-format: false
+        force-nick-equals-account: true
+        forbid-anonymous-nick-changes: false
+
+    multiclient:
+        enabled: true
+        allowed-by-default: true
+        always-on: "opt-in"
+        auto-away: "opt-out"
+        always-on-expiration: 90d
+
+    vhosts:
+        enabled: true
+        max-length: 64
+        valid-regexp: '^[0-9A-Za-z.\-_/]+$'
+    default-user-modes: +i
+
+channels:
+    default-modes: +nt
+    max-channels-per-client: 100
+    operator-only-creation: false
+    registration:
+        enabled: true
+        operator-only: false
+        max-channels-per-account: 42
+    list-delay: 20s
+    invite-expiration: 24h
+
+oper-classes:
+    "chat-moderator":
+        title: Chat Moderator
+        capabilities:
+            - "kill"
+            - "ban"
+            - "nofakelag"
+            - "roleplay"
+            - "relaymsg"
+            - "vhosts"
+            - "sajoin"
+            - "samode"
+            - "snomasks"
+
+    "server-admin":
+        title: Server Admin
+        extends: "chat-moderator"
+        capabilities:
+            - "rehash"
+            - "die"
+            - "accreg"
+            - "chanreg"
+            - "history"
+            - "defcon"
+            - "massmessage"
+
+opers:
+    orcam:
+        class: "server-admin"
+        whois-line: is the unerror bdfl
+        vhost: "bdfl.unerror.network"
+        hidden: false
+        modes: +is acdjknoqtuxv
+        password: "$2a$04$zCr3Y8qN0.YBTFmbZBQN0ewYZ4GUquKVL78yugFEesyoZClTojUHW"
+
+logging:
+    - method: stderr
+      type: "* -userinput -useroutput"
+      level: info
+
+debug:
+    recover-from-errors: true
+
+datastore:
+    path: /ircd/ircd.db
+    autoupgrade: true
+
+languages:
+    enabled: true
+    default: en
+    path: languages
+
+limits:
+    nicklen: 32
+    identlen: 20
+    channellen: 64
+    awaylen: 390
+    kicklen: 390
+    topiclen: 390
+    monitor-entries: 100
+    whowas-entries: 100
+    chan-list-modes: 60
+    registration-messages: 1024
+    multiline:
+        max-bytes: 4096 # 0 means disabled
+        max-lines: 100  # 0 means no limit
+
+fakelag:
+    enabled: true
+    window: 1s
+    burst-limit: 5
+    messages-per-window: 2
+    cooldown: 2s
+
+roleplay:
+    enabled: false
+
+history:
+    enabled: true
+    channel-length: 2048
+    client-length: 256
+    autoresize-window: 3d
+    autoreplay-on-join: 0
+    chathistory-maxmessages: 100
+    znc-maxmessages: 2048
+    restrictions:
+        expire-time: 1w
+        query-cutoff: 'none'
+        grace-period: 1h
+    persistent:
+        enabled: false
+        unregistered-channels: false
+        registered-channels: "opt-out"
+        direct-messages: "opt-out"
+    retention:
+        allow-individual-delete: false
+        enable-account-indexing: false
+
+    tagmsg-storage:
+        default: false
+
+# whether to allow customization of the config at runtime using environment variables,
+# e.g., ERGO__SERVER__MAX_SENDQ=128k. see the manual for more details.
+allow-environment-overrides: true

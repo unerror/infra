@@ -16,6 +16,9 @@ spec:
       protocol: TCP
       name: irc
     {{- if .Values.server.tls.enabled }}
+    - port: 443
+      name: websockets  
+      targetPort: 443
     - port: {{ .Values.service.tlsPort }}
       targetPort: 6697
       protocol: TCP

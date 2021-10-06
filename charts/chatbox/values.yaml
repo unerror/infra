@@ -53,6 +53,11 @@ nodeSelector: {}
 tolerations: []
 affinity: {}
 
+pvc:
+  size: 1Gi
+  accessModes:
+    - ReadWriteOnce
+
 server:
   service:
     annotations:

@@ -6,4 +6,4 @@ metadata:
     {{- include "chatbox.labels" . | nindent 4 }}
 
 data:
-  ircd.conf: {{- toYaml .Values.server.config | nindent 4 }}
+  {{ (.Files.Glob "files").AsConfig | indent 2 }}
