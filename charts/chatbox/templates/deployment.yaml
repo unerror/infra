@@ -30,17 +30,6 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["/bin/sh"]
-          args:
-          - "-c"
-          - |
-            echo "Watching /ircd/";
-            inotifyd - /ircd/:wMymndox /ircd/tls/:wMymndox | while read -r notifies ; do
-              echo "$notifies";
-              echo "notify received, sending SIGHUP";
-              pkill -HUP oragono;
-            done
-            echo "Exiting.";
           ports:
             - name: irc
               containerPort: 6667
