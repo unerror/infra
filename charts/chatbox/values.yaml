@@ -30,7 +30,7 @@ securityContext:
   # runAsUser: 1000
 
 service:
-  externalName: irc.unerror.network
+  externalName: lb.unerror.network
   port: 6667
   tlsPort: 6697
 
