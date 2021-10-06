@@ -156,7 +156,7 @@ logging:
 debug:
     recover-from-errors: true
 datastore:
-    path: /ircd/ircd.db
+    path: /ircd/db/ircd.db
     autoupgrade: true
 languages:
     enabled: false
