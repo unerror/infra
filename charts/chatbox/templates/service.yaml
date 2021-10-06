@@ -4,7 +4,7 @@ metadata:
   name: {{ include "chatbox.fullname" . }}-ircd-name
   labels:
     {{- include "chatbox.labels" . | nindent 4 }}
-    {{- with .Values.service.externalName.annotations }}
+  {{- with .Values.service.externalName.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
   {{- end }}
@@ -18,13 +18,12 @@ metadata:
   name: {{ include "chatbox.fullname" . }}-ircd
   labels:
     {{- include "chatbox.labels" . | nindent 4 }}
-    {{- with .Values.service.annotations }}
+  {{- with .Values.service.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
-  type: ExternalName
-  externalName: {{ .Values.service.externalName }}
+  type: ClusterIP
   ports:
     - port: {{ .Values.service.port }}
       targetPort: 6667
