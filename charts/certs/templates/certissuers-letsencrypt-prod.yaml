@@ -23,7 +23,8 @@ spec:
       - http01:
           ingress:
             class: nginx
-            metadata:
-              annotations:
-                "nginx.ingress.kubernetes.io/whitelist-source-range": "0.0.0.0/0,::/0"
-                "nginx.ingress.kubernetes.io/backend-protocol": "HTTPS"
+            podTemplate:
+              metadata:
+                annotations:
+                  "nginx.ingress.kubernetes.io/whitelist-source-range": "0.0.0.0/0,::/0"
+                  "nginx.ingress.kubernetes.io/backend-protocol": "HTTPS"
