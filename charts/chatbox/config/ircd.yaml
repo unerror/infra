@@ -1,5 +1,5 @@
 network:
-    name: Unerror Network
+    name: Unerror
 server:
     name: irc2.unerror.network
     listeners:
