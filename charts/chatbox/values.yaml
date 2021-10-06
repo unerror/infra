@@ -62,13 +62,13 @@ server:
   service:
     annotations:
       service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: "true"
-      external-dns.alpha.kubernetes.io/hostname: irc2.unerror.network
+      external-dns.alpha.kubernetes.io/hostname: irc.unerror.network
       external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
   tls:
     dns01: "true"
     enabled: true
     hostnames:
-      - irc2.unerror.network
+      - irc.unerror.network
     issuerRef:
       name: letsencrypt-prod
       kind: ClusterIssuer

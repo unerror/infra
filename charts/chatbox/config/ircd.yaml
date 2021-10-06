@@ -1,7 +1,7 @@
 network:
     name: Unerror
 server:
-    name: irc2.unerror.network
+    name: irc.unerror.network
     listeners:
         ":6667":
             proxy: true
