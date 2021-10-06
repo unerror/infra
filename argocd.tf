@@ -8,6 +8,32 @@ resource "kubernetes_secret" "name" {
   }
 }
 
+resource "helm_release" "argocd" {
+  name = "argocd"
+
+  chart             = "./charts/argocd"
+  namespace         = "default"
+  dependency_update = true
+
+  values = [
+    file("./charts/argocd/values.yaml")
+  ]
+
+  dynamic "set_sensitive" {
+    for_each = data.sops_file.argocd-chart-values.data
+
+    content {
+      name  = replace(set_sensitive.key, "dex.config", "dex\\.config")
+      value = set_sensitive.value
+      type  = "auto"
+    }
+  }
+
+  depends_on = [
+    time_sleep.base-chart-install
+  ]
+}
+
 resource "argocd_repository" "infra-git" {
   repo            = var.infra_repo
   username        = "git"

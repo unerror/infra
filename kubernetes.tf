@@ -91,33 +91,6 @@ resource "time_sleep" "base-chart-install" {
   create_duration = "20s"
 }
 
-resource "helm_release" "argocd" {
-  name = "argocd"
-
-  chart             = "./charts/argocd"
-  namespace         = "default"
-  dependency_update = true
-
-  values = [
-    file("./charts/argocd/values.yaml")
-  ]
-
-  dynamic "set_sensitive" {
-    for_each = data.sops_file.argocd-chart-values.data
-
-    content {
-      name  = replace(set_sensitive.key, "dex.config", "dex\\.config")
-      value = set_sensitive.value
-      type  = "auto"
-    }
-  }
-
-  depends_on = [
-    time_sleep.base-chart-install
-  ]
-}
-
-
 resource "helm_release" "certs" {
   name = "certs"
 
@@ -132,3 +105,94 @@ resource "helm_release" "certs" {
     time_sleep.base-chart-install
   ]
 }
+
+resource "argocd_application" "base" {
+  metadata {
+    name      = "base"
+    namespace = "default"
+  }
+
+  wait = true
+
+  spec {
+    source {
+      repo_url        = var.infra_repo
+      path            = "charts/base"
+      target_revision = "HEAD"
+      helm {
+        value_files = ["values.yaml", "secrets://secrets.yaml"]
+      }
+    }
+
+    sync_policy {
+      automated = {
+        allow_empty = false
+        prune       = true
+        self_heal   = true
+      }
+
+      retry {
+        backoff = {
+          duration     = ""
+          max_duration = ""
+        }
+        limit = "0"
+      }
+    }
+
+    destination {
+      server    = "https://kubernetes.default.svc"
+      namespace = "default"
+    }
+  }
+
+  depends_on = [
+    helm_release.argocd
+  ]
+}
+
+resource "argocd_application" "certs" {
+  metadata {
+    name      = "certs"
+    namespace = "default"
+  }
+
+  wait = true
+
+  spec {
+    source {
+      repo_url        = var.infra_repo
+      path            = "charts/certs"
+      target_revision = "HEAD"
+      helm {
+        value_files = ["values.yaml"]
+      }
+    }
+
+    sync_policy {
+      automated = {
+        allow_empty = false
+        prune       = true
+        self_heal   = true
+      }
+
+      retry {
+        backoff = {
+          duration     = ""
+          max_duration = ""
+        }
+        limit = "0"
+      }
+    }
+
+    destination {
+      server    = "https://kubernetes.default.svc"
+      namespace = "default"
+    }
+  }
+
+  depends_on = [
+    helm_release.argocd
+  ]
+}
+
