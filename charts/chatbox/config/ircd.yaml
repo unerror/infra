@@ -4,6 +4,7 @@ server:
     name: irc2.unerror.network
     listeners:
         ":6667":
+            proxy: true
         ":6697":
             tls:
                 key: /ircd/tls/tls.key
@@ -11,6 +12,7 @@ server:
             proxy: true
         ":443":
             websocket: true
+            proxy: true
             tls:
                 key: /ircd/tls/tls.key
                 cert: /ircd/tls/tls.crt
