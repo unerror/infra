@@ -92,7 +92,7 @@ accounts:
     nick-reservation:
         enabled: true
         additional-nick-limit: 0
-        method: strict
+        method: optional
         allow-custom-enforcement: false
         guest-nickname-format: "Guest-*"
         force-guest-format: false
