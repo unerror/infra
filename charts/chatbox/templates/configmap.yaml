@@ -6,7 +6,10 @@ metadata:
     {{- include "chatbox.labels" . | nindent 4 }}
 
 data:
-  ircd.motd: |-
-      {{ .Files.Get "ircd.motd" | indent 2 }}
-  ircd.yaml: {{ range .Files.Lines "ircd.yaml" }}
-    {{ . }} {{ end }}
+  ircd.motd: |
+    👋
+{{ .Files.Get "config/ircd.motd" | indent 4 }}
+  ircd.yaml: |
+    # Configuration
+{{ .Files.Get "config/ircd.yaml" | indent 4 }}
+
