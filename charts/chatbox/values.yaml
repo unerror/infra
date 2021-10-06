@@ -32,6 +32,7 @@ securityContext:
 service:
   type: LoadBalancer
   port: 6667
+  tlsPort: 6697
 
 ingress:
   enabled: false
