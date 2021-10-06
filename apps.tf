@@ -1,0 +1,44 @@
+resource "argocd_application" "chatbox" {
+  metadata {
+    name      = "chatbox"
+    namespace = "default"
+  }
+
+  wait = true
+
+  spec {
+    source {
+      repo_url        = var.infra_repo
+      path            = "charts/chatbox"
+      target_revision = "HEAD"
+      helm {
+        value_files = ["values.yaml"]
+      }
+    }
+
+    sync_policy {
+      automated = {
+        allow_empty = false
+        prune       = true
+        self_heal   = true
+      }
+
+      retry {
+        backoff = {
+          duration     = ""
+          max_duration = ""
+        }
+        limit = "0"
+      }
+    }
+
+    destination {
+      server    = "https://kubernetes.default.svc"
+      namespace = "default"
+    }
+  }
+
+  depends_on = [
+    helm_release.argocd
+  ]
+}
