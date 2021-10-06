@@ -158,9 +158,6 @@ debug:
 datastore:
     path: /ircd/ircd.db
     autoupgrade: true
-languages:
-    enabled: true
-    default: en
 limits:
     nicklen: 32
     identlen: 20
