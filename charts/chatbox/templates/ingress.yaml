@@ -11,9 +11,9 @@ metadata:
   name: {{ $fullName }}
   labels:
     {{- include "chatbox.labels" . | nindent 4 }}
-  {{- with .Values.ingress.annotations }}
   annotations:
     nginx.ingress.kubernetes.io/proxy-ssl-secret: {{ include "chatbox.fullname" . }}-crt-secret
+  {{- with .Values.ingress.annotations }}
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
