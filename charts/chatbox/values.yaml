@@ -30,7 +30,6 @@ securityContext:
   # runAsUser: 1000
 
 service:
-  type: ClusterIP
   port: 6667
   tlsPort: 6697
 
