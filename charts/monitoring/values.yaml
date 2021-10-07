@@ -4,42 +4,9 @@ grafana_password: ""
 kube-prometheus-stack:
   alertmanager:
     enabled: true
-    ingress:
-      ingressClassName: "nginx"
-      enabled: "true"
-      hosts:
-      - am.i.unerror.network
-      tls:
-      - hosts:
-          - am.i.unerror.network
-        secretName: alertmanager-tls-cert
-      annotations:
-          cert-manager.io/cluster-issuer: letsencrypt-prod
   grafana:
     enabled: true
-    ingress:
-      ingressClassName: "nginx"
-      enabled: "true"
-      hosts:
-      - g.i.unerror.network
-      tls:
-      - hosts:
-          - g.i.unerror.network
-        secretName: grafana-tls-cert
-      annotations:
-          cert-manager.io/cluster-issuer: letsencrypt-prod
   prometheus:
-    ingress:
-      ingressClassName: "nginx"
-      enabled: "true"
-      hosts:
-      - p.i.unerror.network
-      tls:
-      - hosts:
-          - p.i.unerror.network
-        secretName: prometheus-tls-cert
-      annotations:
-          cert-manager.io/cluster-issuer: letsencrypt-prod
     prometheusSpec:
       remoteWrite:
       - url: https://prometheus-blocks-prod-us-central1.grafana.net/api/prom/push
