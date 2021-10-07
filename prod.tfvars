@@ -15,7 +15,7 @@ kubernetes_tags     = ["kubernetes", "unerror", "unerror-network"]
 kubernetes_version  = "1.21.3-do.0"
 kubernetes_node_pools = [{
   name       = "worker-pool"
-  size       = "s-1vcpu-2gb"
+  size       = "s-2vcpu-2gb"
   node_count = 3
 }]
 
