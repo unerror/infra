@@ -17,6 +17,8 @@ provider "helm" {
   }
 }
 
+# Kubernetes Cluster and default nodepool configuration
+# (WARNING: changing the defualt node pool size foces a replacement of the whole cluster)
 resource "digitalocean_kubernetes_cluster" "une-k8s" {
   name = "une-k8s"
 
@@ -42,6 +44,7 @@ resource "digitalocean_kubernetes_cluster" "une-k8s" {
   }
 }
 
+# Kubernetes Secret for DO Docker registry
 resource "kubernetes_secret" "dockerlogin" {
   metadata {
     name = "do-docker-registry"
@@ -58,11 +61,18 @@ resource "kubernetes_secret" "dockerlogin" {
   ]
 }
 
+resource "kubernetes_namespace" "une-sys" {
+  metadata {
+    name = "une-sys"
+  }
+}
+
+# Initial Helm releases (to be replaced to be ArgoCD managed)
 resource "helm_release" "base" {
   name = "base"
 
   chart             = "./charts/base"
-  namespace         = "default"
+  namespace         = kubernetes_namespace.une-sys.id
   timeout           = 900
   dependency_update = true
   skip_crds         = false
@@ -95,7 +105,7 @@ resource "helm_release" "certs" {
   name = "certs"
 
   chart     = "./charts/certs"
-  namespace = "default"
+  namespace = kubernetes_namespace.une-sys.id
 
   values = [
     file("./charts/certs/values.yaml")
@@ -106,15 +116,44 @@ resource "helm_release" "certs" {
   ]
 }
 
+# ArgoCD Managed Base Charts
+resource "argocd_project" "infra" {
+  metadata {
+    name      = "infra"
+  }
+
+  spec {
+    description  = ""
+    source_repos = ["*"]
+
+    destination {
+      server    = "*"
+      namespace = kubernetes_namespace.une-sys.id
+    }
+
+    destination {
+      server    = "*"
+      namespace = "kube-system"
+    }
+
+    cluster_resource_whitelist {
+      group = "*"
+      kind  = "*"
+    }
+
+    orphaned_resources {}
+  }
+}
+
 resource "argocd_application" "base" {
   metadata {
     name      = "base"
-    namespace = "default"
   }
 
   wait = true
 
   spec {
+    project = argocd_project.infra.id
     source {
       repo_url        = var.infra_repo
       path            = "charts/base"
@@ -142,24 +181,26 @@ resource "argocd_application" "base" {
 
     destination {
       server    = "https://kubernetes.default.svc"
-      namespace = "default"
+      namespace = kubernetes_namespace.une-sys.id
     }
   }
 
   depends_on = [
-    helm_release.argocd
+    helm_release.argocd,
+    argocd_project.infra
   ]
 }
 
 resource "argocd_application" "certs" {
   metadata {
     name      = "certs"
-    namespace = "default"
   }
 
   wait = true
 
   spec {
+    project = argocd_project.infra.id
+    
     source {
       repo_url        = var.infra_repo
       path            = "charts/certs"
@@ -187,12 +228,13 @@ resource "argocd_application" "certs" {
 
     destination {
       server    = "https://kubernetes.default.svc"
-      namespace = "default"
+      namespace = kubernetes_namespace.une-sys.id
     }
   }
 
   depends_on = [
-    helm_release.argocd
+    helm_release.argocd,
+    argocd_project.infra
   ]
 }
 
