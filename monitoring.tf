@@ -1,12 +1,13 @@
 resource "argocd_application" "monitoring" {
   metadata {
     name      = "monitoring"
-    namespace = "default"
   }
 
   wait = true
 
   spec {
+    project = argocd_project.infra.id
+
     source {
       repo_url        = var.infra_repo
       path            = "charts/monitoring"
@@ -34,7 +35,7 @@ resource "argocd_application" "monitoring" {
 
     destination {
       server    = "https://kubernetes.default.svc"
-      namespace = "default"
+      namespace = kubernetes_namespace.une-sys.id
     }
   }
 
