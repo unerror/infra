@@ -15,7 +15,6 @@ kube-prometheus-stack:
         secretName: alertmanager-tls-cert
       annotations:
           cert-manager.io/cluster-issuer: letsencrypt-prod
-          nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
   grafana:
     enabled: true
     ingress:
@@ -29,7 +28,6 @@ kube-prometheus-stack:
         secretName: grafana-tls-cert
       annotations:
           cert-manager.io/cluster-issuer: letsencrypt-prod
-          nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
   prometheus:
     ingress:
       ingressClassName: "nginx"
@@ -42,7 +40,6 @@ kube-prometheus-stack:
         secretName: prometheus-tls-cert
       annotations:
           cert-manager.io/cluster-issuer: letsencrypt-prod
-          nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
     prometheusSpec:
       remoteWrite:
       - url: https://prometheus-blocks-prod-us-central1.grafana.net/api/prom/push
