@@ -18,14 +18,14 @@ metadata:
 spec:
   ingressClassName: {{ .Values.ingress.ingressClassName }}
   tls:
-    {{ with .Values.ingress.hosts }}
+    {{- range .Values.ingress.hosts }}
     - hosts:
         - {{ toYaml . | quote }}
       secretName: {{ $fullName }}-crt-secret
     {{ end }}
   rules:
-    {{ with .Values.ingress.hosts }}
-    - host: {{ toYaml . | quote }}
+    {{- range .Values.ingress.hosts }}
+    - host: {{ . | quote }}
       http:
         paths:
           - path: /
