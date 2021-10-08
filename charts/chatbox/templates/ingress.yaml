@@ -20,7 +20,7 @@ spec:
   tls:
     {{- range .Values.ingress.hosts }}
     - hosts:
-        - {{ toYaml . | quote }}
+        - {{ . | quote }}
       secretName: {{ $fullName }}-crt-secret
     {{ end }}
   rules:
@@ -30,7 +30,9 @@ spec:
         paths:
           - path: /
             backend:
-              serviceName: {{ $fullName }}-ircd
-              servicePort: 443
+              service:
+                name: {{ $fullName }}-ircd
+                port:
+                  number: 443
     {{ end }}
   {{- end }}
