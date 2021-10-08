@@ -33,7 +33,7 @@ service:
   externalName:
     name: lb.unerror.network
     annotations:
-      external-dns.alpha.kubernetes.io/hostname: irc.unerror.network
+      external-dns.alpha.kubernetes.io/hostname: irc.unerror.com
       external-dns.alpha.kubernetes.io/target: lb.unerror.network
       external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
   annotations: {}
@@ -52,7 +52,9 @@ ingress:
     external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
 
   ingressClassName: nginx
-  host: irc.unerror.network
+  hosts:
+    - irc.unerror.com
+    - irc.unerror.network
 
 resources: {}
 nodeSelector: {}
@@ -69,10 +71,9 @@ server:
     dns01: "true"
     enabled: true
     hostnames:
+      - irc.unerror.com
       - irc.unerror.network
     issuerRef:
       name: letsencrypt-prod
       kind: ClusterIssuer
       group: cert-manager.io
-  config: |
-    ssz

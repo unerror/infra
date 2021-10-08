@@ -1,8 +1,8 @@
 {{- if .Values.ingress.enabled -}}
 {{- $fullName := include "chatbox.fullname" . -}}
 {{- $svcPort := .Values.service.port -}}
-{{- if semverCompare ">=1.14-0" .Capabilities.KubeVersion.GitVersion -}}
-apiVersion: networking.k8s.io/v1beta1
+{{- if semverCompare ">=1.19-0" .Capabilities.KubeVersion.GitVersion -}}
+apiVersion: networking.k8s.io/v1
 {{- else -}}
 apiVersion: extensions/v1beta1
 {{- end }}
@@ -18,15 +18,19 @@ metadata:
 spec:
   ingressClassName: {{ .Values.ingress.ingressClassName }}
   tls:
+    {{ with .Values.ingress.hosts }}
     - hosts:
-        - {{ .Values.ingress.host | quote }}
-      secretName: {{ include "chatbox.fullname" . }}-crt-secret
+        - {{ toYaml . | quote }}
+      secretName: {{ $fullName }}-crt-secret
+    {{ end }}
   rules:
-    - host: {{ .Values.ingress.host | quote }}
+    {{ with .Values.ingress.hosts }}
+    - host: {{ toYaml . | quote }}
       http:
         paths:
           - path: /
             backend:
-              serviceName: {{ include "chatbox.fullname" . }}-ircd
+              serviceName: {{ $fullName }}-ircd
               servicePort: 443
+    {{ end }}
   {{- end }}
