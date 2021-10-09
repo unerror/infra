@@ -55,7 +55,7 @@ affinity: {}
 pvc:
   size: 1Gi
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
 
 server:
   tls:
