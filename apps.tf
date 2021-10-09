@@ -12,7 +12,7 @@ resource "argocd_application" "chatbox" {
       path            = "charts/chatbox"
       target_revision = "HEAD"
       helm {
-        value_files = ["values.yaml"]
+        value_files = ["values.yaml", "secrets://secrets.yaml"]
       }
     }
 

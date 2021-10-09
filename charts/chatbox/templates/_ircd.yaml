@@ -1,3 +1,4 @@
+{{- define "ircd.yaml" }}
 network:
     name: Unerror
 server:
@@ -143,21 +144,11 @@ oper-classes:
             - "history"
             - "defcon"
             - "massmessage"
+{{- with .Values.server.oper }}
 opers:
-    orcam:
-        class: "server-admin"
-        whois-line: is the unerror bdfl
-        vhost: "bdfl.unerror.network"
-        hidden: false
-        modes: +is acdjknoqtuxv
-        password: "$2a$04$zCr3Y8qN0.YBTFmbZBQN0ewYZ4GUquKVL78yugFEesyoZClTojUHW"
-    Striek:
-        class: "server-admin"
-        whois-line: is the very model of a modern major general
-        vhost: "i.hit.my.head.again"
-        hidden: false
-        modes: +is acdjknoqtuxv
-        password: "$2a$04$2gDSvpt//xJ2IYxPaovyFuZCAVzX6caJexdcGDWnUa0gfkCS2VpeO"
+    {{- toYaml . | nindent 4 }}
+{{- end }}
+
 logging:
     - method: stderr
       type: "* -userinput -useroutput"
@@ -214,3 +205,4 @@ history:
     tagmsg-storage:
         default: false
 allow-environment-overrides: true
+{{- end }}

@@ -10,6 +10,5 @@ data:
     👋
 {{ .Files.Get "config/ircd.motd" | indent 4 }}
   ircd.yaml: |
-    # Configuration
-{{ .Files.Get "config/ircd.yaml" | indent 4 }}
+    {{ include "ircd.yaml" . | nindent 6 }}
 
