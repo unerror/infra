@@ -65,3 +65,9 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+s3:
+  accessKeyId: ""
+  secretAccessKey: ""
+  endpoint: ""
+  region: ""
