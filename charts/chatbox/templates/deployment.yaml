@@ -91,7 +91,7 @@ spec:
       - name: irc-db
         persistentVolumeClaim:
           claimName: {{ include "chatbox.fullname" . }}-db
-      - name: irc-db
+      - name: irc-new-db
         persistentVolumeClaim:
           claimName: {{ include "chatbox.fullname" . }}-new-db
       {{- with .Values.nodeSelector }}
