@@ -59,7 +59,7 @@ spec:
           - mountPath: /ircd/db
             name: irc-db
           - mountPath: /ircd/newdb
-            name: irc-newdb
+            name: irc-new-db
         - name: config-reloader
           # image is based on busybox which includes inotifyd + pkill
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
