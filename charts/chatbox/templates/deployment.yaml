@@ -56,10 +56,10 @@ spec:
           - mountPath: /ircd/tls
             name: irc-certs
             readOnly: true
+          - mountPath: /ircd/olddb
+            name: irc-old-db
           - mountPath: /ircd/db
             name: irc-db
-          - mountPath: /ircd/newdb
-            name: irc-new-db
         - name: config-reloader
           # image is based on busybox which includes inotifyd + pkill
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
@@ -88,10 +88,10 @@ spec:
       - name: irc-certs
         secret:
           secretName: {{ include "chatbox.fullname" . }}-crt-secret
-      - name: irc-db
+      - name: irc-old-db
         persistentVolumeClaim:
           claimName: {{ include "chatbox.fullname" . }}-db
-      - name: irc-new-db
+      - name: irc-db
         persistentVolumeClaim:
           claimName: {{ include "chatbox.fullname" . }}-new-db
       {{- with .Values.nodeSelector }}
