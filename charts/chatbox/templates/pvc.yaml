@@ -29,4 +29,4 @@ spec:
   resources:
     requests:
       storage: {{ .Values.newpvc.size }}
-  storageClassName: {{ .Values.newpvc.storageClass }}
+  storageClassName: s3-default
