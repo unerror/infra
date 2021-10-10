@@ -9,7 +9,7 @@ spec:
   selector:
     matchLabels:
       {{- include "csi-s3.selectorLabels.provisioner" . | nindent 6 }}
-  template: 
+  template:
     metadata:
       {{- with .Values.podAnnotations }}
       annotations:
@@ -67,6 +67,7 @@ spec:
   selector:
     matchLabels:
       {{- include "csi-s3.selectorLabels.attacher" . | nindent 6 }}
+  template:
     metadata:
       {{- with .Values.podAnnotations }}
       annotations:
