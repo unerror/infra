@@ -56,8 +56,6 @@ spec:
           - mountPath: /ircd/tls
             name: irc-certs
             readOnly: true
-          - mountPath: /ircd/olddb
-            name: irc-old-db
           - mountPath: /ircd/db
             name: irc-db
         - name: config-reloader
@@ -88,9 +86,6 @@ spec:
       - name: irc-certs
         secret:
           secretName: {{ include "chatbox.fullname" . }}-crt-secret
-      - name: irc-old-db
-        persistentVolumeClaim:
-          claimName: {{ include "chatbox.fullname" . }}-db
       - name: irc-db
         persistentVolumeClaim:
           claimName: {{ include "chatbox.fullname" . }}-new-db
