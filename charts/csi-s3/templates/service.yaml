@@ -1,0 +1,36 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ include "csi-s3.fullname" . }}-provisioner
+  namespace: kube-system
+  labels:
+  {{- include "csi-s3.labels" . | nindent 4 }}
+  {{- with .Values.service.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  selector:
+    {{- include "csi-s3.selectorLabels.provisioner" . | nindent 4 }}
+  ports:
+    - name: csi-s3-dummy
+      port: 65535
+---
+# needed for StatefulSet
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ include "csi-s3.fullname" . }}-attacher
+  namespace: kube-system
+  labels:
+  {{- include "csi-s3.labels" . | nindent 4 }}
+  {{- with .Values.service.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  selector:
+    {{- include "csi-s3.selectorLabels.attacher" . | nindent 4 }}
+  ports:
+    - name: csi-s3-dummy
+      port: 65535

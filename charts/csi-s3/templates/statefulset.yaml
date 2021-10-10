@@ -1,0 +1,100 @@
+kind: StatefulSet
+apiVersion: apps/v1
+metadata:
+  name: {{ include "csi-s3.fullname" . }}
+  namespace: kube-system
+spec:
+  serviceName: {{ include "csi-s3.fullname" . }}-provisioner
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "csi-s3.selectorLabels.provisioner" . | nindent 6 }}
+  template: 
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "csi-s3.selectorLabels.provisioner" . | nindent 8 }}
+    spec:
+      serviceAccount: {{ include "csi-s3.fullname" . }}-provisioner
+      tolerations:
+        - key: node-role.kubernetes.io/master
+          operator: "Exists"
+      containers:
+        - name: csi-provisioner
+          image: "{{ .Values.image.provisioner.repository }}:{{ .Values.image.provisioner.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.provisioner.pullPolicy }}
+          args:
+            - "--csi-address=$(ADDRESS)"
+            - "--v=4"
+          env:
+            - name: ADDRESS
+              value: /var/lib/kubelet/plugins/ch.ctrox.csi.s3-driver/csi.sock
+          volumeMounts:
+            - name: socket-dir
+              mountPath: /var/lib/kubelet/plugins/ch.ctrox.csi.s3-driver
+        - name: csi-s3
+          image: "{{ .Values.image.csi.repository }}:{{ .Values.image.csi.tag | default .Chart.AppVersion }}"
+          args:
+            - "--endpoint=$(CSI_ENDPOINT)"
+            - "--nodeid=$(NODE_ID)"
+            - "--v=4"
+          env:
+            - name: CSI_ENDPOINT
+              value: unix:///var/lib/kubelet/plugins/ch.ctrox.csi.s3-driver/csi.sock
+            - name: NODE_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+          imagePullPolicy: {{ .Values.image.csi.pullPolicy }}
+          volumeMounts:
+            - name: socket-dir
+              mountPath: /var/lib/kubelet/plugins/ch.ctrox.csi.s3-driver
+      volumes:
+        - name: socket-dir
+          emptyDir: {}
+---
+kind: StatefulSet
+apiVersion: apps/v1
+metadata:
+  name: {{ include "csi-s3.fullname" . }}
+  namespace: kube-system
+spec:
+  serviceName: {{ include "csi-s3.fullname" . }}-attacher
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "csi-s3.selectorLabels.attacher" . | nindent 6 }}
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "csi-s3.selectorLabels.attacher" . | nindent 8 }}
+    spec:
+      serviceAccount: {{ include "csi-s3.fullname" . }}-attacher
+      tolerations:
+      - key: node-role.kubernetes.io/master
+        operator: "Exists"
+      containers:
+        - name: csi-attacher
+          image: "{{ .Values.image.attacher.repository }}:{{ .Values.image.attacher.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.attacher.pullPolicy }}
+          args:
+            - "--v=4"
+            - "--csi-address=$(ADDRESS)"
+          env:
+            - name: ADDRESS
+              value: /var/lib/kubelet/plugins/ch.ctrox.csi.s3-driver/csi.sock
+          imagePullPolicy: "IfNotPresent"
+          volumeMounts:
+            - name: socket-dir
+              mountPath: /var/lib/kubelet/plugins/ch.ctrox.csi.s3-driver
+      volumes:
+        - name: socket-dir
+          hostPath:
+            path: /var/lib/kubelet/plugins/ch.ctrox.csi.s3-driver
+            type: DirectoryOrCreate
