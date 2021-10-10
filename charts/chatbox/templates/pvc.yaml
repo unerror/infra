@@ -13,3 +13,20 @@ spec:
   resources:
     requests:
       storage: {{ .Values.pvc.size }}
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "chatbox.fullname" . }}-new-db
+  labels:
+    {{- include "chatbox.labels" . | nindent 4 }}
+spec:
+	{{- with .Values.newpvc.accessModes }}
+  accessModes:
+    {{- toYaml . | nindent 4 }}
+	{{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.newpvc.size }}
+  storageClassName: {{ .Values.newpvc.storageClass }}

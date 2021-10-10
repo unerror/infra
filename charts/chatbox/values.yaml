@@ -56,6 +56,11 @@ pvc:
   size: 1Gi
   accessModes:
     - ReadWriteOnce
+newpvc:
+  size: 1Gi
+  accessModes:
+    - ReadWriteMany
+  storageClass: csi-s3
 
 server:
   tls:
