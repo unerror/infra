@@ -1,14 +1,45 @@
 do_region = "tor1"
-databases = {
+
+database_users = ["homeassistant", "matrix"]
+database_dbs = {
   homeassistant = {
-    pool      = "home-assistant"
-    pool_size = 4
-    database  = "homeassistant"
+    pool_size = 2
     user      = "homeassistant"
+  }
+
+  synapse = {
+    pool_size = 2
+    user = "matrix"
+  }
+
+  matrix_appservice_irc = {
+    pool_size = 2
+    user = "matrix"
+  }
+
+  matrix_dimension = {
+    pool_size = 2
+    user = "matrix"
+  }
+
+  matrix_ma1sd = {
+    pool_size = 2
+    user = "matrix"
+  }
+
+  matrix_mautrix_hangouts = {
+    pool_size = 2
+    user = "matrix"
+  }
+
+  matrix_reminder_bot = {
+    pool_size = 2
+    user = "matrix"
   }
 }
 
 database_firewall = ["158.69.126.10"]
+
 
 kubernetes_vpc_cidr = "10.118.0.0/20"
 kubernetes_tags     = ["kubernetes", "unerror", "unerror-network"]

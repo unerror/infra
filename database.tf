@@ -9,31 +9,36 @@ resource "digitalocean_database_cluster" "db-tor1" {
 }
 
 resource "digitalocean_database_db" "dbs" {
-  for_each = tomap(var.databases)
+  for_each = tomap(var.database_dbs)
 
-  name = each.value.database
+  name = each.key
 
   cluster_id = digitalocean_database_cluster.db-tor1.id
 }
 
 resource "digitalocean_database_user" "users" {
-  for_each = tomap(var.databases)
+  for_each = toset(var.database_users)
 
-  name = each.value.user
+  name = each.value
 
   cluster_id = digitalocean_database_cluster.db-tor1.id
 }
 
 
 resource "digitalocean_database_connection_pool" "pools" {
-  for_each = tomap(var.databases)
+  for_each = tomap(var.database_dbs)
 
   cluster_id = digitalocean_database_cluster.db-tor1.id
-  name       = each.value.pool
+  name       = each.key
   mode       = "transaction"
   size       = each.value.pool_size
-  db_name    = digitalocean_database_db.dbs[each.value.database].name
+  db_name    = digitalocean_database_db.dbs[each.key].name
   user       = digitalocean_database_user.users[each.value.user].name
+
+  depends_on = [
+    digitalocean_database_user.users,
+    digitalocean_database_db.dbs
+  ]
 }
 
 resource "digitalocean_database_firewall" "firewall" {

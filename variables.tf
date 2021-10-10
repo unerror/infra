@@ -1,8 +1,12 @@
-variable "databases" {
+variable "database_dbs" {
   type = map
 }
 
 variable "database_firewall" {
+  type = list
+}
+
+variable "database_users" {
   type = list
 }
 
