@@ -250,3 +250,48 @@ resource "argocd_application" "certs" {
   ]
 }
 
+resource "argocd_application" "csi-s3" {
+  metadata {
+    name      = "csi-s3"
+    namespace = "default"
+  }
+
+  wait = true
+
+  spec {
+    project = argocd_project.infra.id
+    source {
+      repo_url        = var.infra_repo
+      path            = "charts/csi-s3"
+      target_revision = "HEAD"
+      helm {
+        value_files = ["values.yaml", "secrets://secrets.yaml"]
+      }
+    }
+
+    sync_policy {
+      automated = {
+        allow_empty = false
+        prune       = true
+        self_heal   = true
+      }
+
+      retry {
+        backoff = {
+          duration     = ""
+          max_duration = ""
+        }
+        limit = "0"
+      }
+    }
+
+    destination {
+      server    = "https://kubernetes.default.svc"
+      namespace = "kube-system"
+    }
+  }
+
+  depends_on = [
+    helm_release.argocd
+  ]
+}
