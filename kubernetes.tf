@@ -17,6 +17,10 @@ provider "helm" {
   }
 }
 
+data "digitalocean_project" "unerror-network" {
+  name = "unerror.network"
+}
+
 # Kubernetes Cluster and default nodepool configuration
 # (WARNING: changing the defualt node pool size foces a replacement of the whole cluster)
 resource "digitalocean_kubernetes_cluster" "une-k8s" {
@@ -43,6 +47,14 @@ resource "digitalocean_kubernetes_cluster" "une-k8s" {
     }
   }
 }
+
+resource "digitalocean_project_resources" "une-k8s-unerror-network" {
+  project = data.digitalocean_project.unerror-network.id
+  resources = [
+    digitalocean_kubernetes_cluster.une-k8s.urn
+  ]
+}
+
 
 # Kubernetes Secret for DO Docker registry
 resource "kubernetes_secret" "dockerlogin" {
