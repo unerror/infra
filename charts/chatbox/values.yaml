@@ -71,10 +71,6 @@ irc:
         name: letsencrypt-prod
         kind: ClusterIssuer
         group: cert-manager.io
-ma1sd-signkey:
-  current: 
-  name: 
-  value: 
 ma1sd:
   persistence:
     enabled: false
