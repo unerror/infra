@@ -7,5 +7,5 @@ appVersion: "latest"
 
 dependencies:
   - name: ma1sd
-    version: 0.1.2
+    version: 0.1.4
     repository: file://../ma1sd/
