@@ -3,21 +3,15 @@ fullnameOverride: ""
 
 irc:
   replicaCount: 1
-
   image:
     repository: ergochat/ergo
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
     tag: "latest"
-
   imagePullSecrets: []
-
   podAnnotations: {}
-
   podSecurityContext: {}
-
   securityContext: {}
-
   service:
     externalName:
       name: lb.unerror.network
@@ -28,7 +22,6 @@ irc:
     annotations: {}
     port: 6667
     tlsPort: 6697
-
   ingress:
     enabled: true
     annotations:
@@ -39,27 +32,19 @@ irc:
       nginx.ingress.kubernetes.io/proxy-ssl-verify: "true"
       external-dns.alpha.kubernetes.io/target: lb.unerror.network
       external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
-
     ingressClassName: nginx
     hosts:
       - irc.unerror.com
       - irc.unerror.network
-
   resources: {}
   nodeSelector: {}
   tolerations: []
   affinity: {}
-
   pvc:
-    size: 1Gi
-    accessModes:
-      - ReadWriteOnce
-  newpvc:
     size: 1Gi
     accessModes:
       - ReadWriteMany
     storageClass: csi-s3
-
   server:
     tls:
       dns01: "true"
@@ -71,6 +56,7 @@ irc:
         name: letsencrypt-prod
         kind: ClusterIssuer
         group: cert-manager.io
+
 matrix-synapse:
   serverName: unerror.network
   publicServerName: matrix.unerror.network
@@ -90,6 +76,7 @@ matrix-synapse:
       value: /usr/lib/x86_64-linux-gnu/libjemalloc.so.2
     - name: SYNAPSE_CACHE_FACTOR
       value: "2"
+
 ma1sd:
   image:
     tag: 2.5.0

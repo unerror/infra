@@ -5,11 +5,11 @@ metadata:
   labels:
     {{- include "chatbox.labels" . | nindent 4 }}
 spec:
-	{{- with .Values.irc.newpvc.accessModes }}
+	{{- with .Values.irc.pvc.accessModes }}
   accessModes:
     {{- toYaml . | nindent 4 }}
 	{{- end }}
   resources:
     requests:
-      storage: {{ .Values.irc.newpvc.size }}
+      storage: {{ .Values.irc.pvc.size }}
   storageClassName: s3-default
