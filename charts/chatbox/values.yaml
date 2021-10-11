@@ -100,7 +100,7 @@ ma1sd:
   ingress:
     enabled: true
     hosts:
-      - matrix.unerror.network
+      - host: matrix.unerror.network
     tls:
       - hosts:
           - matrix.unerror.network
