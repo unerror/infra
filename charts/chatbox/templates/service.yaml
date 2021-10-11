@@ -4,22 +4,22 @@ metadata:
   name: {{ include "chatbox.fullname" . }}-ircd
   labels:
     {{- include "chatbox.labels" . | nindent 4 }}
-  {{- with .Values.service.annotations }}
+  {{- with .Values.irc.service.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
   type: ClusterIP
   ports:
-    - port: {{ .Values.service.port }}
+    - port: {{ .Values.irc.service.port }}
       targetPort: 6667
       protocol: TCP
       name: irc
-    {{- if .Values.server.tls.enabled }}
+    {{- if .Values.irc.server.tls.enabled }}
     - port: 443
       name: websockets  
       targetPort: 443
-    - port: {{ .Values.service.tlsPort }}
+    - port: {{ .Values.irc.service.tlsPort }}
       targetPort: 6697
       protocol: TCP
       name: ircs

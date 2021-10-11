@@ -144,7 +144,7 @@ oper-classes:
             - "history"
             - "defcon"
             - "massmessage"
-{{- with .Values.server.oper }}
+{{- with .Values.irc.server.oper }}
 opers:
     {{- toYaml . | nindent 4 }}
 {{- end }}

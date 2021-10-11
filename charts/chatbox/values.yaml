@@ -1,75 +1,73 @@
-# Default values for chatbox.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
-
-replicaCount: 1
-
-image:
-  repository: ergochat/ergo
-  pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: "latest"
-
-imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
-podAnnotations: {}
+irc:
+  replicaCount: 1
 
-podSecurityContext: {}
+  image:
+    repository: ergochat/ergo
+    pullPolicy: IfNotPresent
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: "latest"
 
-securityContext: {}
+  imagePullSecrets: []
 
-service:
-  externalName:
-    name: lb.unerror.network
+  podAnnotations: {}
+
+  podSecurityContext: {}
+
+  securityContext: {}
+
+  service:
+    externalName:
+      name: lb.unerror.network
+      annotations:
+        external-dns.alpha.kubernetes.io/hostname: irc.unerror.com
+        external-dns.alpha.kubernetes.io/target: lb.unerror.network
+        external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+    annotations: {}
+    port: 6667
+    tlsPort: 6697
+
+  ingress:
+    enabled: true
     annotations:
-      external-dns.alpha.kubernetes.io/hostname: irc.unerror.com
+      nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+      nginx.ingress.kubernetes.io/secure-backends: "true"
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/proxy-ssl-secret: default/chatbox-crt-secret
+      nginx.ingress.kubernetes.io/proxy-ssl-verify: "true"
       external-dns.alpha.kubernetes.io/target: lb.unerror.network
       external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
-  annotations: {}
-  port: 6667
-  tlsPort: 6697
 
-ingress:
-  enabled: true
-  annotations:
-    nginx.ingress.kubernetes.io/backend-protocol: HTTPS
-    nginx.ingress.kubernetes.io/secure-backends: "true"
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/proxy-ssl-secret: default/chatbox-crt-secret
-    nginx.ingress.kubernetes.io/proxy-ssl-verify: "true"
-    external-dns.alpha.kubernetes.io/target: lb.unerror.network
-    external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
-
-  ingressClassName: nginx
-  hosts:
-    - irc.unerror.com
-    - irc.unerror.network
-
-resources: {}
-nodeSelector: {}
-tolerations: []
-affinity: {}
-
-pvc:
-  size: 1Gi
-  accessModes:
-    - ReadWriteOnce
-newpvc:
-  size: 1Gi
-  accessModes:
-    - ReadWriteMany
-  storageClass: csi-s3
-
-server:
-  tls:
-    dns01: "true"
-    enabled: true
-    hostnames:
+    ingressClassName: nginx
+    hosts:
       - irc.unerror.com
       - irc.unerror.network
-    issuerRef:
-      name: letsencrypt-prod
-      kind: ClusterIssuer
-      group: cert-manager.io
+
+  resources: {}
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+
+  pvc:
+    size: 1Gi
+    accessModes:
+      - ReadWriteOnce
+  newpvc:
+    size: 1Gi
+    accessModes:
+      - ReadWriteMany
+    storageClass: csi-s3
+
+  server:
+    tls:
+      dns01: "true"
+      enabled: true
+      hostnames:
+        - irc.unerror.com
+        - irc.unerror.network
+      issuerRef:
+        name: letsencrypt-prod
+        kind: ClusterIssuer
+        group: cert-manager.io

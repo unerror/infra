@@ -5,38 +5,38 @@ metadata:
   labels:
     {{- include "chatbox.labels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ .Values.irc.replicaCount }}
   selector:
     matchLabels:
       {{- include "chatbox.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
+      {{- with .Values.irc.podAnnotations }}
       annotations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
         {{- include "chatbox.selectorLabels" . | nindent 8 }}
     spec:
-      {{- with .Values.imagePullSecrets }}
+      {{- with .Values.irc.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+        {{- toYaml .Values.irc.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+            {{- toYaml .Values.irc.securityContext | nindent 12 }}
+          image: "{{ .Values.irc.image.repository }}:{{ .Values.irc.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.irc.image.pullPolicy }}
           ports:
             - name: irc
               containerPort: 6667
               protocol: TCP
             - containerPort: 443
               name: websocket
-            {{- if .Values.server.tls.enabled }}
+            {{- if .Values.irc.server.tls.enabled }}
             - name: ircs
               containerPort: 6697
               protocol: TCP 
@@ -52,7 +52,7 @@ spec:
             timeoutSeconds: 5
             periodSeconds: 60
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+            {{- toYaml .Values.irc.resources | nindent 12 }}
           volumeMounts:
           - mountPath: /ircd/
             name: irc-config
@@ -64,7 +64,7 @@ spec:
             name: irc-db
         - name: config-reloader
           # image is based on busybox which includes inotifyd + pkill
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.irc.image.repository }}:{{ .Values.irc.image.tag | default .Chart.AppVersion }}"
           command: ["/bin/sh"]
           args:
           - "-c"
@@ -93,15 +93,15 @@ spec:
       - name: irc-db
         persistentVolumeClaim:
           claimName: {{ include "chatbox.fullname" . }}-new-db
-      {{- with .Values.nodeSelector }}
+      {{- with .Values.irc.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.affinity }}
+      {{- with .Values.irc.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.tolerations }}
+      {{- with .Values.irc.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
