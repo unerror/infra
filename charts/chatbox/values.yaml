@@ -74,4 +74,7 @@ irc:
 ma1sd-signkey:
   current: 
   name: 
-  value:
+  value: 
+ma1sd:
+  persistence:
+    enabled: false
