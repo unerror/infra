@@ -1,6 +1,6 @@
 dependencies:
 - name: ma1sd
   repository: file://../ma1sd/
-  version: 0.1.2
-digest: sha256:f3b10e3d65a9f1074a44135a49cccde1dd188b5ea98ba4656d7dddfc62e8a38f
-generated: "2021-10-11T13:54:44.885815-03:00"
+  version: 0.1.3
+digest: sha256:71c9eb3ef98a283bbe158d7d06121ef4b860813f69656bd2b51d4f01d4cd8c5f
+generated: "2021-10-11T14:06:36.686758-03:00"
