@@ -99,6 +99,7 @@ ma1sd:
     enabled: false
   ingress:
     enabled: true
+    ingressClassName: nginx
     hosts:
       - host: matrix.unerror.network
     tls:
