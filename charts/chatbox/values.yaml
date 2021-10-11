@@ -70,4 +70,8 @@ irc:
       issuerRef:
         name: letsencrypt-prod
         kind: ClusterIssuer
-        group: cert-manager.io
+        group: cert-manager.ioma1sd-signkey:
+ma1sd-signkey:
+  current: ''
+  name: ''
+  value: ''
