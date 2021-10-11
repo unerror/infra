@@ -102,7 +102,7 @@ config:
 
 # signing_key -- Generate with `python3 -e "import string; import random; import sys; from signedjson.key import generate_signing_key, write_signing_keys; write_signing_keys(sys.stdout,(generate_signing_key("a_" + "".join(random.SystemRandom().choice(string.ascii_letters) for _ in range(4))),))"` or use synapse signing key
 signing_key:
-  seriel: 
+  seriel:
   algo: ed25519
   value:
 
