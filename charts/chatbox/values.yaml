@@ -128,7 +128,8 @@ ma1sd:
       v1: true
       v2: true
     server:
-      name: matrix.unerror.network
+      name: unerror.network
+      publicUrl: https://matrix.unerror.network
     storage:
       backend: postgresql
     synapseSql:
