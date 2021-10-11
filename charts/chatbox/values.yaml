@@ -104,10 +104,10 @@ ma1sd:
     ingressClassName: nginx
     hosts:
       - host: matrix.unerror.network
-    secretName: matrix-network-cert
     tls:
       - hosts:
           - matrix.unerror.network
+        secretName: matrix-network-cert
   config:
     dns:
       overwrite:
