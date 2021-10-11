@@ -1,0 +1,86 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "ma1sd.fullname" . }}
+  labels:
+{{ include "ma1sd.labels" . | indent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "ma1sd.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      annotations:
+        checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
+      labels:
+        app.kubernetes.io/name: {{ include "ma1sd.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      serviceAccountName: {{ template "ma1sd.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8090
+              protocol: TCP
+          livenessProbe:
+            tcpSocket:
+              port: 8090
+          readinessProbe:
+            tcpSocket:
+              port: 8090
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+          - mountPath: /var/lib/ma1sd
+            name: ma1sd-data
+          # TODO - /etc/ma1sd/signing.key/current
+          # TODO - {"type":"Regular","algo":"ed25519","serial":"AAAACLYTA34d"}
+          # TODO - /etc/ma1sd/signing.key/regular/ed25519/AAAACLYTA34d
+          # TODO - {"version":"0","is_valid":true,"key":"7Zl9eYijQIBzV10NShvyXgk+KvGMvV/apgoR4CTku14"}
+          {{- if .Values.signing_key }}
+          - mountPath: /etc/ma1sd/signing.key/current
+            name: secret
+            subPath: serial
+          - mountPath: /etc/ma1sd/signing.key/regular/{{ .Values.signing_key.seriel }}
+            name: secret
+            subPath: signing.key
+          {{- end }}
+          - mountPath: /etc/ma1sd/ma1sd.yaml
+            name: secret
+            subPath: ma1sd.yaml
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      volumes:
+      - name: ma1sd-data
+        {{- if .Values.persistence.enabled }}
+        persistentVolumeClaim:
+          claimName: {{ .Values.persistence.existingClaim | default (include "ma1sd.fullname" .) }}
+        {{- else }}
+        emptyDir: {}
+        {{- end }}
+      - name: secret
+        secret:
+          secretName: {{ include "ma1sd.fullname" . }}
