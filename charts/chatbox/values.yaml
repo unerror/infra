@@ -99,9 +99,12 @@ ma1sd:
     enabled: false
   ingress:
     enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod
     ingressClassName: nginx
     hosts:
       - host: matrix.unerror.network
+    secretName: matrix-network-cert
     tls:
       - hosts:
           - matrix.unerror.network
