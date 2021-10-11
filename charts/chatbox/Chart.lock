@@ -1,0 +1,6 @@
+dependencies:
+- name: ma1sd
+  repository: https://halkeye.github.io/helm-charts/
+  version: 0.1.0
+digest: sha256:cda818e06fa11654d53ae4db2ea8e09ab09e8d1e94493e0eb91413e22fe2007a
+generated: "2021-10-11T12:14:25.304703-03:00"
