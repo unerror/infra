@@ -71,6 +71,78 @@ irc:
         name: letsencrypt-prod
         kind: ClusterIssuer
         group: cert-manager.io
+matrix-synapse:
+  serverName: unerror.network
+  publicServerName: matrix.unerror.network
+  image:
+    tag: v1.44.0
+  config:
+    turnUris: [] # xx: add when turn
+    turnSecret: ""
+  enableRegistration: true
+  synapse:
+    annotations:
+      prometheus.io/scrape: "true"
+      prometheus.io/path: /_synapse/metrics
+      prometheus.io/port: 9090
+  extraEnv:
+    - name: LD_PRELOAD
+      value: /usr/lib/x86_64-linux-gnu/libjemalloc.so.2
+    - name: SYNAPSE_CACHE_FACTOR
+      value: "2"
 ma1sd:
+  image:
+    tag: 2.5.0
+  serviceAccount:
+    create: false
   persistence:
     enabled: false
+  ingress:
+    enabled: true
+    hosts:
+      - matrix.unerror.network
+    tls:
+      - hosts:
+          - matrix.unerror.network
+  config:
+    dns:
+      overwrite:
+        homeserver:
+          client:
+            - name: matrix.unerror.network
+              value: "http://chatbox-synapse-matrix-synapse:8008"
+    hashing:
+      algorithms:
+        - none
+        - sha256
+      delay: 2m
+      enabled: true
+      hashStorageType: sql
+      pepperLength: 20
+      requests: 10
+      rotationPolicy: per_requests
+    key:
+      path: /etc/ma1sd/signing.key
+    matrix:
+      domain: unerror.unerror.network
+      v1: true
+      v2: true
+    server:
+      name: matrix.unerror.network
+    storage:
+      backend: postgresql
+    synapseSql:
+      enabled: true
+      type: postgresql
+    notification:
+      handler:
+        email: "sendgrid"
+      handlers:
+        sendgrid:
+          identity:
+            from: chatbox@unerror.network
+            name: Unerror Chatbox Matrix
+    threepid:
+      email:
+        identity:
+          from: chatbox@unerror.network
