@@ -1,0 +1,9 @@
+dependencies:
+- name: tailscale-relay
+  repository: https://charts.visonneau.fr/
+  version: 0.0.14
+- name: coturn
+  repository: https://iits-consulting.github.io/coturn-chart/
+  version: 1.1.1
+digest: sha256:6654eb9a2a767771eb2f318524756acd9e4c06d19e02d3973edbb9657c7a3b94
+generated: "2021-10-11T22:51:07.888493-03:00"

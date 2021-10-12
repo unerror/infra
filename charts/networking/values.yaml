@@ -4,3 +4,27 @@ tailscale-relay:
       TAILSCALE_ADVERTISE_ROUTES: 10.0.0.0/8
       TAILSCALE_ADVERTISE_TAGS: tag:une-k8s
       TAILSCALE_HOSTNAME: "une-k8s-relay"
+
+coturn:
+  coturn:
+    traefik:
+      tcp:
+        enabled: false
+      udp:
+        enabled: false
+    image:
+      tag: "4.5.2"
+    config: |
+      realm=turn-domain.de
+      log-file=stdout
+      pidfile=/var/tmp/turnserver.pid
+      userdb=/var/tmp/turnserver.db
+      # Specify the user for the TURN authentification
+      # Enable long-term credential mechanism
+      lt-cred-mech
+      user=Username:Password
+      no-cli
+      no-tls
+      no-dtls
+      verbose
+      prod
