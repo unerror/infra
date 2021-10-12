@@ -107,7 +107,6 @@ matrix-synapse:
       - matrix.unerror.network
     wkHosts:
       - matrix.unerror.network
-
     paths:
       - path: /_matrix/identity
         backend:
@@ -180,7 +179,7 @@ matrix-synapse:
     annotations:
       prometheus.io/scrape: "true"
       prometheus.io/path: /_synapse/metrics
-      prometheus.io/port: 9090
+      prometheus.io/port: "9090"
     extraEnv:
       - name: LD_PRELOAD
         value: /usr/lib/x86_64-linux-gnu/libjemalloc.so.2
@@ -191,7 +190,7 @@ matrix-synapse:
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/path: /_synapse/metrics
-        prometheus.io/port: 9090
+        prometheus.io/port: "9090"
       extraCommands:
         - apt-get update -qyy && apt-get install curl unzip -yqq
         - curl -Lo /tmp/rest-provider.zip https://github.com/devplayer0/matrix-synapse-rest-password-provider/archive/master.zip
