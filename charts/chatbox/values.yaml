@@ -113,17 +113,13 @@ matrix-synapse:
           serviceName: ma1sd
           servicePort: 8090
     csPaths:
-      - path: /_matrix/identity
-        backend:
-          serviceName: ma1sd
-          servicePort: 8090
       - path: /_matrix/client/r0/user_directory
         backend:
-          serviceName: ma1sd
+          serviceName: chatbox-ma1sd
           servicePort: 8090
       - path: /_matrix/client/r0/login
         backend:
-          serviceName: ma1sd
+          serviceName: chatbox-ma1sd
           servicePort: 8090
   extraConfig:
     max_upload_size: 128M
