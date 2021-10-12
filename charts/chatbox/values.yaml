@@ -13,12 +13,6 @@ irc:
   podSecurityContext: {}
   securityContext: {}
   service:
-    externalName:
-      name: lb.unerror.network
-      annotations:
-        external-dns.alpha.kubernetes.io/hostname: irc.unerror.com
-        external-dns.alpha.kubernetes.io/target: lb.unerror.network
-        external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
     annotations: {}
     port: 6667
     tlsPort: 6697
@@ -56,6 +50,7 @@ irc:
         name: letsencrypt-prod
         kind: ClusterIssuer
         group: cert-manager.io
+
 tls:
   enabled: true
   hostnames:
@@ -151,27 +146,3 @@ ma1sd:
       email:
         identity:
           from: chatbox@unerror.network
-
-coturn:
-  coturn:
-    traefik:
-      tcp:
-        enabled: false
-      udp:
-        enabled: false
-    image:
-      tag: "4.5.2"
-    config: |
-      realm=turn-domain.de
-      log-file=stdout
-      pidfile=/var/tmp/turnserver.pid
-      userdb=/var/tmp/turnserver.db
-      # Specify the user for the TURN authentification
-      # Enable long-term credential mechanism
-      lt-cred-mech
-      user=Username:Password
-      no-cli
-      no-tls
-      no-dtls
-      verbose
-      prod
