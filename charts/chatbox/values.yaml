@@ -96,7 +96,7 @@ matrix-synapse:
     enabled: true
     annotations:
       nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    ingressClassName: nginx
+    className: nginx
     tls:
       - hosts:
           - matrix.unerror.network
