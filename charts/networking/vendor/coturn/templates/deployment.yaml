@@ -50,6 +50,9 @@ spec:
               readOnly: true
             - name: var-tmp
               mountPath: /var/tmp
+            - mountPath: /tls
+              name: coturn-certs
+              readOnly: true
           securityContext:
             capabilities:
               drop:
@@ -64,5 +67,8 @@ spec:
         - name: coturn-config
           secret:
             secretName: {{ include "coturn.fullname" . }}-coturn-config
+        - name: coturn-certs
+          secret:
+            secretName: {{ include "coturn.fullname" . }}-crt-secret
         - name: var-tmp
           emptyDir: {}

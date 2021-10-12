@@ -27,3 +27,12 @@ coturn:
       no-dtls
       verbose
       prod
+
+tls:
+  enabled: true
+  hostnames:
+    - turn.unerror.network
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+    group: cert-manager.io
