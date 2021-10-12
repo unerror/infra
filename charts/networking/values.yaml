@@ -12,6 +12,7 @@ coturn:
       annotations:
         external-dns.alpha.kubernetes.io/target: lb.unerror.network
         external-dns.alpha.kubernetes.io/hostname: turn.unerror.network
+        external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
     image:
       tag: "4.5.2"
     config: |
