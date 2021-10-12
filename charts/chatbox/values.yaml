@@ -157,11 +157,12 @@ ma1sd:
 coturn:
   coturn:
     traefik:
-    tcp:
-      enabled: false
-    udp:
-      enabled: false
-    tag: "4.5.2"
+      tcp:
+        enabled: false
+      udp:
+        enabled: false
+    image:
+      tag: "4.5.2"
     config: |
       realm=turn-domain.de
       log-file=stdout
