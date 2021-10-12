@@ -70,8 +70,10 @@ matrix-synapse:
   signingkey:
     job:
       enabled: false
-    existingSecret: synapse-extras
+    existingSecret: chatbox-matrix-signkey
     existingSecretKey: signing.key
+    secret: |
+      data
   config:
     turnUris: [] # xx: add when turn
     turnSecret: ""
