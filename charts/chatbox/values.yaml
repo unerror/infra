@@ -57,6 +57,7 @@ tls:
     - irc.unerror.com
     - irc.unerror.network
     - matrix.unerror.network
+    - unerror.network
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer
