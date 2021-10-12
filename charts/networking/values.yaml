@@ -15,20 +15,6 @@ coturn:
         external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
     image:
       tag: "4.5.2"
-    config: |
-      realm=turn-domain.de
-      log-file=stdout
-      pidfile=/var/tmp/turnserver.pid
-      userdb=/var/tmp/turnserver.db
-      # Specify the user for the TURN authentification
-      # Enable long-term credential mechanism
-      lt-cred-mech
-      user=Username:Password
-      no-cli
-      no-tls
-      no-dtls
-      verbose
-      prod
 
 tls:
   enabled: true
