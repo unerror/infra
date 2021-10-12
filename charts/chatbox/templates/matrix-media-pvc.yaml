@@ -5,7 +5,10 @@ metadata:
   labels:
     {{- include "chatbox.labels" . | nindent 4 }}
 spec:
-  accessMode: {{ index .Values "matrix-synapse" "persistence" "accessMode" }}
+	{{- with index .Values "matrix-synapse" "persistence" "accessMode" }}
+  accessMode:
+    {{- toYaml . | nindent 4 | quote }}
+	{{- end }}
   resources:
     requests:
       storage: {{ index .Values "matrix-synapse" "persistence" "size" }}
