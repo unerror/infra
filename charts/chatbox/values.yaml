@@ -110,7 +110,7 @@ matrix-synapse:
     paths:
       - path: /_matrix/identity
         backend:
-          serviceName: ma1sd
+          serviceName: chatbox-ma1sd
           servicePort: 8090
     csPaths:
       - path: /_matrix/client/r0/user_directory
@@ -128,13 +128,13 @@ matrix-synapse:
     auto_join_rooms:
       - "#offtopic:unerror.com"
     account_threepid_delegates:
-      email: http://ma1sd:8090
-      msisdn: http://ma1sd:8090
+      email: http://chatbox-ma1sd:8090
+      msisdn: http://chatbox-ma1sd:8090
     trusted_third_party_id_servers: [matrix.unerror.network]
     password_providers:
       - module: rest_auth_provider.RestAuthProvider
         config:
-          endpoint: "http://ma1sd:8090"
+          endpoint: "http://chatbox-ma1sd:8090"
           policy:
             registration:
               profile:
