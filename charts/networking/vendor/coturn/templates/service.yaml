@@ -4,10 +4,6 @@ metadata:
   name: {{ include "coturn.fullname" . }}-coturn
   labels:
 {{ include "labels" . | indent 4}}
-{{- with .Values.coturn.service.annotations }}
-  annotations:
-    {{- toYaml . | nindent 4 }}
-{{- end }}
 spec:
   type: {{ .Values.coturn.service.type }}
   ports:

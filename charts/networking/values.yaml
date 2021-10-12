@@ -9,10 +9,6 @@ coturn:
   coturn:
     service:
       type: ClusterIP
-      annotations:
-        external-dns.alpha.kubernetes.io/target: lb.unerror.network
-        external-dns.alpha.kubernetes.io/hostname: turn.unerror.network
-        external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
     image:
       tag: "4.5.2"
 
@@ -24,3 +20,13 @@ tls:
     name: letsencrypt-prod
     kind: ClusterIssuer
     group: cert-manager.io
+
+ingress:
+  enabled: true
+  annotations:
+    external-dns.alpha.kubernetes.io/target: lb.unerror.network
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+  ingressClassName: nginx
+  hosts:
+    - turn.unerror.com
+    - turn.unerror.network

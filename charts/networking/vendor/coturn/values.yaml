@@ -6,7 +6,6 @@ coturn:
   kind: Deployment
   service:
     type: ClusterIP
-    annotations:
 
   image:
     repository: "instrumentisto/coturn"
