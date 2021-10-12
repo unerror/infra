@@ -5,12 +5,13 @@ cert-manager:
     defaultIssuerName: letsencrypt-prod
   installCRDs: true
 external-dns:
+  publishInternalServices: true
   cloudflare:
     proxied: true
   provider: cloudflare
   sources:
-  - ingress
-  - service
+    - ingress
+    - service
 ingress-nginx:
   controller:
     config:
