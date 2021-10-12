@@ -62,6 +62,11 @@ matrix-synapse:
   publicServerName: matrix.unerror.network
   image:
     tag: v1.44.0
+  signingkey:
+    job:
+      enabled: false
+    existingSecret: synapse-extras
+    existingSecretKey: signing.key
   config:
     turnUris: [] # xx: add when turn
     turnSecret: ""
