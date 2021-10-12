@@ -11,4 +11,4 @@ dependencies:
     repository: https://charts.visonneau.fr/
   - name: coturn
     version: 1.1.1
-    repository: https://iits-consulting.github.io/coturn-chart/
+    repository: file://./vendor/coturn

@@ -3,7 +3,7 @@ dependencies:
   repository: https://charts.visonneau.fr/
   version: 0.0.14
 - name: coturn
-  repository: https://iits-consulting.github.io/coturn-chart/
+  repository: file://./vendor/coturn
   version: 1.1.1
-digest: sha256:6654eb9a2a767771eb2f318524756acd9e4c06d19e02d3973edbb9657c7a3b94
-generated: "2021-10-11T22:51:07.888493-03:00"
+digest: sha256:17e396a10995b1044a00cd28c27057dc0ce36c63cf9ffc9f583b15e059111fc1
+generated: "2021-10-11T23:06:07.73915-03:00"
