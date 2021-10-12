@@ -1,17 +1,15 @@
-{{- if .Values.irc.server.tls.enabled -}}
+{{- if .Values.tls.enabled -}}
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: {{ include "chatbox.fullname" . }}-cert
-  labels:
-    use-cloudflare-solver: {{ .Values.irc.server.tls.dns01 }}
 spec:
   secretName: {{ include "chatbox.fullname" . }}-crt-secret
-	{{- with .Values.irc.server.tls.hostnames }}
+	{{- with .Values.tls.hostnames }}
   dnsNames:
     {{- toYaml . | nindent 4 }}
   {{- end }}
-  {{- with .Values.irc.server.tls.issuerRef }}
+  {{- with .Values.tls.issuerRef }}
   issuerRef:
     {{- toYaml . | nindent 4 }}
   {{- end }}

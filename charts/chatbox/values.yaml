@@ -47,15 +47,25 @@ irc:
     storageClass: csi-s3
   server:
     tls:
-      dns01: "true"
       enabled: true
       hostnames:
         - irc.unerror.com
         - irc.unerror.network
+        - matrix.unerror.network
       issuerRef:
         name: letsencrypt-prod
         kind: ClusterIssuer
         group: cert-manager.io
+tls:
+  enabled: true
+  hostnames:
+    - irc.unerror.com
+    - irc.unerror.network
+    - matrix.unerror.network
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+    group: cert-manager.io
 
 matrix-synapse:
   serverName: unerror.network
@@ -99,7 +109,7 @@ ma1sd:
     tls:
       - hosts:
           - matrix.unerror.network
-        secretName: matrix-network-cert
+        secretName: chatbox-crt-secret
   config:
     dns:
       overwrite:
