@@ -72,22 +72,182 @@ matrix-synapse:
       enabled: false
     existingSecret: chatbox-matrix-signkey
     existingSecretKey: signing.key
-    secret: |
-      data
+    postgresql:
+      enabled: true
+      persistence:
+        enabled: false
+    redis:
+      enabled: true
+    volumePermissions:
+      enabled: true
+  persistence:
+    enabled: true
+    accessMode: ReadWriteMany
+    size: 20Gi
+  ingress:
+    enabled: true
+    annotations:
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    ingressClassName: nginx
+    tls:
+      - hosts:
+          - matrix.unerror.network
+        secretName: chatbox-crt-secret
+    hosts:
+      - matrix.unerror.network
+    csHosts:
+      - matrix.unerror.network
+
+    paths:
+      - path: /_matrix/identity
+        backend:
+          serviceName: ma1sd
+          servicePort: 8090
+    csPaths:
+      - path: /_matrix/identity
+        backend:
+          serviceName: ma1sd
+          servicePort: 8090
+      - path: /_matrix/client/r0/user_directory
+        backend:
+          serviceName: ma1sd
+          servicePort: 8090
+      - path: /_matrix/client/r0/login
+        backend:
+          serviceName: ma1sd
+          servicePort: 8090
   config:
-    turnUris: [] # xx: add when turn
-    turnSecret: ""
-  enableRegistration: true
+    turnUris:
+      [
+        "turn:turn.unerror.network?transport=udp",
+        "turn:turn.unerror.network?transport=tcp",
+      ]
+    enableRegistration: true
+  extraConfig:
+    max_upload_size: 128M
+    max_image_pixels: 32M
+    allow_guest_access: false
+    auto_join_rooms:
+      - "#offtopic:unerror.com"
+    account_threepid_delegates:
+      email: http://ma1sd:8090
+      msisdn: http://ma1sd:8090
+    trusted_third_party_id_servers: [matrix.unerror.network]
+    password_providers:
+      - module: rest_auth_provider.RestAuthProvider
+        config:
+          endpoint: "http://ma1sd:8090"
+          policy:
+            registration:
+              profile:
+                name: true
+            login:
+              profile:
+                name: false
+    url_preview_enabled: true
+    url_preview_ip_range_blacklist:
+      - "127.0.0.0/8"
+      - "10.0.0.0/8"
+      - "172.16.0.0/12"
+      - "192.168.0.0/16"
+      - "100.64.0.0/10"
+      - "192.0.0.0/24"
+      - "169.254.0.0/16"
+      - "192.88.99.0/24"
+      - "198.18.0.0/15"
+      - "192.0.2.0/24"
+      - "198.51.100.0/24"
+      - "203.0.113.0/24"
+      - "224.0.0.0/4"
+      - "::1/128"
+      - "fe80::/10"
+      - "fc00::/7"
+      - "2001:db8::/32"
+      - "ff00::/8"
+      - "fec0::/10"
   synapse:
+    extraCommands:
+      - apt-get update -qyy && apt-get install curl unzip -yqq
+      - curl -Lo /tmp/rest-provider.zip https://github.com/devplayer0/matrix-synapse-rest-password-provider/archive/master.zip
+      - cd /tmp && unzip rest-provider.zip
+      - cd /tmp/matrix-synapse-rest-password-provider-master && python setup.py install
+    livenessProbe:
+      # Give the extra commands a chance to run
+      initialDelaySeconds: 30
     annotations:
       prometheus.io/scrape: "true"
       prometheus.io/path: /_synapse/metrics
       prometheus.io/port: 9090
-  extraEnv:
-    - name: LD_PRELOAD
-      value: /usr/lib/x86_64-linux-gnu/libjemalloc.so.2
-    - name: SYNAPSE_CACHE_FACTOR
-      value: "2"
+    extraEnv:
+      - name: LD_PRELOAD
+        value: /usr/lib/x86_64-linux-gnu/libjemalloc.so.2
+      - name: SYNAPSE_CACHE_FACTOR
+        value: "2"
+  workers:
+    default:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: /_synapse/metrics
+        prometheus.io/port: 9090
+      extraCommands:
+        - apt-get update -qyy && apt-get install curl unzip -yqq
+        - curl -Lo /tmp/rest-provider.zip https://github.com/devplayer0/matrix-synapse-rest-password-provider/archive/master.zip
+        - cd /tmp && unzip rest-provider.zip
+        - cd /tmp/matrix-synapse-rest-password-provider-master && python setup.py install
+      livenessProbe:
+        # Give the extra commands a chance to run
+        initialDelaySeconds: 30
+      extraEnv:
+        - name: LD_PRELOAD
+          value: /usr/lib/x86_64-linux-gnu/libjemalloc.so.2
+        - name: SYNAPSE_CACHE_FACTOR
+          value: "2"
+    generic_worker:
+      enabled: true
+      replicaCount: 2
+      csPaths: # Set all of these since the login endpoint should be overridden by ma1sd
+        # - "/_matrix/client/(v2_alpha|r0)/sync"
+        - "/_matrix/client/(api/v1|v2_alpha|r0)/events"
+        # - "/_matrix/client/(api/v1|r0)/initialSync"
+        # - "/_matrix/client/(api/v1|r0)/rooms/[^/]+/initialSync"
+        - "/_matrix/client/(api/v1|r0|unstable)/publicRooms"
+        - "/_matrix/client/(api/v1|r0|unstable)/rooms/.*/joined_members"
+        - "/_matrix/client/(api/v1|r0|unstable)/rooms/.*/context/.*"
+        - "/_matrix/client/(api/v1|r0|unstable)/rooms/.*/members"
+        - "/_matrix/client/(api/v1|r0|unstable)/rooms/.*/state"
+        - "/_matrix/client/(api/v1|r0|unstable)/account/3pid"
+        - "/_matrix/client/(api/v1|r0|unstable)/keys/query"
+        - "/_matrix/client/(api/v1|r0|unstable)/keys/changes"
+        - "/_matrix/client/versions"
+        - "/_matrix/client/(api/v1|r0|unstable)/voip/turnServer"
+        - "/_matrix/client/(api/v1|r0|unstable)/joined_groups"
+        - "/_matrix/client/(api/v1|r0|unstable)/publicised_groups"
+        - "/_matrix/client/(api/v1|r0|unstable)/publicised_groups/"
+        # - "/_matrix/client/(api/v1|r0|unstable)/login"
+        - "/_matrix/client/(r0|unstable)/register"
+        - "/_matrix/client/(r0|unstable)/auth/.*/fallback/web"
+        - "/_matrix/client/(api/v1|r0|unstable)/rooms/.*/send"
+        - "/_matrix/client/(api/v1|r0|unstable)/rooms/.*/state/"
+        - "/_matrix/client/(api/v1|r0|unstable)/rooms/.*/(join|invite|leave|ban|unban|kick)"
+        - "/_matrix/client/(api/v1|r0|unstable)/join/"
+        - "/_matrix/client/(api/v1|r0|unstable)/profile/"
+    pusher:
+      enabled: true
+    federation_sender:
+      enabled: true
+    media_repository:
+      enabled: true
+    frontend_proxy:
+      enabled: true
+    synchrotron:
+      enabled: true
+      generic: true
+      listeners: [client]
+      csPaths:
+        - "/_matrix/client/(v2_alpha|r0)/sync"
+        - "/_matrix/client/(api/v1|v2_alpha|r0)/events"
+        - "/_matrix/client/(api/v1|r0)/initialSync"
+        - "/_matrix/client/(api/v1|r0)/rooms/[^/]+/initialSync"
 
 ma1sd:
   image:
