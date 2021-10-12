@@ -32,3 +32,6 @@ ingress-nginx:
   tcp:
     6667: "default/chatbox-ircd:6667:PROXY:PROXY"
     6697: "default/chatbox-ircd:6697:PROXY:PROXY"
+    3478: "une-sys/networking-coturn:3478:PROXY:PROXY"
+  udp:
+    3478: "une-sys/networking-coturn:3478:PROXY:PROXY"
