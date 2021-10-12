@@ -82,7 +82,8 @@ matrix-synapse:
       enabled: true
   persistence:
     enabled: true
-    accessMode: ReadWriteMany
+    accessMode:
+      - ReadWriteMany
     size: 20Gi
   ingress:
     enabled: true
