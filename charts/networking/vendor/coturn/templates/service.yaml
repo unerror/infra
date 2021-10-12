@@ -4,7 +4,7 @@ metadata:
   name: {{ include "coturn.fullname" . }}-coturn
   labels:
 {{ include "labels" . | indent 4}}
-{{- with .Values.irc.service.annotations }}
+{{- with .Values.coturn.service.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
 {{- end }}
