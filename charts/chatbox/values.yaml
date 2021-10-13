@@ -80,14 +80,14 @@ matrix-synapse:
       enabled: false
     existingSecret: chatbox-matrix-signkey
     existingSecretKey: signing.key
-    postgresql:
-      enabled: true
-      persistence:
-        enabled: false
-    redis:
-      enabled: true
-    volumePermissions:
-      enabled: true
+  postgresql:
+    enabled: true
+    persistence:
+      enabled: false
+  redis:
+    enabled: true
+  volumePermissions:
+    enabled: true
   persistence:
     enabled: true
     storageClass: s3-default
