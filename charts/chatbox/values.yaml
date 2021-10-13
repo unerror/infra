@@ -296,6 +296,11 @@ ma1sd:
     synapseSql:
       enabled: true
       type: postgresql
+    view:
+      session:
+        onTokenSubmit:
+          success: "/etc/ma1sd/templates/session/tokenSubmitSuccess-page.html"
+          failure: "/etc/ma1sd/templates/session/tokenSubmitSuccess.html"
     notification:
       handler:
         email: "sendgrid"
@@ -304,6 +309,24 @@ ma1sd:
           identity:
             from: chatbox@unerror.network
             name: Unerror Chatbox Matrix
+          templates:
+            invite:
+              subject: You've been invited into a room on Unerror Network Matrix
+              body:
+                text: /etc/ma1sd/threepids/sms/invite-template.txt
+                html: /etc/ma1sd/threepids/email/invite-template.eml
+            session:
+              validation:
+                subject: Unerror Network Matrix Session Validation
+                body:
+                  text: /etc/ma1sd/threepids/sms/validate-template.txt
+                  html: /etc/ma1sd/threepids/email/validate-template.eml
+              unbind:
+                notification:
+                  subject: Unerror Network Matrix Session Unbind
+                  body:
+                    text: /etc/ma1sd/threepids/email/unbind-notification.eml
+                    html: /etc/ma1sd/threepids/sms/unbind-notification.txt
     threepid:
       email:
         identity:
