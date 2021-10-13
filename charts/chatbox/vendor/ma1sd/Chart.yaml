@@ -14,4 +14,4 @@ name: ma1sd
 sources:
   - https://github.com/ma1uta/ma1sd
   - https://hub.docker.com/r/ma1uta/ma1sd
-version: 0.1.4
+version: 0.1.5

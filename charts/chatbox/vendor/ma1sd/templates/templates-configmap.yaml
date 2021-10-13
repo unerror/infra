@@ -7,18 +7,18 @@ metadata:
     {{- include "ma1sd.labels" . | nindent 4 }}
 
 data:
-  tokenSubmitFailure.html: |-    
-    {{ .Files.Get "notification-templates/tokenSubmitFailure.html" | quote }}
+  tokenSubmitFailure.html: |-
+        {{ .Files.Get "notification-templates/tokenSubmitFailure.html" | nindent 8 }}
   tokenSubmitSuccess.html: |-
-    {{ .Files.Get "notification-templates/tokenSubmitSuccess.html" | quote }}
+        {{ .Files.Get "notification-templates/tokenSubmitSuccess.html" | nindent 8 }}
   invite-template.eml: |-
-    {{ .Files.Get "notification-templates/invite-template.eml" | quote }}
+        {{ .Files.Get "notification-templates/invite-template.eml" | nindent 8 }}
   mxid-template.eml: |-
-    {{ .Files.Get "notification-templates/mxid-template.eml" | quote }}
+        {{ .Files.Get "notification-templates/mxid-template.eml" | nindent 8 }}
   unbind-notification.eml: |-
-    {{ .Files.Get "notification-templates/unbind-notification.eml" | quote }}
+        {{ .Files.Get "notification-templates/unbind-notification.eml" | nindent 8 }}
   validate-template.eml: |-
-    {{ .Files.Get "notification-templates/validate-template.eml" | quote }}
+        {{ .Files.Get "notification-templates/validate-template.eml" | nindent 8 }}
   invite-template.txt: {{ .Files.Get "notification-templates/invite-template.txt" | quote }}
   unbind-notification.txt: {{ .Files.Get "notification-templates/unbind-notification.txt" | quote }}
   validate-template.txt: {{ .Files.Get "notification-templates/validate-template.txt" | quote }}
