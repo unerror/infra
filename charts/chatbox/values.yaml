@@ -143,6 +143,16 @@ matrix-synapse:
             login:
               profile:
                 name: false
+    email:
+      app_name: Unerror Network Matrix
+      client_base_url: https://matrix.unerror.network
+      enable_notifs: true
+      notif_for_new_users: true
+      notif_from: Unerror Network Matrix <chatbox@unerror.network>
+      require_transport_security: true
+      smtp_host: smtp.sendgrid.net
+      smtp_port: 465
+      enable_tls: true
     url_preview_enabled: true
     url_preview_ip_range_blacklist:
       - "127.0.0.0/8"
@@ -288,14 +298,6 @@ ma1sd:
     synapseSql:
       enabled: true
       type: postgresql
-    notification:
-      handler:
-        email: "sendgrid"
-      handlers:
-        sendgrid:
-          identity:
-            from: chatbox@unerror.network
-            name: Unerror Chatbox Matrix
     threepid:
       email:
         identity:
