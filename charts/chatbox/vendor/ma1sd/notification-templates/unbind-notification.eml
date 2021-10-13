@@ -1,29 +1,3 @@
-Subject: Unbind 3PID
-MIME-Version: 1.0
-Content-Type: multipart/alternative;
-	boundary="7REaIwWQCioQ6NaBlAQlg8ztbUQj6PKJ"
-
---7REaIwWQCioQ6NaBlAQlg8ztbUQj6PKJ
-Content-Type: text/plain; charset=UTF-8
-Content-Disposition: inline
-
-Hello there!
-
-You or a server on your behalf unbinded your email.
-
-If you didn't make this request, please contact the system administrator.
-
-%DOMAIN_PRETTY% Admins
-
---7REaIwWQCioQ6NaBlAQlg8ztbUQj6PKJ
-Content-Type: multipart/related;
-	boundary="M3yzHl5YZehm9v4bAM8sKEdcOoVnRnKR";
-	type="text/html"
-
---M3yzHl5YZehm9v4bAM8sKEdcOoVnRnKR
-Content-Type: text/html; charset=UTF-8
-Content-Disposition: inline
-
 <!doctype html>
 <html lang="en">
     <head>
@@ -72,6 +46,3 @@ Content-Disposition: inline
         </table>
     </body>
 </html>
---M3yzHl5YZehm9v4bAM8sKEdcOoVnRnKR--
-
---7REaIwWQCioQ6NaBlAQlg8ztbUQj6PKJ--

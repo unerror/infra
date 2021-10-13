@@ -1,34 +1,3 @@
-Subject: Your Matrix Validation Token
-MIME-Version: 1.0
-Content-Type: multipart/alternative;
-	boundary="7REaIwWQCioQ6NaBlAQlg8ztbUQj6PKJ"
-
---7REaIwWQCioQ6NaBlAQlg8ztbUQj6PKJ
-Content-Type: text/plain; charset=UTF-8
-Content-Disposition: inline
-
-Hello there!
-
-You or a server on your behalf requested to validate your email.
-
-If it was really you who made this request, you can click on the following link to
-complete the verification of your email address:
-
-  %VALIDATION_LINK%
-
-If you didn't make this request, you can safely disregard this email.
-
-%DOMAIN_PRETTY% Admins
-
---7REaIwWQCioQ6NaBlAQlg8ztbUQj6PKJ
-Content-Type: multipart/related;
-	boundary="M3yzHl5YZehm9v4bAM8sKEdcOoVnRnKR";
-	type="text/html"
-
---M3yzHl5YZehm9v4bAM8sKEdcOoVnRnKR
-Content-Type: text/html; charset=UTF-8
-Content-Disposition: inline
-
 <!doctype html>
 <html lang="en">
     <head>
@@ -82,6 +51,3 @@ Content-Disposition: inline
         </table>
     </body>
 </html>
---M3yzHl5YZehm9v4bAM8sKEdcOoVnRnKR--
-
---7REaIwWQCioQ6NaBlAQlg8ztbUQj6PKJ--

@@ -7,7 +7,7 @@ appVersion: "latest"
 
 dependencies:
   - name: ma1sd
-    version: 0.1.5
+    version: 0.1.6
     repository: file://./vendor/ma1sd/
   - name: matrix-synapse
     repository: https://ananace.gitlab.io/charts/
