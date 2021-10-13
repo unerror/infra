@@ -7,22 +7,19 @@ metadata:
     {{- include "ma1sd.labels" . | nindent 4 }}
 
 data:
-  tokenSubmitFailure.html: |
-    {{ .Files.Get "tokenSubmitFailure.html" | indent 4 }}
-  tokenSubmitSuccess.html: |
-    {{ .Files.Get "tokenSubmitSuccess.html" | indent 4 }}
-  invite-template.eml: |
-    {{ .Files.Get "invite-template.eml" | indent 4 }}
-  mxid-template.eml: |
-    {{ .Files.Get "mxid-template.eml" | indent 4 }}
-  unbind-notification.eml: |
-    {{ .Files.Get "unbind-notification.eml" | indent 4 }}
-  validate-template.eml: |
-    {{ .Files.Get "validate-template.eml" | indent 4 }}
-  invite-template.txt: |
-    {{ .Files.Get "invite-template.txt" | indent 4 }}
-  unbind-notification.txt: |
-    {{ .Files.Get "unbind-notification.txt" | indent 4 }}
-  validate-template.txt: |
-    {{ .Files.Get "validate-template.txt" | indent 4 }}
+  tokenSubmitFailure.html: |-    
+    {{ .Files.Get "notification-templates/tokenSubmitFailure.html" | quote }}
+  tokenSubmitSuccess.html: |-
+    {{ .Files.Get "notification-templates/tokenSubmitSuccess.html" | quote }}
+  invite-template.eml: |-
+    {{ .Files.Get "notification-templates/invite-template.eml" | quote }}
+  mxid-template.eml: |-
+    {{ .Files.Get "notification-templates/mxid-template.eml" | quote }}
+  unbind-notification.eml: |-
+    {{ .Files.Get "notification-templates/unbind-notification.eml" | quote }}
+  validate-template.eml: |-
+    {{ .Files.Get "notification-templates/validate-template.eml" | quote }}
+  invite-template.txt: {{ .Files.Get "notification-templates/invite-template.txt" | quote }}
+  unbind-notification.txt: {{ .Files.Get "notification-templates/unbind-notification.txt" | quote }}
+  validate-template.txt: {{ .Files.Get "notification-templates/validate-template.txt" | quote }}
 {{- end }}
