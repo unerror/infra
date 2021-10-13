@@ -61,6 +61,33 @@ spec:
           - mountPath: /etc/ma1sd/ma1sd.yaml
             name: secret
             subPath: ma1sd.yaml
+          - mountPath: /etc/ma1sd/templates/session/tokenSubmitFailure.html
+            name: templates
+            subPath: tokenSubmitFailure.html
+          - mountPath: /etc/ma1sd/templates/session/tokenSubmitSuccess.html
+            name: templates
+            subPath: tokenSubmitSuccess.html
+          - mountPath: /etc/ma1sd/threepids/email/invite-template.eml
+            name: templates
+            subPath: invite-template.eml
+          - mountPath: /etc/ma1sd/threepids/email/mxid-template.eml
+            name: templates
+            subPath: mxid-template.eml
+          - mountPath: /etc/ma1sd/threepids/email/unbind-notification.eml
+            name: templates
+            subPath: unbind-notification.eml
+          - mountPath: /etc/ma1sd/threepids/email/validate-template.eml
+            name: templates
+            subPath: validate-template.eml
+          - mountPath: /etc/ma1sd/threepids/sms/invite-template.txt
+            name: templates
+            subPath: invite-template.txt
+          - mountPath: /etc/ma1sd/threepids/sms/unbind-notification.txt
+            name: templates
+            subPath: unbind-notification.txt
+          - mountPath: /etc/ma1sd/threepids/sms/validate-template.txt
+            name: templates
+            subPath: validate-template.txt
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -84,3 +111,6 @@ spec:
       - name: secret
         secret:
           secretName: {{ include "ma1sd.fullname" . }}
+      - name: templates
+        configMap:
+          name: {{ include "ma1sd.fullname" . }}-templates

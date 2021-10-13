@@ -1,0 +1,28 @@
+{{- if not .Values.templates.existingClaim }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "ma1sd.fullname" . }}-templates
+  labels:
+    {{- include "ma1sd.labels" . | nindent 4 }}
+
+data:
+  tokenSubmitFailure.html: |
+    {{ .Files.Get "tokenSubmitFailure.html" | indent 4 }}
+  tokenSubmitSuccess.html: |
+    {{ .Files.Get "tokenSubmitSuccess.html" | indent 4 }}
+  invite-template.eml: |
+    {{ .Files.Get "invite-template.eml" | indent 4 }}
+  mxid-template.eml: |
+    {{ .Files.Get "mxid-template.eml" | indent 4 }}
+  unbind-notification.eml: |
+    {{ .Files.Get "unbind-notification.eml" | indent 4 }}
+  validate-template.eml: |
+    {{ .Files.Get "validate-template.eml" | indent 4 }}
+  invite-template.txt: |
+    {{ .Files.Get "invite-template.txt" | indent 4 }}
+  unbind-notification.txt: |
+    {{ .Files.Get "unbind-notification.txt" | indent 4 }}
+  validate-template.txt: |
+    {{ .Files.Get "validate-template.txt" | indent 4 }}
+{{- end }}
