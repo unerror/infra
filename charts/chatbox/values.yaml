@@ -107,7 +107,7 @@ matrix-synapse:
     csHosts:
       - matrix.unerror.network
     wkHosts:
-      - matrix.unerror.network
+      - unerror.network
     paths:
       - path: /_matrix/identity
         backend:
@@ -122,6 +122,8 @@ matrix-synapse:
         backend:
           serviceName: chatbox-ma1sd
           servicePort: 8090
+  wellknown:
+    enabled: true
   extraConfig:
     max_upload_size: 128M
     max_image_pixels: 32M
