@@ -83,7 +83,7 @@ matrix-synapse:
   postgresql:
     enabled: true
     persistence:
-      enabled: false
+      enabled: true
   redis:
     enabled: true
   volumePermissions:
