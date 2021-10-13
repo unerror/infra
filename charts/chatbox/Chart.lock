@@ -1,9 +1,9 @@
 dependencies:
 - name: ma1sd
   repository: file://./vendor/ma1sd/
-  version: 0.1.5
+  version: 0.1.6
 - name: matrix-synapse
   repository: https://ananace.gitlab.io/charts/
   version: 2.1.12
-digest: sha256:f01ab74a92487f75e8927ab79047b1408e67da9e625fab28738a0d38598322e7
-generated: "2021-10-12T23:22:37.502197-03:00"
+digest: sha256:b2a2099c49bd1f5c2e044ca70acda0051d755e5069f875d0f0f27765aeeaa683
+generated: "2021-10-12T23:43:39.272592-03:00"
