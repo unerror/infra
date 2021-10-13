@@ -298,6 +298,14 @@ ma1sd:
     synapseSql:
       enabled: true
       type: postgresql
+    notification:
+      handler:
+        email: "sendgrid"
+      handlers:
+        sendgrid:
+          identity:
+            from: chatbox@unerror.network
+            name: Unerror Chatbox Matrix
     threepid:
       email:
         identity:
