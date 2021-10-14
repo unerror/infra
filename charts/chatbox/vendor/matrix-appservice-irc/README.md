@@ -1,0 +1,102 @@
+# matrix-appservice-irc
+
+![Version: 0.1.16](https://img.shields.io/badge/Version-0.1.16-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.31.0](https://img.shields.io/badge/AppVersion-0.31.0-informational?style=flat-square)
+
+Matrix <--> IRC Bridge
+
+**Homepage:** <https://github.com/matrix-org/matrix-appservice-irc>
+
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| Gavin Mogan | helm@gavinmogan.com |  |
+
+## Source Code
+
+* <https://github.com/matrix-org/matrix-appservice-irc>
+* <https://hub.docker.com/r/matrixdotorg/matrix-appservice-irc>
+
+## Values
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| affinity | object | `{}` |  |
+| config.advanced.maxHttpSockets | int | `1000` |  |
+| config.advanced.maxTxnSize | int | `10000000` |  |
+| config.database.connectionString | string | `"postgres://username:password@host:port/databasename"` |  |
+| config.database.engine | string | `"postgres"` |  |
+| config.homeserver.domain | string | `"localhost"` |  |
+| config.homeserver.enablePresence | bool | `true` |  |
+| config.homeserver.url | string | `"http://youhomeserver:8008"` |  |
+| config.ircService.bridgeInfoState.enabled | bool | `false` |  |
+| config.ircService.bridgeInfoState.initial | bool | `false` |  |
+| config.ircService.debugApi.enabled | bool | `false` |  |
+| config.ircService.debugApi.port | int | `11100` |  |
+| config.ircService.ident.address | string | `"::"` |  |
+| config.ircService.ident.enabled | bool | `false` |  |
+| config.ircService.ident.port | int | `1113` |  |
+| config.ircService.ircHandler.leaveConcurrency | int | `10` |  |
+| config.ircService.ircHandler.mapIrcMentionsToMatrix | string | `"on"` |  |
+| config.ircService.logging.errfile | string | `"errors.log"` |  |
+| config.ircService.logging.level | string | `"debug"` |  |
+| config.ircService.logging.logfile | string | `"debug.log"` |  |
+| config.ircService.logging.maxFiles | int | `5` |  |
+| config.ircService.logging.toConsole | bool | `true` |  |
+| config.ircService.matrixHandler.eventCacheSize | int | `4096` |  |
+| config.ircService.metrics.enabled | bool | `true` |  |
+| config.ircService.metrics.remoteUserAgeBuckets[0] | string | `"1h"` |  |
+| config.ircService.metrics.remoteUserAgeBuckets[1] | string | `"1d"` |  |
+| config.ircService.metrics.remoteUserAgeBuckets[2] | string | `"1w"` |  |
+| config.ircService.passwordEncryptionKeyPath | string | `"/config/passkey.pem"` |  |
+| config.ircService.provisioning.enableReload | bool | `true` |  |
+| config.ircService.provisioning.enabled | bool | `false` |  |
+| config.ircService.provisioning.requestTimeoutSeconds | int | `300` |  |
+| config.ircService.provisioning.ruleFile | string | `"./provisioning.rules.yaml"` |  |
+| config.ircService.servers | object | `{}` |  |
+| config.sentry.dsn | string | `"https://<key>@sentry.io/<project>"` |  |
+| config.sentry.enabled | bool | `false` |  |
+| deploymentAnnotations | object | `{}` |  |
+| fullnameOverride | string | `""` |  |
+| image.pullPolicy | string | `"IfNotPresent"` |  |
+| image.repository | string | `"matrixdotorg/matrix-appservice-irc"` |  |
+| image.tag | string | `"release-{{ .Chart.AppVersion }}"` |  |
+| imagePullSecrets | list | `[]` |  |
+| ingress.annotations | object | `{}` |  |
+| ingress.enabled | bool | `false` |  |
+| ingress.hosts[0] | string | `"chart-example.local"` |  |
+| ingress.tls | list | `[]` |  |
+| nameOverride | string | `""` |  |
+| nodeSelector | object | `{}` |  |
+| passkey | string | `nil` |  |
+| podAnnotations | object | `{}` |  |
+| podSecurityContext | object | `{}` |  |
+| probes.liveness.failureThreshold | int | `5` |  |
+| probes.liveness.periodSeconds | int | `10` |  |
+| probes.readiness.failureThreshold | int | `5` |  |
+| probes.readiness.periodSeconds | int | `10` |  |
+| probes.startup.failureThreshold | int | `30` |  |
+| probes.startup.initialDelaySeconds | int | `5` |  |
+| probes.startup.periodSeconds | int | `10` |  |
+| registration.as_token | string | `""` |  |
+| registration.hs_token | string | `""` |  |
+| registration.id | string | `"irc"` |  |
+| registration.namespaces.aliases | list | `[]` |  |
+| registration.namespaces.users | list | `[]` |  |
+| registration.protocols[0] | string | `"irc"` |  |
+| registration.rate_limited | bool | `false` |  |
+| registration.sender_localpart | string | `"appservice-irc"` |  |
+| registration.url | string | `"http://localhost:9999"` |  |
+| replicaCount | int | `1` |  |
+| resources | object | `{}` |  |
+| securityContext | object | `{}` |  |
+| service.externalTrafficPolicy | string | `nil` |  |
+| service.port | int | `9999` |  |
+| service.type | string | `"ClusterIP"` |  |
+| serviceAccount.annotations | object | `{}` |  |
+| serviceAccount.create | bool | `true` |  |
+| serviceAccount.name | string | `nil` |  |
+| tolerations | list | `[]` |  |
+
+----------------------------------------------
+Autogenerated from chart metadata using [helm-docs v1.5.0](https://github.com/norwoodj/helm-docs/releases/v1.5.0)

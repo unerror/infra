@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "matrix-appservice-irc.fullname" . }}
+  labels:
+{{ include "matrix-appservice-irc.labels" . | indent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  externalTrafficPolicy: {{ .Values.service.externalTrafficPolicy }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "matrix-appservice-irc.selectorLabels" . | nindent 4 }}

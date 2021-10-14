@@ -1,0 +1,138 @@
+apiVersion: apps/v1
+{{- $podAnnotations := .Values.podAnnotations }}
+{{- $secretAnnotation := dict "checksum/secret" (include (print $.Template.BasePath "/secrets.yaml") . | sha256sum) }}
+{{- $podAnnotations := merge $podAnnotations $secretAnnotation }}
+kind: Deployment
+metadata:
+  name: {{ include "matrix-appservice-irc.fullname" . }}
+  {{- if .Values.deploymentAnnotations }}
+  annotations:
+    {{- range $key, $value := .Values.deploymentAnnotations }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}
+  {{- end }}
+  labels:
+{{ include "matrix-appservice-irc.labels" . | indent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+{{- if .Values.strategy }}
+  strategy:
+{{ toYaml .Values.strategy | indent 4 }}
+{{ if eq .Values.strategy.type "Recreate" }}
+    rollingUpdate: null
+{{- end }}
+{{- end }}
+  selector:
+    matchLabels:
+      {{- include "matrix-appservice-irc.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "matrix-appservice-irc.selectorLabels" . | nindent 8 }}
+      {{- if $podAnnotations }}
+      annotations:
+        {{- range $key, $value := $podAnnotations }}
+        {{ $key }}: {{ $value | quote }}
+        {{- end }}
+      {{- end }}
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      serviceAccountName: {{ template "matrix-appservice-irc.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      {{- if .Values.dnsConfig }}
+      dnsConfig:
+        {{- toYaml .Values.dnsConfig | nindent 8 }}
+      {{- end }}
+      initContainers:
+        - name: init
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ tpl .Values.image.tag . }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["/bin/sh"]
+          args:
+            - "-c"
+            - |-
+              set -ex
+              cp /config/*.yaml /data/
+          volumeMounts:
+            - name: data
+              mountPath: /data
+            - name: config
+              mountPath: /config
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ tpl .Values.image.tag . }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 9999
+              protocol: TCP
+{{- if and (.Values.registration.as_token) (gt (len .Values.registration.as_token) 0) }}
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            failureThreshold: {{ .Values.probes.liveness.failureThreshold }}
+            periodSeconds: {{ .Values.probes.liveness.periodSeconds }}
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            failureThreshold: {{ .Values.probes.readiness.failureThreshold }}
+            periodSeconds: {{ .Values.probes.readiness.periodSeconds }}
+{{- if semverCompare ">=1.16-0" .Capabilities.KubeVersion.GitVersion }}
+          startupProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: {{ .Values.probes.startup.initialDelaySeconds }}
+            failureThreshold: {{ .Values.probes.startup.failureThreshold }}
+            periodSeconds: {{ .Values.probes.startup.periodSeconds }}
+{{- end }}
+{{ else }}
+          command:
+            - sh
+            - -c
+            - |
+              node /app/app.js -r -f /data/appservice-registration-irc.yaml -u "http://{{ include "matrix-appservice-irc.fullname" . }}:9999" -c /config/config.yaml -l "{{ .Values.registration.sender_localpart }}" && \
+              cat /data/appservice-registration-irc.yaml && \
+              sleep 99d
+{{- end }}
+          volumeMounts:
+          - name: config
+            mountPath: /config
+          - name: data
+            mountPath: /data
+          {{- if .Values.volumeMounts }}
+          {{- toYaml .Values.volumeMounts }}
+          {{- end }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      volumes:
+        - name: data
+          emptyDir: {}
+        - name: config
+          secret:
+            secretName: {{ include "matrix-appservice-irc.fullname" . }}
+        {{- if .Values.volumes }}
+        {{- toYaml .Values.volumes }}
+        {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
