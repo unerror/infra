@@ -5,5 +5,8 @@ dependencies:
 - name: matrix-synapse
   repository: https://ananace.gitlab.io/charts/
   version: 2.1.12
-digest: sha256:b2a2099c49bd1f5c2e044ca70acda0051d755e5069f875d0f0f27765aeeaa683
-generated: "2021-10-12T23:43:39.272592-03:00"
+- name: matrix-appservice-irc
+  repository: https://halkeye.github.io/helm-charts/
+  version: 0.1.16
+digest: sha256:27aa6a4ccfece4f32037da63f8b6e842836bb569b9a1aeecef0dde671ac608fe
+generated: "2021-10-13T22:19:14.041402-03:00"
