@@ -333,3 +333,113 @@ ma1sd:
       email:
         identity:
           from: chatbox@unerror.network
+
+matrix-appservice-irc:
+  registration:
+    id: appservice-irc
+    de.sorunome.msc2409.push_ephemeral: true
+    protocols:
+      - irc
+    namespaces:
+      rooms:
+        - exclusive: false
+          regex: "!CndlWZukCBAXQKSTgg:unerror.com"
+        - exclusive: false
+          regex: "!MgMAsxJzkeiUxYwyNS:unerror.com"
+        - exclusive: false
+          regex: "!THQzArbJSBoThbyySC:unerror.com"
+      users:
+        - exclusive: true
+          regex: '@irc_.*:unerror\.com'
+    rate_limited: false
+    sender_localpart: irc_bot
+    url: http://chatbox-matrix-appservice-irc:9999
+  config:
+    homeserver:
+      domain: unerror.network
+      enablePresence: true
+      media_url: https://matrix.unerror.network
+      url: http://chatbox-matrix-synapse:8008
+    ircService:
+      bridgeInfoState:
+        enabled: true
+        initial: true
+      servers:
+        irc.unerror.com:
+          allowExpiredCerts: true
+          botConfig:
+            enabled: true
+            joinChannelsIfNoUsers: true
+            nick: MatrixBot[un]
+          ircClients:
+            allowNickChanges: true
+            concurrentReconnectLimit: 50
+            idleTimeout: 10800
+            lineLimit: 3
+            maxClients: 30
+            nickTemplate: $DISPLAY[m]
+            reconnectIntervalMs: 5000
+          mappings:
+            "#krokbot":
+              roomIds:
+                - "!THQzArbJSBoThbyySC:unerror.com"
+            "#lounge":
+              key: r@ns0n
+              roomIds:
+                - "!MgMAsxJzkeiUxYwyNS:unerror.com"
+            "#offtopic":
+              roomIds:
+                - "!CndlWZukCBAXQKSTgg:unerror.com"
+          matrixClients:
+            displayName: $NICK
+            joinAttempts: -1
+            userTemplate: "@irc_$NICK"
+          membershipLists:
+            channels:
+              - channel: "#lounge"
+                ircToMatrix:
+                  incremental: true
+                  initial: true
+              - channel: "#krokbot"
+                ircToMatrix:
+                  incremental: true
+                  initial: true
+              - channel: "#offtopic"
+                ircToMatrix:
+                  incremental: true
+                  initial: true
+            enabled: true
+            floodDelayMs: 10000
+            global:
+              ircToMatrix:
+                incremental: true
+                initial: true
+              matrixToIrc:
+                incremental: true
+                initial: true
+            rooms:
+              - matrixToIrc:
+                  incremental: true
+                  initial: true
+                room: "!MgMAsxJzkeiUxYwyNS:unerror.com"
+              - matrixToIrc:
+                  incremental: true
+                  initial: true
+                room: "!THQzArbJSBoThbyySC:unerror.com"
+              - matrixToIrc:
+                  incremental: true
+                  initial: true
+                room: "!CndlWZukCBAXQKSTgg:unerror.com"
+          modePowerMap:
+            o: 50
+            v: 1
+          name: Unerror IRC
+          port: 6697
+          privateMessages:
+            enabled: true
+            federate: true
+          sasl: true
+          sendConnectionMessages: true
+          ssl: true
+    database:
+      engine: "postgres"
