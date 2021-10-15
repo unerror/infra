@@ -72,7 +72,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           {{- with .Values.env }}
           env:
-            {{- . | nindent 12 }}
+            {{- toYaml . | nindent 12 }}
           {{- end }}
           ports:
             - name: http
@@ -115,7 +115,7 @@ spec:
           - name: data
             mountPath: /data
           {{- if .Values.volumeMounts }}
-          {{- toYaml .Values.volumeMounts }}
+          {{- toYaml .Values.volumeMounts | nindent 10}}
           {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
@@ -126,7 +126,7 @@ spec:
           secret:
             secretName: {{ include "matrix-appservice-irc.fullname" . }}
         {{- if .Values.volumes }}
-        {{- toYaml .Values.volumes }}
+        {{- toYaml .Values.volumes | nindent 8 }}
         {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
