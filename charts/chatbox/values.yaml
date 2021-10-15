@@ -394,7 +394,7 @@ matrix-appservice-irc:
         enabled: true
         initial: true
       servers:
-        irc.unerror.com:
+        chatbox-ircd:
           allowExpiredCerts: true
           botConfig:
             enabled: true
@@ -463,12 +463,12 @@ matrix-appservice-irc:
             o: 50
             v: 1
           name: Unerror IRC
-          port: 6697
+          port: 6667
           privateMessages:
             enabled: true
             federate: true
           sasl: false
           sendConnectionMessages: true
-          ssl: true
+          ssl: false
     database:
       engine: "postgres"
