@@ -344,8 +344,6 @@ matrix-appservice-irc:
       mountPath: /ssl/db-ca.crt
       subPath: db-ca.crt
   env:
-    - name: SSL_CERT_FILE
-      value: /ssl/db-ca.crt
     - name: NODE_EXTRA_CA_CERTS
       value: /ssl/db-ca.crt
   registration:
