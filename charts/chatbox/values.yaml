@@ -393,8 +393,6 @@ element-web:
   defaultServer:
     url: https://matrix.unerror.com
     name: Unerror Network Matrix
-  autoscaling:
-    enabled: true
   config:
     disable_custom_urls: false
     disable_guests: false
