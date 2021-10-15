@@ -6,7 +6,7 @@ dependencies:
   repository: https://ananace.gitlab.io/charts/
   version: 2.1.12
 - name: matrix-appservice-irc
-  repository: https://halkeye.github.io/helm-charts/
+  repository: file://./vendor/matrix-appservice-irc
   version: 0.1.16
-digest: sha256:27aa6a4ccfece4f32037da63f8b6e842836bb569b9a1aeecef0dde671ac608fe
-generated: "2021-10-13T22:19:14.041402-03:00"
+digest: sha256:b85bc907becdeba6892a134b119192982e3cc1beb27c2305b7ad2b44a0388569
+generated: "2021-10-14T20:04:52.743491-03:00"

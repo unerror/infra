@@ -5,4 +5,4 @@ metadata:
 type: Opaque
 data:
   # You can include additional key value pairs as you do with Opaque Secrets
-  crt: {{ index .Values "postgres-ca-cert" | b64enc}}
+  db-ca.crt: {{ index .Values "postgres-ca-cert" | b64enc}}

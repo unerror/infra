@@ -335,6 +335,13 @@ ma1sd:
           from: chatbox@unerror.network
 
 matrix-appservice-irc:
+  volumes:
+    - name: ssl
+      secret:
+        secretName: base-postgres-ca-certs
+  volumeMounts:
+    - name: ssl
+      mountPath: /ssl
   registration:
     id: appservice-irc
     de.sorunome.msc2409.push_ephemeral: true
