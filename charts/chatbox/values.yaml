@@ -341,7 +341,8 @@ matrix-appservice-irc:
         secretName: postgres-ca-cert
   volumeMounts:
     - name: ssl
-      mountPath: /ssl
+      mountPath: /ssl/db-ca.crt
+      subPath: db-ca.crt
   env:
     - name: SSL_CERT_FILE
       value: /ssl/db-ca.crt
