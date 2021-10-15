@@ -16,6 +16,7 @@ tls:
   enabled: true
   hostnames:
     - turn.unerror.network
+    - turn.unerror.com
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer
