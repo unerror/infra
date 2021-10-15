@@ -523,6 +523,8 @@ mautrix-hangouts:
       id: mautrix-hangouts
       max_body_size: 1
       port: 8080
+      database_opts:
+        prepared_statement_cache_size: 0
     bridge:
       displayname_preference:
         - name
