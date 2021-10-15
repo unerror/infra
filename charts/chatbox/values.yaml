@@ -497,6 +497,8 @@ matrix-appservice-irc:
           sendConnectionMessages: true
     database:
       engine: "postgres"
+      database_opts:
+        statement_cache_size: 0
 
 mautrix-hangouts:
   image:
