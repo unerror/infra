@@ -87,7 +87,7 @@ matrix-synapse:
   redis:
     enabled: true
   volumePermissions:
-    enabled: true
+    enabled: false
   persistence:
     enabled: true
     storageClass: s3-default
