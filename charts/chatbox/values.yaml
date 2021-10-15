@@ -342,6 +342,9 @@ matrix-appservice-irc:
   volumeMounts:
     - name: ssl
       mountPath: /ssl
+  env:
+    - name: SSL_CERT_FILE
+      value: /ssl/db-ca.crt
   registration:
     id: appservice-irc
     de.sorunome.msc2409.push_ephemeral: true
