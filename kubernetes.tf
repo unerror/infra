@@ -140,6 +140,11 @@ resource "argocd_project" "infra" {
 
     destination {
       server    = "*"
+      namespace = "default"
+    }
+
+    destination {
+      server    = "*"
       namespace = kubernetes_namespace.une-sys.id
     }
 
