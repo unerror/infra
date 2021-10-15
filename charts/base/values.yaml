@@ -13,6 +13,8 @@ external-dns:
     - service
 ingress-nginx:
   controller:
+    ingressClassResource:
+      default: true
     config:
       compute-full-forwarded-for: "true"
       forwarded-for-header: CF-Connecting-IP
