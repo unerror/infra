@@ -4,6 +4,10 @@ network:
 server:
     name: irc.unerror.network
     listeners:
+        ":6698":
+            tls:
+                key: /ircd/tls/tls.key
+                cert: /ircd/tls/tls.crt
         ":6667":
             proxy: true
         ":6697":
