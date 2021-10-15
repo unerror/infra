@@ -90,6 +90,8 @@ volumeMounts: []
 
 volumes: []
 
+env: []
+
 registration:
   id: irc
   hs_token: ''
