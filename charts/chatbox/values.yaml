@@ -186,7 +186,7 @@ matrix-synapse:
           secretName: chatbox-matrix-appservice-irc
       - name: appservice-hangouts-registration
         secret:
-          secretName: chatbox-matrix-appservice-hangouts
+          secretName: chatbox-mautrix-hangouts
     extraVolumeMounts:
       - name: appservice-irc-registration
         mountPath: /appservice-irc-registration.yaml
@@ -219,7 +219,7 @@ matrix-synapse:
             secretName: chatbox-matrix-appservice-irc
         - name: appservice-hangouts-registration
           secret:
-            secretName: chatbox-matrix-appservice-hangouts
+            secretName: chatbox-mautrix-hangouts
       volumeMounts:
         - name: appservice-irc-registration
           mountPath: /appservice-irc-registration.yaml
