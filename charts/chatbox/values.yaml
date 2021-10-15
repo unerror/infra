@@ -206,6 +206,14 @@ matrix-synapse:
         value: "2"
   workers:
     default:
+      extraVolumes:
+        - name: appservice-irc-registration
+          secret:
+            secretName: chatbox-matrix-appservice-irc
+      extraVolumeMounts:
+        - name: appservice-irc-registration
+          mountPath: /appservice-irc-registration.yaml
+          subPath: appservice-registration-irc.yaml
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/path: /_synapse/metrics
