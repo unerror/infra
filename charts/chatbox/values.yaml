@@ -381,9 +381,15 @@ element-web:
     annotations:
       nginx.ingress.kubernetes.io/ssl-redirect: "true"
     hosts:
-      - host: unerror.network
-      - host: matrix.unerror.network
-      - host: matrix.unerror.com
+      - unerror.network
+      - matrix.unerror.network
+      - matrix.unerror.com
+    tls:
+      - hosts:
+          - matrix.unerror.com
+          - unerror.network
+          - matrix.unerror.network
+        secretName: chatbox-crt-secret
   defaultServer:
     url: https://matrix.unerror.com
     name: Unerror Network Matrix
