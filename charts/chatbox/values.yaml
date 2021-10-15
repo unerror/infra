@@ -206,11 +206,11 @@ matrix-synapse:
         value: "2"
   workers:
     default:
-      extraVolumes:
+      volumes:
         - name: appservice-irc-registration
           secret:
             secretName: chatbox-matrix-appservice-irc
-      extraVolumeMounts:
+      volumeMounts:
         - name: appservice-irc-registration
           mountPath: /appservice-irc-registration.yaml
           subPath: appservice-registration-irc.yaml
