@@ -46,6 +46,7 @@ irc:
         - irc.unerror.com
         - irc.unerror.network
         - matrix.unerror.network
+        - matrix.unerror.com
       issuerRef:
         name: letsencrypt-prod
         kind: ClusterIssuer
@@ -58,14 +59,16 @@ tls:
     - irc.unerror.network
     - matrix.unerror.network
     - unerror.network
+    - matrix.unerror.com
+    - unerror.com
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer
     group: cert-manager.io
 
 matrix-synapse:
-  serverName: unerror.network
-  publicServerName: matrix.unerror.network
+  serverName: unerror.com
+  publicServerName: matrix.unerror.com
   config:
     turnUris:
       [
@@ -81,9 +84,16 @@ matrix-synapse:
     existingSecret: chatbox-matrix-signkey
     existingSecretKey: signing.key
   postgresql:
-    enabled: true
-    persistence:
-      enabled: true
+    enabled: false
+  externalPostgresql:
+    port: 25061
+    username: matrix
+    database: synapse
+    sslmode: require
+    host: private-db-tor1-do-user-133480-0.b.db.ondigitalocean.com
+    extraArgs:
+      cp_max: 10
+      cp_min: 5
   redis:
     enabled: true
   volumePermissions:
@@ -100,14 +110,14 @@ matrix-synapse:
     className: nginx
     tls:
       - hosts:
-          - matrix.unerror.network
+          - matrix.unerror.com
         secretName: chatbox-crt-secret
     hosts:
-      - matrix.unerror.network
+      - matrix.unerror.com
     csHosts:
-      - matrix.unerror.network
+      - matrix.unerror.com
     wkHosts:
-      - unerror.network
+      - unerror.com
     paths:
       - path: /_matrix/identity
         backend:
@@ -136,7 +146,7 @@ matrix-synapse:
     account_threepid_delegates:
       email: http://chatbox-ma1sd:8090
       msisdn: http://chatbox-ma1sd:8090
-    trusted_third_party_id_servers: [matrix.unerror.network]
+    trusted_third_party_id_servers: [matrix.unerror.com]
     password_providers:
       - module: rest_auth_provider.RestAuthProvider
         config:
@@ -150,10 +160,10 @@ matrix-synapse:
                 name: false
     email:
       app_name: Unerror Network Matrix
-      client_base_url: https://matrix.unerror.network
+      client_base_url: https://matrix.unerror.com
       enable_notifs: true
       notif_for_new_users: true
-      notif_from: Unerror Network Matrix <chatbox@unerror.network>
+      notif_from: Unerror Network Matrix <chatbox@unerror.com>
       require_transport_security: true
       smtp_host: smtp.sendgrid.net
       smtp_port: 465
@@ -293,17 +303,17 @@ ma1sd:
     enabled: false
     ingressClassName: nginx
     hosts:
-      - host: matrix.unerror.network
+      - host: matrix.unerror.com
     tls:
       - hosts:
-          - matrix.unerror.network
+          - matrix.unerror.com
         secretName: chatbox-crt-secret
   config:
     dns:
       overwrite:
         homeserver:
           client:
-            - name: matrix.unerror.network
+            - name: matrix.unerror.com
               value: "http://chatbox-synapse-matrix-synapse:8008"
     hashing:
       algorithms:
@@ -318,12 +328,12 @@ ma1sd:
     key:
       path: /etc/ma1sd/signing.key
     matrix:
-      domain: unerror.unerror.network
+      domain: unerror.com
       v1: true
       v2: true
     server:
-      name: unerror.network
-      publicUrl: https://matrix.unerror.network
+      name: unerror.com
+      publicUrl: https://matrix.unerror.com
     storage:
       backend: postgresql
     synapseSql:
@@ -340,7 +350,7 @@ ma1sd:
       handlers:
         sendgrid:
           identity:
-            from: chatbox@unerror.network
+            from: chatbox@unerror.com
             name: Unerror Chatbox Matrix
           templates:
             invite:
@@ -363,7 +373,7 @@ ma1sd:
     threepid:
       email:
         identity:
-          from: chatbox@unerror.network
+          from: chatbox@unerror.com
 
 matrix-appservice-irc:
   volumes:
@@ -400,9 +410,9 @@ matrix-appservice-irc:
     url: http://chatbox-matrix-appservice-irc:9999
   config:
     homeserver:
-      domain: unerror.network
+      domain: unerror.com
       enablePresence: true
-      media_url: https://matrix.unerror.network
+      media_url: https://matrix.unerror.com
       url: http://chatbox-matrix-synapse:8008
     ircService:
       bridgeInfoState:
@@ -525,8 +535,8 @@ mautrix-hangouts:
       web:
         auth:
           prefix: /mautrix-hangouts/login
-          public: https://matrix.unerror.network/mautrix-hangouts/login
+          public: https://matrix.unerror.com/mautrix-hangouts/login
     homeserver:
       address: http://chatbox-matrix-synapse:8008
-      domain: unerror.network
+      domain: unerror.com
       verify_ssl: false
