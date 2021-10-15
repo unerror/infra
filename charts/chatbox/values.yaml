@@ -525,7 +525,7 @@ mautrix-hangouts:
       port: 8080
       database_opts:
         connect_args:
-          statement_cache_size: 0
+          prepared_statement_cache_size: 0
     bridge:
       displayname_preference:
         - name
