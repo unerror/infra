@@ -125,6 +125,8 @@ matrix-synapse:
   wellknown:
     enabled: true
   extraConfig:
+    app_service_config_files:
+      - /appservice-irc-registration.yaml
     max_upload_size: 128M
     max_image_pixels: 32M
     allow_guest_access: false
@@ -177,6 +179,14 @@ matrix-synapse:
       - "ff00::/8"
       - "fec0::/10"
   synapse:
+    extraVolumes:
+      - name: appservice-irc-registration
+        secret:
+          secretName: chatbox-matrix-appservice-irc
+    extraVolumeMounts:
+      - name: appservice-irc-registration
+        mountPath: /appservice-irc-registration.yaml
+        subPath: appservice-registration-irc.yaml
     extraCommands:
       - apt-get update -qyy && apt-get install curl unzip -yqq
       - curl -Lo /tmp/rest-provider.zip https://github.com/devplayer0/matrix-synapse-rest-password-provider/archive/master.zip
