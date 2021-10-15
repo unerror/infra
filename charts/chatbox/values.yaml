@@ -364,6 +364,8 @@ matrix-appservice-irc:
   env:
     - name: NODE_EXTRA_CA_CERTS
       value: /ssl/db-ca.crt
+    - name: NODE_TLS_REJECT_UNAUTHORIZED
+      value: "0"
   registration:
     id: appservice-irc
     de.sorunome.msc2409.push_ephemeral: true
