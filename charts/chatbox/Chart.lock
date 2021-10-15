@@ -8,5 +8,8 @@ dependencies:
 - name: matrix-appservice-irc
   repository: file://./vendor/matrix-appservice-irc
   version: 0.1.16
-digest: sha256:b85bc907becdeba6892a134b119192982e3cc1beb27c2305b7ad2b44a0388569
-generated: "2021-10-14T20:04:52.743491-03:00"
+- name: mautrix-hangouts
+  repository: https://halkeye.github.io/helm-charts/
+  version: 0.1.3
+digest: sha256:d42fa1688260b697049bb50c28be7c3ce785056571bd3b038938f78a6ed85c78
+generated: "2021-10-15T09:25:31.716639-03:00"

@@ -474,3 +474,46 @@ matrix-appservice-irc:
           sendConnectionMessages: true
     database:
       engine: "postgres"
+
+mautrix-hangouts:
+  image:
+    tag: v0.1.4
+  registration:
+    de.sorunome.msc2409.push_ephemeral: true
+    id: mautrix-hangouts
+    namespaces:
+      users:
+        - exclusive: true
+          regex: ^@hangouts_.+:unerror\.com$
+        - exclusive: true
+          regex: ^@hangouts:unerror\.com$
+    rate_limited: false
+    sender_localpart: _bot_hangouts
+    url: http://chatbox-mautrix-hangouts:8080
+  config:
+    appservice:
+      address: http://chatbox-mautrix-hangouts:8080
+      bot_avatar: mxc://maunium.net/FBXZnpfORkBEruORbikmleAy
+      bot_displayname: Hangouts Bridge
+      bot_username: hangouts
+      hostname: 0.0.0.0
+      id: mautrix-hangouts
+      max_body_size: 1
+      port: 8080
+    bridge:
+      displayname_preference:
+        - name
+      encryption:
+        allow: true
+      initial_chat_sync: 20
+      invite_own_puppet_to_pm: true
+      permissions:
+        unerror.com: user
+      web:
+        auth:
+          prefix: /mautrix-hangouts/login
+          public: https://matrix.unerror.network/mautrix-hangouts/login
+    homeserver:
+      address: http://chatbox-matrix-synapse:8008
+      domain: unerror.network
+      verify_ssl: false
