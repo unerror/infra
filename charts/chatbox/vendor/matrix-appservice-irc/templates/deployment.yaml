@@ -72,7 +72,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           {{- with .Values.env }}
           env:
-            {{- toYaml . | quote}}
+            {{- . | nindent 12 }}
           {{- end }}
           ports:
             - name: http
