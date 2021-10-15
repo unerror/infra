@@ -10,7 +10,7 @@ dependencies:
     version: 1.5.3
     repository: https://charts.jetstack.io
   - name: external-dns
-    version: 5.4.8
+    version: 5.4.11
     repository: https://charts.bitnami.com/bitnami
   - name: ingress-nginx
     version: 4.0.2
