@@ -338,7 +338,7 @@ matrix-appservice-irc:
   volumes:
     - name: ssl
       secret:
-        secretName: base-postgres-ca-certs
+        secretName: postgres-ca-certs
   volumeMounts:
     - name: ssl
       mountPath: /ssl
