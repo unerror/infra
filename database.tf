@@ -1,7 +1,3 @@
-data "digitalocean_droplet" "matrix-legacy" {
-  name = "matrix.unerror.com"
-}
-
 resource "digitalocean_database_cluster" "db-tor1" {
   name       = "db-tor1"
   engine     = "pg"
@@ -58,10 +54,5 @@ resource "digitalocean_database_firewall" "firewall" {
   rule {
     type  = "k8s"
     value = digitalocean_kubernetes_cluster.une-k8s.id
-  }
-
-  rule {
-    type = "droplet"
-    value = data.digitalocean_droplet.matrix-legacy.id
   }
 }
