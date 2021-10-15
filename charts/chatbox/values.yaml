@@ -394,7 +394,7 @@ matrix-appservice-irc:
         enabled: true
         initial: true
       servers:
-        chatbox-ircd:
+        irc.unerror.com:
           allowExpiredCerts: true
           botConfig:
             enabled: true
@@ -467,7 +467,7 @@ matrix-appservice-irc:
           privateMessages:
             enabled: true
             federate: true
-          sasl: true
+          sasl: false
           sendConnectionMessages: true
           ssl: true
     database:
