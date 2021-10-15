@@ -127,6 +127,7 @@ matrix-synapse:
   extraConfig:
     app_service_config_files:
       - /appservice-irc-registration.yaml
+      - /appservice-hangouts-registration.yaml
     max_upload_size: 128M
     max_image_pixels: 32M
     allow_guest_access: false
@@ -183,10 +184,16 @@ matrix-synapse:
       - name: appservice-irc-registration
         secret:
           secretName: chatbox-matrix-appservice-irc
+      - name: appservice-hangouts-registration
+        secret:
+          secretName: chatbox-matrix-appservice-hangouts
     extraVolumeMounts:
       - name: appservice-irc-registration
         mountPath: /appservice-irc-registration.yaml
         subPath: appservice-registration-irc.yaml
+      - name: appservice-hangouts-registration
+        mountPath: /appservice-hangouts-registration.yaml
+        subPath: registration.yaml
     extraCommands:
       - apt-get update -qyy && apt-get install curl unzip -yqq
       - curl -Lo /tmp/rest-provider.zip https://github.com/devplayer0/matrix-synapse-rest-password-provider/archive/master.zip
@@ -210,10 +217,16 @@ matrix-synapse:
         - name: appservice-irc-registration
           secret:
             secretName: chatbox-matrix-appservice-irc
+        - name: appservice-hangouts-registration
+          secret:
+            secretName: chatbox-matrix-appservice-hangouts
       volumeMounts:
         - name: appservice-irc-registration
           mountPath: /appservice-irc-registration.yaml
           subPath: appservice-registration-irc.yaml
+        - name: appservice-hangouts-registration
+          mountPath: /appservice-hangouts-registration.yaml
+          subPath: registration.yaml
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/path: /_synapse/metrics
