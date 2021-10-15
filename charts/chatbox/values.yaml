@@ -94,6 +94,7 @@ matrix-synapse:
     extraArgs:
       cp_max: 10
       cp_min: 5
+      statement_cache_size: 0
   redis:
     enabled: true
   volumePermissions:
