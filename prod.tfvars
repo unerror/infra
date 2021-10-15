@@ -9,32 +9,33 @@ database_dbs = {
 
   synapse = {
     pool_size = 2
-    user = "matrix"
+    user      = "matrix"
   }
 
   matrix_appservice_irc = {
     pool_size = 2
-    user = "matrix"
+    user      = "matrix"
   }
 
   matrix_dimension = {
     pool_size = 2
-    user = "matrix"
+    user      = "matrix"
   }
 
   matrix_ma1sd = {
     pool_size = 2
-    user = "matrix"
+    user      = "matrix"
   }
 
   matrix_mautrix_hangouts = {
     pool_size = 2
-    user = "matrix"
+    mode      = "session"
+    user      = "matrix"
   }
 
   matrix_reminder_bot = {
     pool_size = 2
-    user = "matrix"
+    user      = "matrix"
   }
 }
 

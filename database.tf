@@ -29,7 +29,7 @@ resource "digitalocean_database_connection_pool" "pools" {
 
   cluster_id = digitalocean_database_cluster.db-tor1.id
   name       = each.key
-  mode       = "transaction"
+  mode       = lookup(each.value, "mode", "transaction")
   size       = each.value.pool_size
   db_name    = digitalocean_database_db.dbs[each.key].name
   user       = digitalocean_database_user.users[each.value.user].name
