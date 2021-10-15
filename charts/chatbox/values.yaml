@@ -378,6 +378,7 @@ ma1sd:
 element-web:
   ingress:
     enabled: true
+    className: nginx
     annotations:
       nginx.ingress.kubernetes.io/ssl-redirect: "true"
     hosts:
