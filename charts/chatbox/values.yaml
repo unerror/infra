@@ -466,12 +466,11 @@ matrix-appservice-irc:
             o: 50
             v: 1
           name: Unerror IRC
-          port: 6698
+          port: 6668
           privateMessages:
             enabled: true
             federate: true
           sasl: true
           sendConnectionMessages: true
-          ssl: true
     database:
       engine: "postgres"
