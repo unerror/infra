@@ -395,7 +395,8 @@ matrix-appservice-irc:
         initial: true
       servers:
         chatbox-ircd:
-          allowExpiredCerts: true
+          sslselfsign: true
+          allowExpiredCerts: false
           botConfig:
             enabled: true
             joinChannelsIfNoUsers: true
