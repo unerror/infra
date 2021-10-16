@@ -36,10 +36,6 @@ irc:
     accessModes:
       - ReadWriteMany
     storageClass: csi-s3
-  tlsOptions:
-    default:
-      sniStrict: true
-      preferServerCipherSuites: true
   server:
     tls:
       enabled: true
