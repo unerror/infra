@@ -6,7 +6,10 @@ argo-cd:
     imagePullSecrets:
       - name: do-docker-registry
   createAggregateRoles: true
+  controller:
+    replicas: 3
   server:
+    replicas: 3
     certificate:
       domain: argo.unerror.network
       enabled: true
@@ -42,6 +45,7 @@ argo-cd:
       hosts:
         - argo.unerror.network
   repoServer:
+    replicas: 3
     env:
       - name: SOPS_AGE_KEY_FILE
         value: /sops/keys.txt
