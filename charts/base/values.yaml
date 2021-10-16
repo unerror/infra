@@ -13,13 +13,14 @@ external-dns:
     - service
 ingress-nginx:
   controller:
+    publishService:
+      enabled: true
     ingressClassResource:
       default: true
     config:
-      compute-full-forwarded-for: "true"
-      forwarded-for-header: CF-Connecting-IP
-      use-forwarded-headers: "true"
-      use-proxy-protocol: "true"
+      compute-full-forwarded-for: true
+      use-forwarded-headers: true
+      use-proxy-protocol: true
     kind: DaemonSet
     service:
       annotations:
