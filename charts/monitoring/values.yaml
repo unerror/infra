@@ -5,6 +5,14 @@ kube-prometheus-stack:
   alertmanager:
     enabled: true
   grafana:
+    ingress:
+      enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+      hosts:
+        - g.i.unerror.network
+      tls:
+        - secretName: grafana-ingress-tls
     enabled: true
   prometheus:
     prometheusSpec:
