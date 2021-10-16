@@ -67,6 +67,9 @@ traefik:
       exposedPort: 6697
       protocol: TCP
       expose: true
+    websecure:
+      tls:
+        enabled: true
   service:
     annotations:
       service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: "true"
