@@ -19,5 +19,3 @@ spec:
           proxyProtocol:
             version: 1
         {{- end }}
-  tls:
-    passthrough: true
