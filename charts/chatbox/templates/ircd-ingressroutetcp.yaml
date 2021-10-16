@@ -10,12 +10,14 @@ spec:
     - match: HostSNI(`*`)
       services:
         - name: {{ include "chatbox.fullname" . }}-ircd
-          port: 6667
+          port: irc
+          terminationDelay: 1000
           proxyProtocol:
-            version: 1
+            version: 2
         {{- if .Values.irc.server.tls.enabled }}
         - name: {{ include "chatbox.fullname" . }}-ircd
-          port: 6667
+          port: ircs
+          terminationDelay: 1000
           proxyProtocol:
-            version: 1
+            version: 2
         {{- end }}
