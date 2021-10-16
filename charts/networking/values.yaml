@@ -48,10 +48,12 @@ traefik:
       port: 6667
       exposedPort: 6667
       protocol: TCP
+      expose: true
     ircs:
       port: 6697
       exposedPort: 6697
       protocol: TCP
+      expose: true
   service:
     annotations:
       service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: "true"
