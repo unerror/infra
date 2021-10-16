@@ -3,6 +3,9 @@ kind: IngressRouteTCP
 metadata:
   name: {{ include "chatbox.fullname" . }}-ircd-tcp
 spec:
+  entrypoints:
+    - irc
+    - ircs
   routes: 
     - match: HostSNI(`*`)
       services:
