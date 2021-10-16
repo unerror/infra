@@ -35,6 +35,9 @@ ingress:
 traefik:
   deployment:
     replicas: 2
+  ingressClass:
+    enabled: true
+    fallbackApiVersion: "v1"
   providers:
     kubernetesCRD:
       allowCrossNamespace: true
