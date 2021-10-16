@@ -9,8 +9,8 @@ kube-prometheus-stack:
   prometheus:
     prometheusSpec:
       remoteWrite:
-      - url: https://prometheus-blocks-prod-us-central1.grafana.net/api/prom/push
-        basicAuth:
+        - url: https://prometheus-blocks-prod-us-central1.grafana.net/api/prom/push
+          basicAuth:
             username:
               name: kubepromsecret
               key: username
@@ -24,3 +24,31 @@ kube-prometheus-stack:
         issuerRef:
           name: "letsencrypt-prod"
           kind: "ClusterIssuer"
+descheduler:
+  cmdOptions:
+    max-pods-to-evict-per-node: 5
+  deschedulerPolicy:
+    strategies:
+      RemoveDuplicates:
+        enabled: true
+      RemovePodsViolatingNodeTaints:
+        enabled: true
+      RemovePodsViolatingNodeAffinity:
+        enabled: true
+        params:
+          nodeAffinityType:
+            - requiredDuringSchedulingIgnoredDuringExecution
+      RemovePodsViolatingInterPodAntiAffinity:
+        enabled: true
+      LowNodeUtilization:
+        enabled: true
+        params:
+          nodeResourceUtilizationThresholds:
+            thresholds:
+              cpu: 20
+              memory: 20
+              pods: 20
+            targetThresholds:
+              cpu: 75
+              memory: 75
+              pods: 15
