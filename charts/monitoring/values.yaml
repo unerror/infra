@@ -3,11 +3,10 @@ grafana_password: ""
 
 kube-prometheus-stack:
   alertmanager:
-    enabled: false
+    enabled: true
   grafana:
-    enabled: false
+    enabled: true
   prometheus:
-    enabled: false
     prometheusSpec:
       remoteWrite:
         - url: https://prometheus-blocks-prod-us-central1.grafana.net/api/prom/push
