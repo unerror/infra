@@ -23,6 +23,7 @@ irc:
       external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
       traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
       traefik.ingress.kubernetes.io/router.tls: "true"
+      traefik.ingress.kubernetes.io/service.serversscheme: https
     ingressClassName: networking-traefik
     hosts:
       - irc.unerror.com
