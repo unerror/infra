@@ -12,3 +12,6 @@ dependencies:
   - name: coturn
     version: 1.1.1
     repository: file://./vendor/coturn
+  - name: traefik
+    version: 10.6.0
+    repository: https://helm.traefik.io/traefik

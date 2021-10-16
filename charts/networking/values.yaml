@@ -31,3 +31,17 @@ ingress:
   hosts:
     - turn.unerror.com
     - turn.unerror.network
+
+traefik:
+  ingressClass:
+    enabled:
+  providers:
+    kubernetesCRD:
+      allowCrossNamespace: true
+      allowExternalNameServices: true
+  logs:
+    access:
+      enabled: true
+  service:
+    annotations:
+      service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: "true"
