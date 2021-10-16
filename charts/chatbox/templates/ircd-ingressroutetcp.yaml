@@ -12,7 +12,7 @@ spec:
           port: irc
           terminationDelay: 1000
           proxyProtocol:
-            version: 2
+            version: 1
 ---
 {{- if .Values.irc.server.tls.enabled }}
 apiVersion: traefik.containo.us/v1alpha1
@@ -29,7 +29,7 @@ spec:
           port: ircs
           terminationDelay: 1000
           proxyProtocol:
-            version: 2
-    tls:
-      passthrough: true
+            version: 1
+  tls:
+    passthrough: true
 {{- end }}
