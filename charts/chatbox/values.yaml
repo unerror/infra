@@ -61,6 +61,10 @@ tls:
     - unerror.network
     - matrix.unerror.com
     - unerror.com
+    - element.unerror.com
+    - element.unerror.network
+    - chat.unerror.com
+    - chat.unerror.network
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer
@@ -385,11 +389,19 @@ element-web:
       - unerror.network
       - matrix.unerror.network
       - matrix.unerror.com
+      - element.unerror.com
+      - element.unerror.network
+      - chat.unerror.com
+      - chat.unerror.network
     tls:
       - hosts:
           - matrix.unerror.com
           - unerror.network
           - matrix.unerror.network
+          - element.unerror.com
+          - element.unerror.network
+          - chat.unerror.com
+          - chat.unerror.network
         secretName: chatbox-crt-secret
   defaultServer:
     url: https://matrix.unerror.com
