@@ -33,8 +33,6 @@ ingress:
     - turn.unerror.network
 
 traefik:
-  ingressClass:
-    enabled: true
   providers:
     kubernetesCRD:
       allowCrossNamespace: true
