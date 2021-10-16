@@ -18,7 +18,7 @@ metadata:
 spec:
   ingressClassName: {{ .Values.irc.ingress.ingressClassName }}
   tls:
-    secretName: {{ $fullName }}-crt-secret
+    - secretName: {{ $fullName }}-crt-secret
   rules:
     {{- range .Values.irc.ingress.hosts }}
     - host: {{ . | quote }}
