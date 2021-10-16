@@ -1,0 +1,20 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: {{ include "chatbox.fullname" . }}-ircd-tcp
+spec:
+  routes: 
+    - match: HostSNI(`*`)
+      services:
+        - name: {{ include "chatbox.fullname" . }}-ircd
+          port: 6667
+          proxyProtocol:
+            version: 1
+				{{- if .Values.irc.server.tls.enabled }}
+        - name: {{ include "chatbox.fullname" . }}-ircd
+          port: 6667
+          proxyProtocol:
+            version: 1
+				{{- end-}}
+  tls:
+    secretName: {{ include "chatbox.fullname" . }}-crt-secret

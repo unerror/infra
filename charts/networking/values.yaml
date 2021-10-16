@@ -34,7 +34,7 @@ ingress:
 
 traefik:
   ingressClass:
-    enabled:
+    enabled: true
   providers:
     kubernetesCRD:
       allowCrossNamespace: true
