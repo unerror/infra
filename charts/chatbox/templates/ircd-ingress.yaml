@@ -1,6 +1,14 @@
 {{- if .Values.irc.ingress.enabled -}}
 {{- $fullName := include "chatbox.fullname" . -}}
 {{- $svcPort := .Values.irc.service.port -}}
+apiVersion: traefik.containo.us/v1alpha1
+kind: ServersTransport
+metadata:
+  name: {{ $fullName }}-transport
+spec:
+    serverName: {{ first .Values.irc.ingress.hosts }}
+    certificatesSecrets: {{ $fullName }}-crt-secret
+---
 {{- if semverCompare ">=1.19-0" .Capabilities.KubeVersion.GitVersion -}}
 apiVersion: networking.k8s.io/v1
 {{- else -}}
