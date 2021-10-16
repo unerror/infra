@@ -10,11 +10,11 @@ spec:
           port: 6667
           proxyProtocol:
             version: 1
-				{{- if .Values.irc.server.tls.enabled }}
+        {{- if .Values.irc.server.tls.enabled }}
         - name: {{ include "chatbox.fullname" . }}-ircd
           port: 6667
           proxyProtocol:
             version: 1
-				{{- end-}}
+        {{- end }}
   tls:
     secretName: {{ include "chatbox.fullname" . }}-crt-secret
