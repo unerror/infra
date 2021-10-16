@@ -30,6 +30,6 @@ spec:
           terminationDelay: 1000
           proxyProtocol:
             version: 2
-      tls:
-        passthrough: true
+    tls:
+      passthrough: true
 {{- end }}
