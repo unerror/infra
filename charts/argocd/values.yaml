@@ -51,6 +51,16 @@ argo-cd:
         - argo.unerror.network
   repoServer:
     replicas: 3
+    affinity:
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+                - key: app.kubernetes.io/component
+                  operator: In
+                  values:
+                    - repo-server
+            topologyKey: "kubernetes.io/hostname"
     env:
       - name: ARGOCD_EXEC_TIMEOUT
         value: "5m"
