@@ -20,4 +20,4 @@ spec:
             version: 1
         {{- end }}
   tls:
-    secretName: {{ include "chatbox.fullname" . }}-crt-secret
+    passthrough: true
