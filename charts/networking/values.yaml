@@ -49,6 +49,7 @@ traefik:
     access:
       enabled: true
   additionalArguments:
+    - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
     - "--entryPoints.irc.proxyProtocol.trustedIPs=127.0.0.1/32,10.0.0.0/8"
     - "--entryPoints.ircs.proxyProtocol.trustedIPs=127.0.0.1/32,10.0.0.0/8"
   ports:
