@@ -40,6 +40,13 @@ traefik:
   logs:
     access:
       enabled: true
+  ports:
+    irc:
+      exposedPort: 6667
+      protocol: TCP
+    ircs:
+      exposedPort: 6697
+      protocol: TCP
   service:
     annotations:
       service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: "true"
