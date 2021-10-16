@@ -8,15 +8,13 @@ kube-prometheus-stack:
     enabled: true
   prometheus:
     prometheusSpec:
-      remoteWrite:
-        - url: https://prometheus-blocks-prod-us-central1.grafana.net/api/prom/push
-          basicAuth:
-            username:
-              name: kubepromsecret
-              key: username
-            password:
-              name: kubepromsecret
-              key: password
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: 50Gi
   prometheusOperator:
     admissionWebhooks:
       certManager:
