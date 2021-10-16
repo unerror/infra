@@ -22,6 +22,7 @@ irc:
       external-dns.alpha.kubernetes.io/target: lb-trfk.unerror.network
       external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
       traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      traefik.ingress.kubernetes.io/router.tls: "true"
     ingressClassName: networking-traefik
     hosts:
       - irc.unerror.com
