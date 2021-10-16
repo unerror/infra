@@ -45,8 +45,8 @@ traefik:
     access:
       enabled: true
   additionalArguments:
-    - "--entryPoints.irc.proxyProtocol.insecure"
-    - "--entryPoints.ircs.proxyProtocol.insecure"
+    - "--entryPoints.irc.proxyProtocol.trustedIPs=127.0.0.1/32,10.0.0.0/8"
+    - "--entryPoints.ircs.proxyProtocol.insecure=127.0.0.1/32,10.0.0.0/8"
   ports:
     irc:
       port: 6667
