@@ -37,6 +37,9 @@ traefik:
     kubernetesCRD:
       allowCrossNamespace: true
       allowExternalNameServices: true
+    kubernetesIngress:
+      publishedService:
+        enabled: true
   logs:
     access:
       enabled: true
