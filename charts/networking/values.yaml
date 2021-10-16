@@ -33,7 +33,8 @@ ingress:
     - turn.unerror.network
 
 traefik:
-  replicas: 2
+  deployment:
+    replicas: 2
   providers:
     kubernetesCRD:
       allowCrossNamespace: true
