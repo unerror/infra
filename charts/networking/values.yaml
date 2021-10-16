@@ -56,6 +56,7 @@ traefik:
     default:
       sniStrict: true
       preferServerCipherSuites: true
+      minVersion: VersionTLS11
   ports:
     irc:
       port: 6667
