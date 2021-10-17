@@ -14,12 +14,11 @@ kube-prometheus-stack:
         traefik.ingress.kubernetes.io/service.serversscheme: http
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: "true"
-        external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
       hosts:
-        - g.i.unerror.network
+        - grafana.unerror.network
       tls:
         - hosts:
-            - g.i.unerror.network
+            - grafana.unerror.network
           secretName: grafana-ingress-tls
   prometheus:
     prometheusSpec:
