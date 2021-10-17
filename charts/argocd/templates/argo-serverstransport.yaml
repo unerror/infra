@@ -1,0 +1,11 @@
+{{- if (index .Values "argo-cd").server.ingress.enabled -}}
+{{- $fullName := include "argocd.fullname" . -}}
+apiVersion: traefik.containo.us/v1alpha1
+kind: ServersTransport
+metadata:
+  name: {{ $fullName }}-transport
+spec:
+    serverName: {{ first (index .Values "argo-cd").server.ingress.hosts }}
+    certificatesSecrets:
+      - {{ (first (index .Values "argo-cd").server.ingress.tls).secretName }}
+{{- end }}

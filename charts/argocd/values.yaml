@@ -39,7 +39,7 @@ argo-cd:
     ingress:
       enabled: true
       ingressClassName: networking-traefik
-      https: false
+      https: true
       tls:
         - hosts:
             - argo.unerror.network
@@ -49,6 +49,7 @@ argo-cd:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: "true"
         traefik.ingress.kubernetes.io/router.tls.options: default
+        traefik.ingress.kubernetes.io/service.serverstransport: default-argocd-transport@kubernetescrd
       hosts:
         - argo.unerror.network
   repoServer:
