@@ -109,8 +109,10 @@ matrix-synapse:
   ingress:
     enabled: true
     annotations:
-      nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    className: nginx
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      traefik.ingress.kubernetes.io/router.tls: "true"
+      traefik.ingress.kubernetes.io/router.tls.options: default
+    className: networking-traefik
     tls:
       - hosts:
           - matrix.unerror.com
@@ -304,7 +306,11 @@ ma1sd:
     enabled: false
   ingress:
     enabled: false
-    ingressClassName: nginx
+    ingressClassName: networking-traefik
+    annotations:
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      traefik.ingress.kubernetes.io/router.tls: "true"
+      traefik.ingress.kubernetes.io/router.tls.options: default
     hosts:
       - host: matrix.unerror.com
     tls:
