@@ -3,12 +3,12 @@ kind: DNSEndpoint
 metadata:
   name: ns-record
 spec:
-  providerSpecific:
-    - name: cloudflare-proxied
-    - value: "false"
   endpoints:
     - dnsName: turn.unerror.network
       recordTTL: 300
       recordType: CNAME
       targets:
         - lb-trfk.unerror.network
+      providerSpecific:
+        - name: cloudflare-proxied
+        - value: "false"
