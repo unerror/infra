@@ -5,7 +5,5 @@ kind: ServersTransport
 metadata:
   name: {{ $fullName }}-transport
 spec:
-    serverName: {{ first (index .Values "argo-cd").server.ingress.hosts }}
-    certificatesSecrets:
-      - {{ (first (index .Values "argo-cd").server.ingress.tls).secretName }}
+    insecureSkipVerify: true
 {{- end }}
