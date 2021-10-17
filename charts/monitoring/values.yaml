@@ -10,6 +10,7 @@ kube-prometheus-stack:
       enabled: true
       ingressClassName: networking-traefik
       annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
         traefik.ingress.kubernetes.io/service.serversscheme: http
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: "true"
@@ -17,7 +18,8 @@ kube-prometheus-stack:
       hosts:
         - g.i.unerror.network
       tls:
-        - host: g.i.unerror.network
+        - hosts:
+            - g.i.unerror.network
           secretName: grafana-ingress-tls
   prometheus:
     prometheusSpec:
