@@ -24,7 +24,6 @@ tls:
 
 ingress:
   enabled: true
-  isDefaultClass: true
   annotations:
     external-dns.alpha.kubernetes.io/target: lb.unerror.network
     external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
@@ -39,6 +38,7 @@ traefik:
   ingressClass:
     enabled: true
     fallbackApiVersion: "v1"
+    isDefaultClass: true
   providers:
     kubernetesCRD:
       allowCrossNamespace: true
