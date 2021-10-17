@@ -55,7 +55,6 @@ traefik:
     - "--entryPoints.ircs.proxyProtocol.trustedIPs=127.0.0.1/32,10.0.0.0/8"
   tlsOptions:
     default:
-      sniStrict: true
       preferServerCipherSuites: true
       minVersion: VersionTLS11
   ports:
