@@ -8,8 +8,11 @@ tailscale-relay:
 coturn:
   coturn:
     traefik:
+      tcp:
+        entrypoint: turn-tcp
       udp:
         enabled: true
+        entrypoint: turn-udp
     service:
       type: ClusterIP
     image:
