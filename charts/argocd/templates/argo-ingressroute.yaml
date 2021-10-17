@@ -16,7 +16,11 @@ spec:
       kind: Rule
       services:
         - name: argocd-server
-          port: 80
+          port: 443
+          passHostHeader: true
+          responseForwarding:
+            flushInterval: 1ms
+          scheme: https
   {{- end }}
   tls:
     secretName: {{ (index .Values "argo-cd").server.ingressRoute.tls.secretName }}
