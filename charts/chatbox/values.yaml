@@ -73,11 +73,7 @@ matrix-synapse:
   serverName: unerror.com
   publicServerName: matrix.unerror.com
   config:
-    turnUris:
-      [
-        "turn:turn.unerror.network?transport=udp",
-        "turn:turn.unerror.network?transport=tcp",
-      ]
+    turnUris: ["turn:turn.unerror.network?transport=tcp"]
     enableRegistration: true
   image:
     tag: v1.44.0

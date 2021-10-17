@@ -10,9 +10,6 @@ coturn:
     traefik:
       tcp:
         entrypoint: turn-tcp
-      udp:
-        enabled: true
-        entrypoint: turn-udp
     service:
       type: ClusterIP
     image:
@@ -42,7 +39,6 @@ traefik:
     - "--entryPoints.irc.proxyProtocol.trustedIPs=127.0.0.1/32,10.0.0.0/8"
     - "--entryPoints.ircs.proxyProtocol.trustedIPs=127.0.0.1/32,10.0.0.0/8"
     - "--entryPoints.turn-tcp.proxyProtocol.trustedIPs=127.0.0.1/32,10.0.0.0/8"
-    - "--entryPoints.turn-udp.proxyProtocol.trustedIPs=127.0.0.1/32,10.0.0.0/8"
   tlsOptions:
     default:
       preferServerCipherSuites: true
@@ -62,11 +58,6 @@ traefik:
       port: 3478
       exposedPort: 3478
       protocol: TCP
-      expose: true
-    turn-udp:
-      port: 3478
-      exposedPort: 3478
-      protocol: UDP
       expose: true
     websecure:
       tls:
