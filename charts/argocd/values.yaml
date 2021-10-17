@@ -44,7 +44,10 @@ argo-cd:
         - websecure
       tls:
         enabled: true
-        issuerRef: letsencrypt-prod
+        issuerRef:
+          name: letsencrypt-prod
+          kind: ClusterIssuer
+          group: cert-manager.io
         secretName: argo-unerror-network-cert
       hosts:
         - argo.unerror.network
