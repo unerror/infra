@@ -381,9 +381,10 @@ ma1sd:
 element-web:
   ingress:
     enabled: true
-    className: nginx
+    className: networking-traefik
     annotations:
-      nginx.ingress.kubernetes.io/ssl-redirect: "true"
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      traefik.ingress.kubernetes.io/router.tls: "true"
     hosts:
       - unerror.network
       - matrix.unerror.network
@@ -393,15 +394,7 @@ element-web:
       - chat.unerror.com
       - chat.unerror.network
     tls:
-      - hosts:
-          - matrix.unerror.com
-          - unerror.network
-          - matrix.unerror.network
-          - element.unerror.com
-          - element.unerror.network
-          - chat.unerror.com
-          - chat.unerror.network
-        secretName: chatbox-crt-secret
+      - secretName: chatbox-crt-secret
   defaultServer:
     url: https://matrix.unerror.com
     name: Unerror Network Matrix
