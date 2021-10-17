@@ -7,6 +7,10 @@ cert-manager:
 external-dns:
   crd:
     create: true
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
   cloudflare:
     proxied: true
   provider: cloudflare
