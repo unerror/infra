@@ -3,10 +3,10 @@ dependencies:
   repository: https://charts.visonneau.fr/
   version: 0.0.14
 - name: coturn
-  repository: file://./vendor/coturn
+  repository: https://iits-consulting.github.io/coturn-chart/
   version: 1.1.1
 - name: traefik
   repository: https://helm.traefik.io/traefik
   version: 10.6.0
-digest: sha256:c2f968afe44b60af835709c2d3aeb40d9b5855f32004ee1a88104d115f0a0afc
-generated: "2021-10-15T22:35:02.226192-03:00"
+digest: sha256:475023d33025204810c353ba07af2265251e1b88d804b9416d4afc1edc69a096
+generated: "2021-10-16T22:59:17.015849-03:00"
