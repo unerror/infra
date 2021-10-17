@@ -16,7 +16,7 @@ ingress-nginx:
     publishService:
       enabled: true
     ingressClassResource:
-      default: true
+      default: false
     config:
       compute-full-forwarded-for: true
       use-forwarded-headers: true
@@ -29,8 +29,6 @@ ingress-nginx:
         external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
   defaultBackend:
     enabled: true
-  ingressClassResource:
-    default: false
   tcp:
     6667: "default/chatbox-ircd:6667:PROXY:PROXY"
     6697: "default/chatbox-ircd:6697:PROXY:PROXY"
