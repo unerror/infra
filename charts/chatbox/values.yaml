@@ -60,6 +60,7 @@ tls:
     - unerror.network
     - matrix.unerror.com
     - unerror.com
+    - www.unerror.com
     - element.unerror.com
     - element.unerror.network
     - chat.unerror.com
@@ -119,6 +120,7 @@ matrix-synapse:
       - matrix.unerror.com
     wkHosts:
       - unerror.com
+      - www.unerror.com
     paths:
       - path: /_matrix/identity
         backend:
