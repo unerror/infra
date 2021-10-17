@@ -10,5 +10,5 @@ spec:
       targets:
         - lb-trfk.unerror.network
       providerSpecific:
-        - name: cloudflare-proxied
+        - name: proxied
         - value: "false"
