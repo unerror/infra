@@ -38,7 +38,7 @@ argo-cd:
           url: https://argoproj.github.io/argo-helm
     ingress:
       enabled: true
-      ingressClassName: nginx
+      ingressClassName: networking-traefik
       https: true
       tls:
         - hosts:
@@ -46,7 +46,9 @@ argo-cd:
           secretName: argo-unerror-network-cert
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
-        nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: "true"
+        traefik.ingress.kubernetes.io/router.tls.options: default
       hosts:
         - argo.unerror.network
   repoServer:
