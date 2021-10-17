@@ -39,7 +39,7 @@ argo-cd:
     ingress:
       enabled: true
       ingressClassName: networking-traefik
-      https: true
+      https: false
       tls:
         - hosts:
             - argo.unerror.network
