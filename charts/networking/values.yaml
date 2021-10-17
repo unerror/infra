@@ -33,7 +33,6 @@ traefik:
     access:
       enabled: true
   additionalArguments:
-    - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
     - "--entryPoints.web.proxyProtocol.trustedIPs=127.0.0.1/32,10.0.0.0/8"
     - "--entryPoints.websecure.proxyProtocol.trustedIPs=127.0.0.1/32,10.0.0.0/8"
     - "--entryPoints.irc.proxyProtocol.trustedIPs=127.0.0.1/32,10.0.0.0/8"
@@ -59,7 +58,13 @@ traefik:
       exposedPort: 3478
       protocol: TCP
       expose: true
+    web:
+      port: 80
+      nodePort: 32080
+      redirectTo: websecure
     websecure:
+      port: 443
+      nodePort: 32443
       tls:
         enabled: true
   service:
