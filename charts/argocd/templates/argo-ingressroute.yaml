@@ -19,5 +19,5 @@ spec:
           port: 443
   {{- end }}
   tls:
-    passthrough: true
+    secretName: {{ (index .Values "argo-cd").server.ingressRoute.tls.secretName }}
 {{- end }}
