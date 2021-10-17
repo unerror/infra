@@ -55,6 +55,8 @@ traefik:
     - "--entryPoints.websecure.proxyProtocol.trustedIPs=127.0.0.1/32,10.0.0.0/8"
     - "--entryPoints.irc.proxyProtocol.trustedIPs=127.0.0.1/32,10.0.0.0/8"
     - "--entryPoints.ircs.proxyProtocol.trustedIPs=127.0.0.1/32,10.0.0.0/8"
+    - "--entryPoints.turn-tcp.proxyProtocol.trustedIPs=127.0.0.1/32,10.0.0.0/8"
+    - "--entryPoints.turn-udp.proxyProtocol.trustedIPs=127.0.0.1/32,10.0.0.0/8"
   tlsOptions:
     default:
       preferServerCipherSuites: true
@@ -69,6 +71,16 @@ traefik:
       port: 6697
       exposedPort: 6697
       protocol: TCP
+      expose: true
+    turn-tcp:
+      port: 3478
+      exposedPort: 3478
+      protocol: TCP
+      expose: true
+    turn-udp:
+      port: 3478
+      exposedPort: 3478
+      protocol: UDP
       expose: true
     websecure:
       tls:
