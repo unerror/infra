@@ -17,7 +17,8 @@ kube-prometheus-stack:
       hosts:
         - g.i.unerror.network
       tls:
-        - secretName: grafana-ingress-tls
+        - host: g.i.unerror.network
+          secretName: grafana-ingress-tls
   prometheus:
     prometheusSpec:
       storageSpec:
