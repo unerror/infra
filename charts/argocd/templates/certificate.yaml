@@ -1,0 +1,16 @@
+{{- if (index .Values "argo-cd").server.ingressRoute.tls.enabled -}}
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ include "argocd.fullname" . }}-cert
+spec:
+  secretName: {{ (index .Values "argo-cd").server.ingressRoute.tls.secretName }}
+	{{- with (index .Values "argo-cd").server.ingressRoute.hosts }}
+  dnsNames:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- with (index .Values "argo-cd").server.ingressRoute.tls.issuerRef }}
+  issuerRef:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+{{- end }}

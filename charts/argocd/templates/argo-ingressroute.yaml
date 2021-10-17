@@ -1,0 +1,23 @@
+{{- if (index .Values "argo-cd").server.ingressRoute.enabled -}}
+{{- $fullName := include "argocd.fullname" . -}}
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ $fullName }}-transport
+spec:
+	{{- with (index .Values "argo-cd").server.ingressRoute.entryPoints }}
+  entryPoints:
+    {{- toYaml . | nindent 4 }}
+	{{- end }}
+
+  {{- range (index .Values "argo-cd").server.ingressRoute.hosts }}
+  routes:
+    - match: Host(`{{ . }}`)
+      kind: Rule
+      services:
+        - name: argocd-server
+          port: 443
+  {{- end }}
+  tls:
+    passthrough: true
+{{- end }}
