@@ -34,7 +34,7 @@ ingress:
 
 traefik:
   deployment:
-    replicas: 2
+    kind: DaemonSet
   ingressClass:
     enabled: true
     fallbackApiVersion: "v1"
@@ -51,6 +51,8 @@ traefik:
       enabled: true
   additionalArguments:
     - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
+    - "--entryPoints.web.proxyProtocol.trustedIPs=127.0.0.1/32,10.0.0.0/8"
+    - "--entryPoints.websecure.proxyProtocol.trustedIPs=127.0.0.1/32,10.0.0.0/8"
     - "--entryPoints.irc.proxyProtocol.trustedIPs=127.0.0.1/32,10.0.0.0/8"
     - "--entryPoints.ircs.proxyProtocol.trustedIPs=127.0.0.1/32,10.0.0.0/8"
   tlsOptions:
