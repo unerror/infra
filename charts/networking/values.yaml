@@ -7,30 +7,13 @@ tailscale-relay:
 
 coturn:
   coturn:
+    traefik:
+      udp:
+        enabled: true
     service:
       type: ClusterIP
     image:
       tag: "4.5.2"
-
-tls:
-  enabled: true
-  hostnames:
-    - turn.unerror.network
-    - turn.unerror.com
-  issuerRef:
-    name: letsencrypt-prod
-    kind: ClusterIssuer
-    group: cert-manager.io
-
-ingress:
-  enabled: true
-  annotations:
-    external-dns.alpha.kubernetes.io/target: lb.unerror.network
-    external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
-  ingressClassName: nginx
-  hosts:
-    - turn.unerror.com
-    - turn.unerror.network
 
 traefik:
   deployment:
