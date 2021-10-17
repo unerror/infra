@@ -1,6 +1,13 @@
 {{- if (index .Values "argo-cd").server.ingressRoute.enabled -}}
 {{- $fullName := include "argocd.fullname" . -}}
 apiVersion: traefik.containo.us/v1alpha1
+kind: ServersTransport
+metadata:
+  name: {{ $fullName }}-transport
+spec:
+  insecureSkipVerify: true
+---
+apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: {{ $fullName }}
@@ -18,6 +25,7 @@ spec:
         - name: argocd-server
           port: 443
           passHostHeader: true
+          serversTransport: {{ $fullName }}-transport
           responseForwarding:
             flushInterval: 1ms
           scheme: https
