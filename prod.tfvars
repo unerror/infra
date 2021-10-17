@@ -49,6 +49,9 @@ kubernetes_node_pools = [{
   name       = "worker-pool"
   size       = "s-2vcpu-4gb"
   node_count = 3
+  auto_scale = true
+  max_nodes  = 5
+  min_nodes  = 3
 }]
 
 argocd_server = "argo.unerror.network:443"
