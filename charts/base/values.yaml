@@ -30,7 +30,7 @@ ingress-nginx:
   defaultBackend:
     enabled: true
   ingressClassResource:
-    default: true
+    default: false
   tcp:
     6667: "default/chatbox-ircd:6667:PROXY:PROXY"
     6697: "default/chatbox-ircd:6697:PROXY:PROXY"
