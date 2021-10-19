@@ -6,8 +6,22 @@ tailscale-relay:
       TAILSCALE_HOSTNAME: "une-k8s-relay"
 
 tailscale:
+  replicas: 1
+  image:
+    repository: registry.digitalocean.com/une-k8s/networking/tailscale
+    tag: v1.16
+  imagePullSecrets:
+    - name: do-docker-registry
+  secret: networking-tailscale-auth
   state: networking-tailscale-state
   serviceAccount: tailscale
+  proxy:
+    enabled: true
+    env:
+      - name: ROUTES
+        value: 10.0.0.0/8
+      - name: EXTRA_ARGS
+        value: "--hostname une-k8s-relay --advertise-tags tag:une-k8s"
 
 coturn:
   coturn:
@@ -21,12 +35,12 @@ coturn:
 
 traefik:
   deployment:
+    imagePullSecrets:
+      - name: do-docker-registry
     kind: DaemonSet
     additionalContainers:
       - name: tailscale-sidecar
         image: registry.digitalocean.com/une-k8s/networking/tailscale:v1.16
-        imagePullSecrets:
-          - name: do-docker-registry
         env:
           - name: KUBE_SECRET
             value: networking-tailscale-state
