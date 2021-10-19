@@ -5,6 +5,10 @@ tailscale-relay:
       TAILSCALE_ADVERTISE_TAGS: tag:une-k8s
       TAILSCALE_HOSTNAME: "une-k8s-relay"
 
+tailscale:
+  state: networking-tailscale-state
+  serviceAccount: tailscale
+
 coturn:
   coturn:
     traefik:
@@ -18,6 +22,21 @@ coturn:
 traefik:
   deployment:
     kind: DaemonSet
+    additionalContainers:
+      - name: tailscale-sidecar
+        image: registry.digitalocean.com/une-k8s/networking/tailscale:v1.16
+        env:
+          - name: KUBE_SECRET
+            value: networking-tailscale-state
+          - name: USER_SPACE
+            value: "false"
+          - name: AUTH_KEY
+            valueFrom:
+              secretKeyRef:
+                name: networking-tailscale-auth
+                key: AUTH_KEY
+                optional: true
+
   ingressClass:
     enabled: true
     fallbackApiVersion: "v1"
