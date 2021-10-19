@@ -57,6 +57,9 @@ spec:
               name: {{ .Values.tailscale.secret }}
               key: AUTH_KEY
               optional: true
+        {{- with .Values.tailscale.proxy.env }}
+          {{- toYaml . | nindent 8 }}
+        {{- end }}
         securityContext:
           capabilities:
             add:
