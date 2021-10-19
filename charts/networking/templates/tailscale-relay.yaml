@@ -1,15 +1,15 @@
-# Copyright (c) 2021 Tailscale Inc & AUTHORS All rights reserved.
-# Use of this source code is governed by a BSD-style
-# license that can be found in the LICENSE file.
 apiVersion: v1
 kind: Deployment
 metadata:
   name: {{ include "networking.fullname" . }}-relay
+  labels:
+    {{- include "networking.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.tailscale.replicas }}
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ include "networking.fullname" . }}
+      app.kubernetes.io/app: tailscale
       app.kubernetes.io/instance: {{ .Release.Name }}
   template:
     metadata:
@@ -17,9 +17,14 @@ spec:
         checksum/secret: {{ include (print $.Template.BasePath "/tailscale-secret.yaml") . | sha256sum }}
       labels:
         app.kubernetes.io/name: {{ include "networking.fullname" . }}
+        app.kubernetes.io/app: tailscale
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
       serviceAccountName: {{ .Values.tailscale.serviceAccount | quote }}
+      {{- with .Values.tailscale.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       initContainers:
         # In order to run as a proxy we need to enable IP Forwarding inside
         # the container. The `net.ipv4.ip_forward` sysctl is not whitelisted
@@ -39,10 +44,6 @@ spec:
       containers:
       - name: tailscale
         imagePullPolicy: Always
-        {{- with .Values.tailscale.imagePullSecrets }}
-        imagePullSecrets:
-          {{- toYaml . | nindent 8 }}
-        {{- end }}
         image: {{ .Values.tailscale.image.repository}}:{{ .Values.tailscale.image.tag }}
         env:
         # Store the state in a k8s secret
