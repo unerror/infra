@@ -23,7 +23,7 @@ tailscale:
       - name: ROUTES
         value: 10.0.0.0/8
       - name: EXTRA_ARGS
-        value: "--hostname une-k8s-relay --advertise-tags tag:une-k8s --snat-subnet-routes true --netfilter-mode true"
+        value: "--hostname une-k8s-relay --advertise-tags=tag:une-k8s --snat-subnet-routes=true --netfilter-mode=true"
 
 coturn:
   coturn:
@@ -49,7 +49,7 @@ traefik:
           - name: USER_SPACE
             value: "false"
           - name: EXTRA_ARGS
-            value: "--hostname une-k8s-traefik --advertise-tags tag:une-k8s --snat-subnet-routes true --netfilter-mode true"
+            value: "--hostname=une-k8s-traefik --advertise-tags=tag:une-k8s --snat-subnet-routes=true --netfilter-mode=true"
           - name: AUTH_KEY
             valueFrom:
               secretKeyRef:
