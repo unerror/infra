@@ -5,4 +5,5 @@
 ARG TAILSCALE_VERSION="v1.16"
 FROM ghcr.io/tailscale/tailscale:${TAILSCALE_VERSION}
 COPY run.sh /run.sh
+RUN chmod a+x /run.sh
 CMD "/run.sh"
