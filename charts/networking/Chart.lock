@@ -1,12 +1,12 @@
 dependencies:
 - name: tailscale-relay
   repository: https://charts.visonneau.fr/
-  version: 0.0.14
+  version: 0.1.0
 - name: coturn
   repository: https://iits-consulting.github.io/coturn-chart/
   version: 1.1.1
 - name: traefik
   repository: https://helm.traefik.io/traefik
   version: 10.6.0
-digest: sha256:475023d33025204810c353ba07af2265251e1b88d804b9416d4afc1edc69a096
-generated: "2021-10-16T22:59:17.015849-03:00"
+digest: sha256:d078c6e489e116329329d4e3a53df1d2a4f15b98b2412501390da1eec9e9e500
+generated: "2021-10-19T13:25:26.211023104Z"
