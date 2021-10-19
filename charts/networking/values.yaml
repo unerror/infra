@@ -40,6 +40,7 @@ traefik:
     kind: DaemonSet
     additionalContainers:
       - name: tailscale-sidecar
+        serviceAccountName: tailscale
         image: registry.digitalocean.com/une-k8s/networking/tailscale:v1.16-p1
         env:
           - name: KUBE_SECRET
