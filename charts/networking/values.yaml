@@ -25,6 +25,8 @@ traefik:
     additionalContainers:
       - name: tailscale-sidecar
         image: registry.digitalocean.com/une-k8s/networking/tailscale:v1.16
+        imagePullSecrets:
+          - name: do-docker-registry
         env:
           - name: KUBE_SECRET
             value: networking-tailscale-state
