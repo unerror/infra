@@ -37,26 +37,7 @@ coturn:
 
 traefik:
   deployment:
-    imagePullSecrets:
-      - name: do-docker-registry
     kind: DaemonSet
-    additionalContainers:
-      - name: tailscale-sidecar
-        image: registry.digitalocean.com/une-k8s/networking/tailscale:v1.16-p1
-        env:
-          - name: KUBE_SECRET
-            value: networking-tailscale-state
-          - name: USER_SPACE
-            value: "false"
-          - name: EXTRA_ARGS
-            value: "--hostname=une-k8s-traefik --advertise-tags=tag:une-k8s --snat-subnet-routes=true --netfilter-mode=on"
-          - name: AUTH_KEY
-            valueFrom:
-              secretKeyRef:
-                name: networking-tailscale-auth
-                key: AUTH_KEY
-                optional: true
-
   ingressClass:
     enabled: true
     fallbackApiVersion: "v1"
