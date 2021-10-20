@@ -87,7 +87,10 @@ traefik:
       external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
 
 k8s-gateway:
-  domain: unerror.network
+  domain: i.unerror.network
+  dnsChallenge:
+    enabled: true
+    domain: i.unerror.network
   extraZonePlugins: |
     forward . tls://9.9.9.9 {
        tls_servername dns.quad9.net
