@@ -4,12 +4,12 @@ dependencies:
   version: 19.1.0
 - name: promtail
   repository: https://grafana.github.io/helm-charts
-  version: 3.8.1
+  version: 3.8.2
 - name: descheduler
   repository: https://kubernetes-sigs.github.io/descheduler/
   version: 0.22.1
 - name: metrics-server
   repository: https://kubernetes-sigs.github.io/metrics-server
   version: 3.6.0
-digest: sha256:f4f800dcb46ecbc8be9ff067a4ccc2ce3c8e74f56a91047486a942b0005fb87c
-generated: "2021-10-19T02:30:32.687318832Z"
+digest: sha256:a3224f1d3ceac772e76a75e45d6724ee4e8509815ac3ac5b9cac8c7ad6797442
+generated: "2021-10-20T01:30:38.88951008Z"

@@ -11,7 +11,7 @@ dependencies:
     repository: https://prometheus-community.github.io/helm-charts
   - name: promtail
     repository: https://grafana.github.io/helm-charts
-    version: 3.8.1
+    version: 3.8.2
   - name: descheduler
     version: 0.22.1
     repository: https://kubernetes-sigs.github.io/descheduler/
