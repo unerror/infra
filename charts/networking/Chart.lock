@@ -5,5 +5,8 @@ dependencies:
 - name: traefik
   repository: https://helm.traefik.io/traefik
   version: 10.6.0
-digest: sha256:4f3cec413c3bba0156bb348020dd03a1a419a404206109b136b3e4f4e97e97a7
-generated: "2021-10-19T12:17:22.774162-03:00"
+- name: k8s-gateway
+  repository: https://ori-edge.github.io/k8s_gateway/
+  version: 1.0.10
+digest: sha256:444bb858d57a26cc5deec6c488cad96e0c015912287851171a43e6764d057422
+generated: "2021-10-19T22:04:54.626966-03:00"

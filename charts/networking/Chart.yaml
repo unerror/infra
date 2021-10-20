@@ -12,3 +12,6 @@ dependencies:
   - name: traefik
     version: 10.6.0
     repository: https://helm.traefik.io/traefik
+  - name: k8s-gateway
+    version: 1.0.10
+    repository: https://ori-edge.github.io/k8s_gateway/

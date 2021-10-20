@@ -18,6 +18,8 @@ tailscale:
       - name: EXTRA_ARGS
         value: "--hostname une-k8s-relay --advertise-tags=tag:une-k8s --snat-subnet-routes=true --netfilter-mode=on"
 
+doRegistryToken: ""
+
 coturn:
   coturn:
     traefik:
@@ -83,3 +85,14 @@ traefik:
       service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: "true"
       external-dns.alpha.kubernetes.io/hostname: lb-trfk.unerror.network
       external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+
+k8s-gateway:
+  domain: unerror.network
+  extraZonePlugins: |
+    forward . tls://9.9.9.9 {
+       tls_servername dns.quad9.net
+       health_check 5s
+    }
+  service:
+    type: NodePort
+  replicaCount: 1
