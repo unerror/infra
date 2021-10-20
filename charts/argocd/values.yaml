@@ -16,7 +16,7 @@ argo-cd:
       - "5"
   server:
     certificate:
-      domain: argo.unerror.network
+      domain: argo.i.unerror.network
       enabled: true
       issuer:
         kind: ClusterIssuer
@@ -27,7 +27,7 @@ argo-cd:
         g, unerror:unerror-team, role:admin
         g, terraform, role:admin
     config:
-      url: https://argo.unerror.network
+      url: https://argo.i.unerror.network
       accounts.terraform: apiKey
       repositories: |
         - type: helm
@@ -51,6 +51,7 @@ argo-cd:
         secretName: argo-unerror-network-cert
       hosts:
         - argo.unerror.network
+        - argo.i.unerror.network
   repoServer:
     replicas: 3
     affinity:
