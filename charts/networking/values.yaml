@@ -92,7 +92,12 @@ k8s-gateway:
     enabled: true
     domain: i.unerror.network
   extraZonePlugins: |
-    forward . tls://100.126.248.79 {
+    forward dns.unerror.network tls://1.1.1.1 {
+      tls_servername cloudflare-dns.com
+      health_check 5s
+    }
+
+    forward . tls://dns.unerror.network {
         tls_servername dns.unerror.network
         health_check 5s
     }
