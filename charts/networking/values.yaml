@@ -85,17 +85,3 @@ traefik:
       service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: "true"
       external-dns.alpha.kubernetes.io/hostname: lb-trfk.unerror.network
       external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
-
-k8s-gateway:
-  domain: i.unerror.network
-  dnsChallenge:
-    enabled: true
-    domain: i.unerror.network
-  extraZonePlugins: |-
-    forward . 1.1.1.1 1.0.0.1 {
-      tls_servername cloudflare-dns.com
-      health_check 5s
-    }
-  service:
-    type: NodePort
-  replicaCount: 1
