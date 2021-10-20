@@ -92,9 +92,9 @@ k8s-gateway:
     enabled: true
     domain: i.unerror.network
   extraZonePlugins: |
-    forward . tls://9.9.9.9 {
-       tls_servername dns.quad9.net
-       health_check 5s
+    forward . tls://100.126.248.79 {
+        tls_servername dns.unerror.network
+        health_check 5s
     }
   service:
     type: NodePort
