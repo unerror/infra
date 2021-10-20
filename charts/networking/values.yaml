@@ -91,15 +91,16 @@ k8s-gateway:
   dnsChallenge:
     enabled: true
     domain: i.unerror.network
-  extraZonePlugins: |
+  extraZonePlugins: |-
     # multiple upstreams
       forward . 127.0.0.1:5301 127.0.0.1:5302
     }
 
-    .:5302 {
+    .:5301 {
       forward dns.unerror.network 1.1.1.1 1.0.0.1 {
         tls_servername cloudflare-dns.com
         health_check 5s
+      }
     }
 
     .:5302 {
