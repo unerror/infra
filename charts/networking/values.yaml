@@ -7,6 +7,8 @@ tailscale:
     - name: do-docker-registry
   secret: networking-tailscale-auth
   state: networking-tailscale-state
+  additionalStates:
+    - networking-tailscale-state-traefik-sidecar
   serviceAccount: tailscale
   additionalserviceAccountBindings:
     - networking-traefik
@@ -51,7 +53,6 @@ traefik:
                 name: networking-tailscale-auth
                 key: AUTH_KEY
                 optional: true
-
   ingressClass:
     enabled: true
     fallbackApiVersion: "v1"
