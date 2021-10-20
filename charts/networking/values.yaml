@@ -92,22 +92,9 @@ k8s-gateway:
     enabled: true
     domain: i.unerror.network
   extraZonePlugins: |-
-    # multiple upstreams
-      forward . 127.0.0.1:5301 127.0.0.1:5302
-    }
-
-    .:5301 {
-      forward dns.unerror.network 1.1.1.1 1.0.0.1 {
-        tls_servername cloudflare-dns.com
-        health_check 5s
-      }
-    }
-
-    .:5302 {
-      forward . tls://dns.unerror.network {
-          tls_servername dns.unerror.network
-          health_check 5s
-      }
+    forward . 1.1.1.1 1.0.0.1 {
+      tls_servername cloudflare-dns.com
+      health_check 5s
     }
   service:
     type: NodePort
