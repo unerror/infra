@@ -13,6 +13,6 @@ dependencies:
   version: 0.1.16
 - name: mautrix-hangouts
   repository: https://halkeye.github.io/helm-charts/
-  version: 0.1.3
-digest: sha256:f6436b7dec1382ae675d4cc3fe5b8e7adf76e9a7a85e12772246a7985cb2137e
-generated: "2021-10-15T18:45:38.683909-03:00"
+  version: 0.1.6
+digest: sha256:e6b9117ed79995e578bcc51e90125bac1077cde6d2dc50bcc32ad2bca550a2d9
+generated: "2021-10-19T07:06:25.506988688Z"

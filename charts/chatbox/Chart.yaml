@@ -20,4 +20,4 @@ dependencies:
     version: 0.1.16
   - name: mautrix-hangouts
     repository: https://halkeye.github.io/helm-charts/
-    version: 0.1.3
+    version: 0.1.6
