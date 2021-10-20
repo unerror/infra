@@ -40,7 +40,7 @@ traefik:
         image: registry.digitalocean.com/une-k8s/networking/tailscale:v1.16-p1
         env:
           - name: KUBE_SECRET
-            value: networking-tailscale-state
+            value: networking-tailscale-state-traefik-sidecar
           - name: USER_SPACE
             value: "false"
           - name: EXTRA_ARGS
