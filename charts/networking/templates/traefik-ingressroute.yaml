@@ -34,7 +34,7 @@ spec:
     - websecure-tsnet
   routes:
   {{- range .Values.traefik.dashboard.hosts }}
-  - match: Host(`{{ . }}`) && PathPrefix(`/dashboard`) || PathPrefix(`/api`)
+  - match: Host(`{{ . }}`)
     kind: Rule
     services:
     - name: api@internal
