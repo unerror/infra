@@ -35,6 +35,15 @@ coturn:
 traefik:
   # todo: when DO supports Dualstack IPv4/IPv6 kubelets, remove this and use tailnet IPv6 as the
   # ExternalIP on a Service
+  dashboard:
+    hosts:
+      - traefik.i.unerror.network
+    tls:
+      enabled: true
+      secretName: networking-traefik-cert
+      issuerRef:
+        name: letsencrypt-prod
+        kind: ClusterIssuer
   securityContext:
     runAsUser: 0
     runAsNonRoot: false

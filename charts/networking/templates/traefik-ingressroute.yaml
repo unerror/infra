@@ -1,3 +1,20 @@
+{{- if .Values.traefik.dashboard.tls.enabled -}}
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ include "networking.fullname" . }}-traefik-internal-cert
+spec:
+  secretName: {{ .Values.traefik.dashboard.tls.secretName }}
+	{{- with .Values.traefik.dashboard.hosts }}
+  dnsNames:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- with .Values.traefik.dashboard.tls.issuerRef }}
+  issuerRef:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+{{- end }}
+---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
@@ -16,8 +33,14 @@ spec:
   entryPoints:
     - websecure-tsnet
   routes:
-  - match: Host(`traefik.i.unerror.network`) && PathPrefix(`/dashboard`) || PathPrefix(`/api`)
+  {{- range .Values.traefik.dashboard.hosts }}
+  - match: Host(`{{ . }}`) && PathPrefix(`/dashboard`) || PathPrefix(`/api`)
     kind: Rule
     services:
     - name: api@internal
       kind: TraefikService
+  {{- end }}
+  {{- if .Values.traefik.dashboard.tls.enabled }}
+  tls:
+    secretName: {{ .Values.traefik.dashboard.tls.secretName }}
+  {{- end }}
