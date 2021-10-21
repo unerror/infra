@@ -1,7 +1,7 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: {{ template "networking.fullname" . }}-traefik-dashboard
+  name: {{ template "networking.fullname" . }}-traefik-dashboard-internal
   annotations:
     helm.sh/hook: "post-install,post-upgrade"
     app.kubernetes.io/name: {{ include "networking.fullname" . }}
