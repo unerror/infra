@@ -7,6 +7,13 @@ argo-cd:
       - name: do-docker-registry
   createAggregateRoles: true
   controller:
+    resources:
+      limits:
+        cpu: 500m
+        memory: 512Mi
+      requests:
+        cpu: 250m
+        memory: 256Mi
     extraArgs:
       - --repo-server-timeout-seconds
       - "500"
@@ -15,6 +22,13 @@ argo-cd:
       - --operation-processors
       - "5"
   server:
+    resources:
+      limits:
+        cpu: 500m
+        memory: 512Mi
+      requests:
+        cpu: 250m
+        memory: 256Mi
     certificate:
       domain: argo.i.unerror.network
       enabled: true
@@ -53,6 +67,13 @@ argo-cd:
         - argo.unerror.network
         - argo.i.unerror.network
   repoServer:
+    resources:
+      limits:
+        cpu: 500m
+        memory: 512Mi
+      requests:
+        cpu: 250m
+        memory: 256Mi
     replicas: 3
     affinity:
       podAntiAffinity:
