@@ -1,0 +1,23 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ template "networking.fullname" . }}-traefik-dashboard
+  annotations:
+    helm.sh/hook: "post-install,post-upgrade"
+    app.kubernetes.io/name: {{ include "networking.fullname" . }}
+    app.kubernetes.io/app: traefikk
+    app.kubernetes.io/instance: {{ .Release.Name }}
+  labels:
+    app.kubernetes.io/name: {{ template "networking.fullname" . }}
+    helm.sh/chart: {{ template "networking.fullname" . }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+spec:
+  entryPoints:
+    - websecure-tsnet
+  routes:
+  - match: PathPrefix(`/dashboard`) || PathPrefix(`/api`)
+    kind: Rule
+    services:
+    - name: api@internal
+      kind: TraefikServicea
