@@ -41,7 +41,7 @@ argo-cd:
     ingressRoute:
       enabled: true
       entryPoints:
-        - websecure
+        - websecure-tsnet
       tls:
         enabled: true
         issuerRef:

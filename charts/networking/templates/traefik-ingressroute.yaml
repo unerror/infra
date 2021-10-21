@@ -16,7 +16,7 @@ spec:
   entryPoints:
     - websecure-tsnet
   routes:
-  - match: PathPrefix(`/dashboard`) || PathPrefix(`/api`)
+  - match: Host(`traefik.i.unerror.network`) && PathPrefix(`/dashboard`) || PathPrefix(`/api`)
     kind: Rule
     services:
     - name: api@internal
