@@ -33,6 +33,10 @@ coturn:
       tag: "4.5.2"
 
 traefik:
+  securityContext:
+    capabilities:
+      drop: [ALL]
+    readOnlyRootFilesystem: true
   deployment:
     imagePullSecrets:
       - name: do-docker-registry
