@@ -36,7 +36,7 @@ traefik:
   deployment:
     imagePullSecrets:
       - name: do-docker-registry
-    kind: DaemonSet
+    kind: Deployment
     additionalContainers:
       - name: tailscale-sidecar
         image: registry.digitalocean.com/une-k8s/networking/tailscale:v1.16-p1
@@ -73,6 +73,11 @@ traefik:
     - "--entryPoints.irc.proxyProtocol.trustedIPs=127.0.0.1/32,10.0.0.0/8"
     - "--entryPoints.ircs.proxyProtocol.trustedIPs=127.0.0.1/32,10.0.0.0/8"
     - "--entryPoints.turn-tcp.proxyProtocol.trustedIPs=127.0.0.1/32,10.0.0.0/8"
+    - "--entryPoints.web-tsnet.address=[fd7a:115c:a1e0:efe3:a5be:7ce3:d74:e02d]:80"
+    - "--entryPoints.web-tsnet.http.redirections.entryPoint.to=[fd7a:115c:a1e0:efe3:a5be:7ce3:d74:e02d]:443"
+    - "--entrypoints.web-tsnet.http.redirections.entryPoint.scheme=https"
+    - "--entryPoints.websecure-tsnet.address=[fd7a:115c:a1e0:efe3:a5be:7ce3:d74:e02d]:443"
+    - "--entryPoints.webwebsecure-tsnet.http.tls=true"
   tlsOptions:
     default:
       preferServerCipherSuites: true
