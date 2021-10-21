@@ -34,6 +34,7 @@ coturn:
 
 traefik:
   securityContext: {}
+  podSecurityContext: {}
   deployment:
     imagePullSecrets:
       - name: do-docker-registry
