@@ -40,6 +40,7 @@ traefik:
     runAsNonRoot: false
     privileged: true
   deployment:
+    replicas: 3
     imagePullSecrets:
       - name: do-docker-registry
     kind: Deployment
@@ -80,7 +81,7 @@ traefik:
     - "--entryPoints.ircs.proxyProtocol.trustedIPs=127.0.0.1/32,10.0.0.0/8"
     - "--entryPoints.turn-tcp.proxyProtocol.trustedIPs=127.0.0.1/32,10.0.0.0/8"
     - "--entryPoints.web-tsnet.address=[::]:80"
-    - "--entryPoints.web-tsnet.http.redirections.entryPoint.to=[::]:443"
+    - "--entryPoints.web-tsnet.http.redirections.entryPoint.to=websecure-tsnet"
     - "--entrypoints.web-tsnet.http.redirections.entryPoint.scheme=https"
     - "--entryPoints.websecure-tsnet.address=[::]:443"
     - "--entryPoints.webwebsecure-tsnet.http.tls=true"
