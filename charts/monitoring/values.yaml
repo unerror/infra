@@ -37,29 +37,3 @@ kube-prometheus-stack:
         issuerRef:
           name: "letsencrypt-prod"
           kind: "ClusterIssuer"
-descheduler:
-  cmdOptions:
-    max-pods-to-evict-per-node: 5
-  deschedulerPolicy:
-    strategies:
-      RemoveDuplicates:
-        enabled: true
-      RemovePodsViolatingNodeTaints:
-        enabled: true
-      RemovePodsViolatingNodeAffinity:
-        enabled: true
-        params:
-          nodeAffinityType:
-            - requiredDuringSchedulingIgnoredDuringExecution
-      RemovePodsViolatingInterPodAntiAffinity:
-        enabled: true
-      LowNodeUtilization:
-        enabled: true
-        params:
-          nodeResourceUtilizationThresholds:
-            thresholds:
-              cpu: 60
-              memory: 60
-            targetThresholds:
-              cpu: 75
-              memory: 75

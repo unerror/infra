@@ -12,9 +12,6 @@ dependencies:
   - name: promtail
     repository: https://grafana.github.io/helm-charts
     version: 3.8.2
-  - name: descheduler
-    version: 0.22.1
-    repository: https://kubernetes-sigs.github.io/descheduler/
   - name: metrics-server
     repository: https://kubernetes-sigs.github.io/metrics-server
     version: 3.6.0
