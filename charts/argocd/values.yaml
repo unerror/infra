@@ -7,6 +7,8 @@ argo-cd:
       - name: do-docker-registry
   createAggregateRoles: true
   controller:
+    args:
+      kubectl-parallelism-limit: 10
     resources:
       limits:
         cpu: 500m
