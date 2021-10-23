@@ -4,6 +4,6 @@ dependencies:
   version: v1.5.4
 - name: external-dns
   repository: https://charts.bitnami.com/bitnami
-  version: 5.4.11
-digest: sha256:3ed7f12c9febbc07d43c19d0b1716a36e697ae59bab388394ddfd5906c962554
-generated: "2021-10-17T01:53:36.682476-03:00"
+  version: 5.4.13
+digest: sha256:cc3737ca4a148c4b1996373b6e75cb2a6cf67a657d0803dfeb7e9425c3c82034
+generated: "2021-10-22T18:05:40.463289444Z"
