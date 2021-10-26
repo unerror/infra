@@ -7,12 +7,12 @@ dependencies:
   version: 2.1.14
 - name: element-web
   repository: https://ananace.gitlab.io/charts/
-  version: 1.0.37
+  version: 1.0.38
 - name: matrix-appservice-irc
   repository: file://./vendor/matrix-appservice-irc
   version: 0.1.16
 - name: mautrix-hangouts
   repository: https://halkeye.github.io/helm-charts/
   version: 0.1.6
-digest: sha256:b0ea8eae90135e22f056866507e396510dee68bf54ab683c08f791a8c1c4b0e4
-generated: "2021-10-20T11:58:47.594441757Z"
+digest: sha256:d255269cb46039f15e3e813f53de8bc9e12e9b31e605eb36ae7ea137b1d6d950
+generated: "2021-10-25T11:15:48.539818389Z"
