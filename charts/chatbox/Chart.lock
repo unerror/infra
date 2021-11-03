@@ -4,7 +4,7 @@ dependencies:
   version: 0.1.6
 - name: matrix-synapse
   repository: https://ananace.gitlab.io/charts/
-  version: 2.1.14
+  version: 2.1.15
 - name: element-web
   repository: https://ananace.gitlab.io/charts/
   version: 1.0.38
@@ -14,5 +14,5 @@ dependencies:
 - name: mautrix-hangouts
   repository: https://halkeye.github.io/helm-charts/
   version: 0.1.6
-digest: sha256:d255269cb46039f15e3e813f53de8bc9e12e9b31e605eb36ae7ea137b1d6d950
-generated: "2021-10-25T11:15:48.539818389Z"
+digest: sha256:be9f5c0531bf46d837f0505d4578e159a1833d2fd73d4d2d7cc8f7ac80268895
+generated: "2021-11-02T15:43:47.849856472Z"
