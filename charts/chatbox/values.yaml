@@ -565,8 +565,6 @@ matrix-appservice-irc:
       engine: "postgres"
 
 mautrix-hangouts:
-  image:
-    tag: v0.1.4
   registration:
     de.sorunome.msc2409.push_ephemeral: true
     id: mautrix-hangouts
