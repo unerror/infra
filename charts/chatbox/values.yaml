@@ -566,8 +566,6 @@ matrix-appservice-irc:
 
 mautrix-hangouts:
   registration:
-    protocols:
-      - hangouts
     namespaces:
       users:
         - exclusive: true
