@@ -11,8 +11,5 @@ dependencies:
 - name: matrix-appservice-irc
   repository: file://./vendor/matrix-appservice-irc
   version: 0.1.16
-- name: mautrix-googlechat
-  repository: https://halkeye.github.io/helm-charts/
-  version: 1.0.1
-digest: sha256:5b54bdfa03ecc52c2bc17e2732159c11f1abf7b9014ec3390619a5c848ba8352
-generated: "2021-11-15T23:42:24.795107-04:00"
+digest: sha256:79f12637dc83b3fffe219cce214286e7c9b58a6d1640f31e548776855bf5637d
+generated: "2021-11-16T00:40:26.10239-04:00"

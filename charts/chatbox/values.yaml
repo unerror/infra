@@ -140,7 +140,6 @@ matrix-synapse:
   extraConfig:
     app_service_config_files:
       - /appservice-irc-registration.yaml
-      - /appservice-googlechat-registration.yaml
     max_upload_size: 128M
     max_image_pixels: 32M
     allow_guest_access: false
@@ -197,16 +196,10 @@ matrix-synapse:
       - name: appservice-irc-registration
         secret:
           secretName: chatbox-matrix-appservice-irc
-      - name: appservice-googlechat-registration
-        secret:
-          secretName: chatbox-mautrix-googlechat
     extraVolumeMounts:
       - name: appservice-irc-registration
         mountPath: /appservice-irc-registration.yaml
         subPath: appservice-registration-irc.yaml
-      - name: appservice-googlechat-registration
-        mountPath: /appservice-googlechat-registration.yaml
-        subPath: registration.yaml
     extraCommands:
       - apt-get update -qyy && apt-get install curl unzip -yqq
       - curl -Lo /tmp/rest-provider.zip https://github.com/devplayer0/matrix-synapse-rest-password-provider/archive/master.zip
@@ -230,16 +223,10 @@ matrix-synapse:
         - name: appservice-irc-registration
           secret:
             secretName: chatbox-matrix-appservice-irc
-        - name: appservice-googlechat-registration
-          secret:
-            secretName: chatbox-mautrix-googlechat
       volumeMounts:
         - name: appservice-irc-registration
           mountPath: /appservice-irc-registration.yaml
           subPath: appservice-registration-irc.yaml
-        - name: appservice-googlechat-registration
-          mountPath: /appservice-googlechat-registration.yaml
-          subPath: registration.yaml
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/path: /_synapse/metrics
@@ -563,25 +550,3 @@ matrix-appservice-irc:
           sendConnectionMessages: true
     database:
       engine: "postgres"
-
-mautrix-googlechat:
-  registration:
-    namespaces:
-      users:
-        - exclusive: true
-          group_id: "@googlechat:unerror.com"
-          regex: ^@googlechat:unerror\.com$
-  config:
-    bridge:
-      encryption:
-        allow: true
-      initial_chat_sync: 20
-      invite_own_puppet_to_pm: false
-      web:
-        auth:
-          prefix: /mautrix-googlechat/login
-          public: https://matrix.unerror.com/mautrix-googlechat/login
-    homeserver:
-      address: http://chatbox-matrix-synapse:8008
-      domain: unerror.com
-      verify_ssl: false
