@@ -140,7 +140,7 @@ matrix-synapse:
   extraConfig:
     app_service_config_files:
       - /appservice-irc-registration.yaml
-      - /appservice-hangouts-registration.yaml
+      - /appservice-googlechat-registration.yaml
     max_upload_size: 128M
     max_image_pixels: 32M
     allow_guest_access: false
@@ -197,15 +197,15 @@ matrix-synapse:
       - name: appservice-irc-registration
         secret:
           secretName: chatbox-matrix-appservice-irc
-      - name: appservice-hangouts-registration
+      - name: appservice-googlechat-registration
         secret:
-          secretName: chatbox-mautrix-hangouts
+          secretName: chatbox-mautrix-googlechat
     extraVolumeMounts:
       - name: appservice-irc-registration
         mountPath: /appservice-irc-registration.yaml
         subPath: appservice-registration-irc.yaml
-      - name: appservice-hangouts-registration
-        mountPath: /appservice-hangouts-registration.yaml
+      - name: appservice-googlechat-registration
+        mountPath: /appservice-googlechat-registration.yaml
         subPath: registration.yaml
     extraCommands:
       - apt-get update -qyy && apt-get install curl unzip -yqq
@@ -230,15 +230,15 @@ matrix-synapse:
         - name: appservice-irc-registration
           secret:
             secretName: chatbox-matrix-appservice-irc
-        - name: appservice-hangouts-registration
+        - name: appservice-googlechat-registration
           secret:
-            secretName: chatbox-mautrix-hangouts
+            secretName: chatbox-mautrix-googlechat
       volumeMounts:
         - name: appservice-irc-registration
           mountPath: /appservice-irc-registration.yaml
           subPath: appservice-registration-irc.yaml
-        - name: appservice-hangouts-registration
-          mountPath: /appservice-hangouts-registration.yaml
+        - name: appservice-googlechat-registration
+          mountPath: /appservice-googlechat-registration.yaml
           subPath: registration.yaml
       annotations:
         prometheus.io/scrape: "true"
@@ -566,25 +566,24 @@ matrix-appservice-irc:
 
 mautrix-hangouts:
   registration:
-    de.sorunome.msc2409.push_ephemeral: true
-    id: mautrix-hangouts
+    id: mautrix-googlechat
     namespaces:
       users:
         - exclusive: true
-          regex: ^@hangouts_.+:unerror\.com$
+          regex: ^@googlechat_.+:unerror\.com$
         - exclusive: true
-          regex: ^@hangouts:unerror\.com$
+          regex: ^@googlechat:unerror\.com$
     rate_limited: false
-    sender_localpart: _bot_hangouts
-    url: http://chatbox-mautrix-hangouts:8080
+    sender_localpart: _bot_googlechat
+    url: http://chatbox-mautrix-googlechat:8080
   config:
     appservice:
-      address: http://chatbox-mautrix-hangouts:8080
+      address: http://chatbox-mautrix-googlechat:8080
       bot_avatar: mxc://maunium.net/FBXZnpfORkBEruORbikmleAy
-      bot_displayname: Hangouts Bridge
-      bot_username: hangouts
+      bot_displayname: Google Chat Bridge
+      bot_username: googlechat
       hostname: 0.0.0.0
-      id: mautrix-hangouts
+      id: mautrix-googlechat
       max_body_size: 1
       port: 8080
     bridge:
@@ -598,8 +597,8 @@ mautrix-hangouts:
         unerror.com: user
       web:
         auth:
-          prefix: /mautrix-hangouts/login
-          public: https://matrix.unerror.com/mautrix-hangouts/login
+          prefix: /mautrix-googlechat/login
+          public: https://matrix.unerror.com/mautrix-googlechat/login
     homeserver:
       address: http://chatbox-matrix-synapse:8008
       domain: unerror.com
