@@ -565,6 +565,17 @@ matrix-appservice-irc:
       engine: "postgres"
 
 mautrix-hangouts:
+  registration:
+    protocols:
+      - hangouts
+    namespaces:
+      users:
+        - exclusive: true
+          group_id: "@googlechat_:unerror.com"
+          regex: ^@googlechat_.+:unerror\.com$
+        - exclusive: true
+          group_id: "@googlechat:unerror.com"
+          regex: ^@googlechat:unerror\.com$
   config:
     bridge:
       encryption:
