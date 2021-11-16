@@ -565,36 +565,12 @@ matrix-appservice-irc:
       engine: "postgres"
 
 mautrix-hangouts:
-  registration:
-    id: mautrix-googlechat
-    namespaces:
-      users:
-        - exclusive: true
-          regex: ^@googlechat_.+:unerror\.com$
-        - exclusive: true
-          regex: ^@googlechat:unerror\.com$
-    rate_limited: false
-    sender_localpart: _bot_googlechat
-    url: http://chatbox-mautrix-googlechat:8080
   config:
-    appservice:
-      address: http://chatbox-mautrix-googlechat:8080
-      bot_avatar: mxc://maunium.net/FBXZnpfORkBEruORbikmleAy
-      bot_displayname: Google Chat Bridge
-      bot_username: googlechat
-      hostname: 0.0.0.0
-      id: mautrix-googlechat
-      max_body_size: 1
-      port: 8080
     bridge:
-      displayname_preference:
-        - name
       encryption:
         allow: true
       initial_chat_sync: 20
-      invite_own_puppet_to_pm: true
-      permissions:
-        unerror.com: user
+      invite_own_puppet_to_pm: false
       web:
         auth:
           prefix: /mautrix-googlechat/login
