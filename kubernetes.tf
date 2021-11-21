@@ -37,7 +37,7 @@ resource "digitalocean_kubernetes_cluster" "une-k8s" {
 
   maintenance_policy {
     day        = "sunday"
-    start_time = "13:00"
+    start_time = "06:00"
   }
 
   dynamic "node_pool" {
