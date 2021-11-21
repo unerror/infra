@@ -17,6 +17,8 @@ provider "helm" {
   }
 }
 
+data "digitalocean_kubernetes_versions" "latest" {}
+
 data "digitalocean_project" "unerror-network" {
   name = "unerror.network"
 }
@@ -28,7 +30,7 @@ resource "digitalocean_kubernetes_cluster" "une-k8s" {
 
   region = var.do_region
   # Grab the latest version slug from `doctl kubernetes options versions`
-  version      = var.kubernetes_version
+  version      = data.digitalocean_kubernetes_versions.latest.latest_version
   tags         = var.kubernetes_tags
   vpc_uuid     = digitalocean_vpc.kubernetes-tor1.id
   auto_upgrade = true
