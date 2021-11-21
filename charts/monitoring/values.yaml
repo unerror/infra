@@ -9,7 +9,7 @@ kube-prometheus-stack:
   grafana:
     enabled: true
     extraConfigmapMounts:
-      - name: grafana-gitub-auth.ini
+      - name: monitoring-grafana-gitub-auth
         mountPath: /etc/grafana/monitoring-grafana-gitub-auth.ini
         configMap: monitoring-grafana-gitub-auth
         readOnly: true
