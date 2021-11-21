@@ -44,7 +44,6 @@ database_firewall = ["158.69.126.10"]
 
 kubernetes_vpc_cidr = "10.118.0.0/20"
 kubernetes_tags     = ["kubernetes", "unerror", "unerror-network"]
-kubernetes_version  = "1.21.3-do.0"
 kubernetes_node_pools = [{
   name       = "worker-pool"
   size       = "s-2vcpu-4gb"
