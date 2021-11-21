@@ -126,19 +126,25 @@ matrix-synapse:
       - path: /_matrix/identity
         pathType: ImplementationSpecific
         backend:
-          serviceName: chatbox-ma1sd
-          servicePort: 8090
+          service:
+            name: chatbox-ma1sd
+            port:
+              number: 8090
     csPaths:
       - path: /_matrix/client/r0/user_directory
         pathType: ImplementationSpecific
         backend:
-          serviceName: chatbox-ma1sd
-          servicePort: 8090
+          service:
+            name: chatbox-ma1sd
+            port:
+              number: 8090
       - path: /_matrix/client/(api/v1|r0|unstable)/login
         pathType: ImplementationSpecific
         backend:
-          serviceName: chatbox-ma1sd
-          servicePort: 8090
+          service:
+            name: chatbox-ma1sd
+            port:
+              number: 8090
   wellknown:
     enabled: true
   extraConfig:
