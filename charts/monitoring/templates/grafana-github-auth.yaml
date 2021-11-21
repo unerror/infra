@@ -5,6 +5,6 @@ metadata:
   resourceVersion: "113118"
   uid: 6cfab473-ea01-48e7-97f1-134bfb1307b7
 data:
-  grafana.ini: |
+  gitub_auth.ini: |
     [auth.github]
 		{{ .Values.grafana.github_auth | indent 4 }}
