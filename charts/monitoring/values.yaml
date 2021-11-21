@@ -7,6 +7,7 @@ kube-prometheus-stack:
   grafana:
     enabled: true
     grafana.ini:
+      root_uri: https://grafana.i.unerror.network
       auth.github:
         enabled: true
         allow_signup: true
