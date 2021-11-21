@@ -53,5 +53,5 @@ kubernetes_node_pools = [{
   min_nodes  = 3
 }]
 
-argocd_server = "argo.unerror.network:443"
+argocd_server = "argo.i.unerror.network:443"
 infra_repo    = "git@github.com:unerror/infra.git"
