@@ -1,11 +1,18 @@
 grafana_prometheus_username: ""
 grafana_password: ""
 
+grafana:
+  github_auth: ""
 kube-prometheus-stack:
   alertmanager:
     enabled: true
   grafana:
     enabled: true
+    extraConfigmapMounts:
+      - name: grafana-gitub-auth.ini
+        mountPath: /etc/grafana/monitoring-grafana-gitub-auth.ini
+        configMap: monitoring-grafana-gitub-auth
+        readOnly: true
     ingress:
       enabled: true
       ingressClassName: networking-traefik
