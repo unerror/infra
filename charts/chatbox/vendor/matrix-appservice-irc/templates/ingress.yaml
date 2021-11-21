@@ -34,6 +34,7 @@ spec:
       http:
         paths:
           - path: /
+            pathType: ImplementationSpecific
             backend:
             {{- if semverCompare ">=1.19-0" $kubeTargetVersion }}
               service:
@@ -42,8 +43,10 @@ spec:
                   name: http
             pathType: Prefix
             {{- else -}}
-              serviceName: {{ $fullName }}
-              servicePort: http
+              service:
+                name: {{ $fullName }}
+                port:
+                  name: http
             {{- end }}
   {{- end }}
 {{- end }}

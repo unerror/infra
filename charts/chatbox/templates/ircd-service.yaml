@@ -27,10 +27,6 @@ spec:
       targetPort: 6697
       protocol: TCP
       name: ircs
-    - port: {{ .Values.irc.service.tlsPort }}
-      targetPort: 6698
-      protocol: TCP
-      name: ircs
     - port: 6698
       targetPort: 6698
       protocol: TCP
