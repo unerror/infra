@@ -36,9 +36,7 @@ spec:
           - path: /
             pathType: ImplementationSpecific
             backend:
-              service:
-                name: {{ $fullName }}-ircd
-                port:
-                  number: 443
+              serviceName: {{ $fullName }}-ircd
+              servicePort: 443
     {{ end }}
   {{- end }}
