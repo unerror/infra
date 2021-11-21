@@ -10,9 +10,9 @@ kube-prometheus-stack:
     enabled: true
     extraConfigmapMounts:
       - name: monitoring-grafana-gitub-auth
-        mountPath: /etc/grafana/monitoring-grafana-gitub-auth.ini
+        mountPath: /etc/grafana/gitub_auth.ini
         configMap: monitoring-grafana-gitub-auth
-        subPath: monitoring-grafana-gitub-auth.ini
+        subPath: gitub_auth.ini
     ingress:
       enabled: true
       ingressClassName: networking-traefik
