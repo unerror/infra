@@ -162,9 +162,14 @@ resource "argocd_project" "infra" {
       group = "*"
       kind  = "*"
     }
-
-    orphaned_resources {}
   }
+
+  lifecycle {
+    ignore_changes = [
+      spec[0].orphaned_resources
+    ]
+  }
+
 }
 
 resource "argocd_application" "base" {
@@ -209,7 +214,8 @@ resource "argocd_application" "base" {
 
   depends_on = [
     helm_release.argocd,
-    argocd_project.infra
+    argocd_project.infra,
+    argocd_repository.infra-git
   ]
 }
 
@@ -256,7 +262,8 @@ resource "argocd_application" "certs" {
 
   depends_on = [
     helm_release.argocd,
-    argocd_project.infra
+    argocd_project.infra,
+    argocd_repository.infra-git
   ]
 }
 
@@ -302,6 +309,8 @@ resource "argocd_application" "csi-s3" {
   }
 
   depends_on = [
-    helm_release.argocd
+    helm_release.argocd,
+    argocd_project.infra,
+    argocd_repository.infra-git
   ]
 }

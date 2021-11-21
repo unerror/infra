@@ -81,6 +81,7 @@ resource "argocd_application" "argocd" {
   }
 
   depends_on = [
-    helm_release.argocd
+    helm_release.argocd,
+    argocd_repository.infra-git
   ]
 }

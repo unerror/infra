@@ -45,6 +45,8 @@ resource "argocd_application" "networking" {
   }
 
   depends_on = [
-    helm_release.argocd
+    helm_release.argocd,
+    argocd_project.infra,
+    argocd_repository.infra-git
   ]
 }

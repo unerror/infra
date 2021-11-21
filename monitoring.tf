@@ -40,6 +40,8 @@ resource "argocd_application" "monitoring" {
   }
 
   depends_on = [
-    helm_release.argocd
+    helm_release.argocd,
+    argocd_project.infra,
+    argocd_repository.infra-git
   ]
 }
