@@ -7,4 +7,4 @@ metadata:
 data:
   gitub_auth.ini: |
     [auth.github]
-		{{ .Values.grafana.github_auth | indent 4 }}
+    {{ .Values.grafana.github_auth | indent 4 }}
