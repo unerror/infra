@@ -476,7 +476,7 @@ matrix-appservice-irc:
       domain: unerror.com
       enablePresence: true
       media_url: https://matrix.unerror.com
-      url: http://matrix.unerror.com
+      url: https://matrix.unerror.com
     ircService:
       bridgeInfoState:
         enabled: true
