@@ -177,8 +177,8 @@ limits:
     chan-list-modes: 60
     registration-messages: 1024
     multiline:
-        max-bytes: 4096 # 0 means disabled
-        max-lines: 100  # 0 means no limit
+        max-bytes: 0 # 0 means disabled
+        max-lines: 0  # 0 means no limit
 fakelag:
     enabled: true
     window: 1s
