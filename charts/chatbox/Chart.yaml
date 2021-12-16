@@ -11,7 +11,7 @@ dependencies:
     repository: file://./vendor/ma1sd/
   - name: matrix-synapse
     repository: https://ananace.gitlab.io/charts/
-    version: 2.1.18
+    version: 2.1.19
   - name: element-web
     repository: https://ananace.gitlab.io/charts/
     version: 1.0.41
