@@ -7,9 +7,9 @@ dependencies:
   version: 2.1.28
 - name: element-web
   repository: https://ananace.gitlab.io/charts/
-  version: 1.1.4
+  version: 1.1.6
 - name: matrix-appservice-irc
   repository: file://./vendor/matrix-appservice-irc
   version: 0.1.16
-digest: sha256:f6c3fefefb9fb30ad8894b92cf715aacb9236439b6f1e13cd3a536af4c6a5516
-generated: "2022-02-22T21:43:43.110164-04:00"
+digest: sha256:9fb67008cbc5aa8bec4fb7e1aeb139269fe655bad455aace28a116fb0df48775
+generated: "2022-03-01T11:07:07.807921-04:00"
