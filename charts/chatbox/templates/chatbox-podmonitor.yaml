@@ -5,11 +5,14 @@ metadata:
   labels:
     release: monitoring
 spec:
+  namespaceSelector:
+    matchNames:
+    - default
   selector:
     matchLabels:
       app.kubernetes.io/instance: chatbox
       app.kubernetes.io/name: matrix-synapse
-  podMetricsEndpoints:
+  endpoints:
   - port: "9090"
     path: /_synapse/metrics
 
