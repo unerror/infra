@@ -100,7 +100,7 @@ resource "helm_release" "base" {
   ]
 
   dynamic "set_sensitive" {
-    for_each = data.sops_file.base-chart-values.data
+    for_each = nonsensitive(data.sops_file.base-chart-values.data)
 
     content {
       name  = set_sensitive.key
