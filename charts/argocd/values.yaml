@@ -57,6 +57,11 @@ argo-cd:
       enabled: false
     ingressRoute:
       enabled: true
+      webhooks:
+        entryPoints:
+          - websecure
+        hosts:
+          - argo.unerror.network
       entryPoints:
         - websecure-tsnet
       tls:

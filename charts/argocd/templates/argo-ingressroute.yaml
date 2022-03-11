@@ -32,4 +32,30 @@ spec:
   {{- end }}
   tls:
     secretName: {{ (index .Values "argo-cd").server.ingressRoute.tls.secretName }}
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ $fullName }}-webhook
+spec:
+	{{- with (index .Values "argo-cd").server.ingressRoute.webhooks.entryPoints }}
+  entryPoints:
+    - websecure
+	{{- end }}
+
+  {{- range (index .Values "argo-cd").server.ingressRoute.webhooks.hosts }}
+  routes:
+    - match: Host(`{{ . }}`) && PathPrefix(`/api/webhook`)
+      kind: Rule
+      services:
+        - name: argocd-server
+          port: 443
+          passHostHeader: true
+          serversTransport: {{ $fullName }}-transport
+          responseForwarding:
+            flushInterval: 1ms
+          scheme: https
+  {{- end }}
+  tls:
+    secretName: {{ (index .Values "argo-cd").server.ingressRoute.tls.secretName }}
 {{- end }}
