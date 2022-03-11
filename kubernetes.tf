@@ -136,7 +136,7 @@ resource "helm_release" "certs" {
 # ArgoCD Managed Base Charts
 resource "argocd_project" "infra" {
   metadata {
-    name      = "infra"
+    name = "infra"
   }
 
   spec {
@@ -174,7 +174,7 @@ resource "argocd_project" "infra" {
 
 resource "argocd_application" "base" {
   metadata {
-    name      = "base"
+    name = "base"
   }
 
   wait = true
@@ -221,14 +221,14 @@ resource "argocd_application" "base" {
 
 resource "argocd_application" "certs" {
   metadata {
-    name      = "certs"
+    name = "certs"
   }
 
   wait = true
 
   spec {
     project = argocd_project.infra.id
-    
+
     source {
       repo_url        = var.infra_repo
       path            = "charts/certs"

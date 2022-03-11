@@ -6,7 +6,7 @@ resource "digitalocean_vpc" "kubernetes-tor1" {
 
 resource "argocd_application" "networking" {
   metadata {
-    name      = "networking"
+    name = "networking"
   }
 
   wait = true
