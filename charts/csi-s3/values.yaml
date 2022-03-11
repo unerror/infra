@@ -15,7 +15,7 @@ image:
     repository: quay.io/k8scsi/csi-attacher
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "v2.2.0"
+    tag: "v3.1.0"
   
 
 imagePullSecrets: []
