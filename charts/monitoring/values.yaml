@@ -38,6 +38,10 @@ kube-prometheus-stack:
       serviceMonitorNamespaceSelector: {}
       podMonitorSelectorNilUsesHelmValues: false
       serviceMonitorSelectorNilUsesHelmValues: false
+      probeNamespaceSelector: {}
+      ruleNamespaceSelector: {}
+      probeSelectorNilUsesHelmValues: false
+      ruleSelectorNilUsesHelmValues: false
       storageSpec:
         volumeClaimTemplate:
           spec:
