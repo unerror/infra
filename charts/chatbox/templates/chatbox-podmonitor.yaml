@@ -1,7 +1,7 @@
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
-  name: {{ include "chatbox.fullname" . }}-metrics-generic-worker
+  name: {{ include "chatbox.fullname" . }}-metrics
   labels:
     {{- include "chatbox.labels" . | nindent 4 }}
   {{- with .Values.irc.service.annotations }}
