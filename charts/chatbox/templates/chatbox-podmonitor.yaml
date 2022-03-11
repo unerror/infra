@@ -1,0 +1,37 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: {{ include "chatbox.fullname" . }}-metrics-generic-worker
+  labels:
+    {{- include "chatbox.labels" . | nindent 4 }}
+  {{- with .Values.irc.service.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: chatbox
+      app.kubernetes.io/name: matrix-synapse
+      app.kubernetes.io/component: generic-worker
+  podMetricsEndpoints:
+    - port: "9090"
+      path: /_synapse/metrics
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: {{ include "chatbox.fullname" . }}-metrics-synapse
+  labels:
+    {{- include "chatbox.labels" . | nindent 4 }}
+  {{- with .Values.irc.service.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: chatbox
+      app.kubernetes.io/name: matrix-synapse
+      app.kubernetes.io/component: synapse
+  podMetricsEndpoints:
+    - port: "9090"
+      path: /_synapse/metrics
