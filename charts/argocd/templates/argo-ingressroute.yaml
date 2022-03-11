@@ -60,7 +60,7 @@ spec:
     secretName: {{ (index .Values "argo-cd").server.ingressRoute.tls.secretName }}
 ---
 # emtpy ingress route for external-dns
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ $fullName }}-webhook-webhooks-external-name
