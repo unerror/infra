@@ -20,7 +20,7 @@ resource "helm_release" "argocd" {
   ]
 
   dynamic "set_sensitive" {
-    for_each = data.sops_file.argocd-chart-values.data
+    for_each = nonsensitive(data.sops_file.argocd-chart-values.data)
 
     content {
       name  = replace(set_sensitive.key, "dex.config", "dex\\.config")

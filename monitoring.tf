@@ -1,6 +1,6 @@
 resource "argocd_application" "monitoring" {
   metadata {
-    name      = "monitoring"
+    name = "monitoring"
   }
 
   wait = true

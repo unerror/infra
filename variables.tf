@@ -1,13 +1,13 @@
 variable "database_dbs" {
-  type = map
+  type = map(any)
 }
 
 variable "database_firewall" {
-  type = list
+  type = list(any)
 }
 
 variable "database_users" {
-  type = list
+  type = list(any)
 }
 
 variable "do_region" {
@@ -25,11 +25,11 @@ variable "kubernetes_version" {
 }
 
 variable "kubernetes_tags" {
-  type = list
+  type = list(any)
 }
 
 variable "kubernetes_node_pools" {
-  type = list
+  type = list(any)
 }
 
 variable "argocd_server" {
