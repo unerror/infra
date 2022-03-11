@@ -34,6 +34,10 @@ kube-prometheus-stack:
           secretName: grafana-ingress-tls
   prometheus:
     prometheusSpec:
+      podMonitorNamespaceSelector:
+        any: true
+      serviceMonitorNamespaceSelector:
+        any: true
       storageSpec:
         volumeClaimTemplate:
           spec:
