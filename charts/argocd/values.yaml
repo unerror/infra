@@ -45,6 +45,7 @@ argo-cd:
     config:
       url: https://argo.i.unerror.network
       accounts.terraform: apiKey
+      helm.valuesFileSchemes: https, http, file, secrets, secret
       repositories: |
         - type: helm
           name: stable
