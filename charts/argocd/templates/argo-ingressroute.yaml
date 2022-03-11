@@ -58,4 +58,17 @@ spec:
   {{- end }}
   tls:
     secretName: {{ (index .Values "argo-cd").server.ingressRoute.tls.secretName }}
+---
+# emtpy ingress route for external-dns
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: {{ $fullName }}-webhook-webhooks-external-name
+  annotations:
+    kubernetes.io/ingress.class: networking-traefik
+spec:
+  rules:
+    {{- range (index .Values "argo-cd").server.ingressRoute.webhooks.hosts }}
+    - host: {{ . }}
+    {{- end }}
 {{- end }}
