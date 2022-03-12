@@ -1,10 +1,4 @@
 argo-cd:
-  global:
-    image:
-      repository: registry.digitalocean.com/une-k8s/core/argocd
-      tag: v2.3.1
-    imagePullSecrets:
-      - name: do-docker-registry
   createAggregateRoles: true
   controller:
     args:
@@ -45,7 +39,12 @@ argo-cd:
     config:
       url: https://argo.i.unerror.network
       accounts.terraform: apiKey
-      helm.valuesFileSchemes: https, http, file, secrets, secret
+      helm.valuesFileSchemes: >-
+        secrets+gpg-import, secrets+gpg-import-kubernetes,
+        secrets+age-import, secrets+age-import-kubernetes,
+        secrets,
+        https,
+        file
       repositories: |
         - type: helm
           name: stable
@@ -98,11 +97,54 @@ argo-cd:
         value: "5m"
       - name: SOPS_AGE_KEY_FILE
         value: /sops/keys.txt
+      - name: HELM_PLUGINS
+        value: /custom-tools/helm-plugins/
+      # In case wrapper scripts are used, HELM_SECRETS_HELM_PATH needs to be the path of the real helm binary
+      - name: HELM_SECRETS_HELM_PATH
+        value: /usr/local/bin/helm
+      - name: HELM_SECRETS_SOPS_PATH
+        value: /custom-tools/sops
+      - name: HELM_SECRETS_KUBECTL_PATH
+        value: /custom-tools/kubectl
+      # https://github.com/jkroepke/helm-secrets/wiki/Security-in-shared-environments
+      - name: HELM_SECRETS_VALUES_ALLOW_SYMLINKS
+        value: "false"
+      - name: HELM_SECRETS_VALUES_ALLOW_ABSOLUTE_PATH
+        value: "false"
+      - name: HELM_SECRETS_VALUES_ALLOW_PATH_TRAVERSAL
+        value: "false"
     volumeMounts:
       - name: age-keyfile
         mountPath: "/sops"
         readOnly: true
+      - mountPath: /custom-tools
+        name: custom-tools
     volumes:
+      - name: custom-tools
+        emptyDir: {}
       - name: age-keyfile
         secret:
           secretName: age-keyfile
+  initContainers:
+    - name: download-tools
+      image: alpine:latest
+      command: [sh, -ec]
+      env:
+        - name: HELM_SECRETS_VERSION
+          value: "3.12.0"
+        - name: SOPS_VERSION
+          value: "3.7.1"
+        - name: KUBECTL_VERSION
+          value: "1.22.0"
+      args:
+        - |
+          mkdir -p /custom-tools/helm-plugins
+          wget -qO- https://github.com/jkroepke/helm-secrets/releases/download/v${HELM_SECRETS_VERSION}/helm-secrets.tar.gz | tar -C /custom-tools/helm-plugins -xzf-;
+
+          wget -qO /custom-tools/sops https://github.com/mozilla/sops/releases/download/v${SOPS_VERSION}/sops-v${SOPS_VERSION}.linux
+          wget -qO /custom-tools/kubectl https://dl.k8s.io/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl
+
+          chmod +x /custom-tools/*
+      volumeMounts:
+        - mountPath: /custom-tools
+          name: custom-tools
