@@ -10,5 +10,5 @@ dependencies:
     version: 1.1.1
     repository: https://iits-consulting.github.io/coturn-chart/
   - name: traefik
-    version: 10.14.2
+    version: 10.15.0
     repository: https://helm.traefik.io/traefik
