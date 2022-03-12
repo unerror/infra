@@ -100,27 +100,38 @@ traefik:
       minVersion: VersionTLS11
   ports:
     irc:
+      name: irc
       port: 6667
       exposedPort: 6667
       protocol: TCP
       expose: true
     ircs:
+      name: ircs
       port: 6697
       exposedPort: 6697
       protocol: TCP
       expose: true
     turn-tcp:
+      name: turn-tcp
       port: 3478
       exposedPort: 3478
       protocol: TCP
       expose: true
     web:
+      name: web
       nodePort: 32080
       redirectTo: websecure
     websecure:
+      name: websecure
       nodePort: 32443
       tls:
         enabled: true
+    metrics:
+      name: metrics
+      port: 9100
+      expose: false
+      exposedPort: 9100
+      protocol: TCP
   service:
     annotations:
       service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: "true"
