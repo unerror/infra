@@ -2,7 +2,7 @@ argo-cd:
   global:
     image:
       repository: registry.digitalocean.com/une-k8s/core/argocd
-      tag: v2.1.2
+      tag: v2.3.1
     imagePullSecrets:
       - name: do-docker-registry
   createAggregateRoles: true
