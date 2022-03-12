@@ -45,7 +45,6 @@ resource "digitalocean_kubernetes_cluster" "une-k8s" {
     content {
       name       = node_pool.value["name"]
       size       = node_pool.value["size"]
-      node_count = node_pool.value["node_count"]
       auto_scale = node_pool.value["auto_scale"]
       max_nodes  = node_pool.value["max_nodes"]
       min_nodes  = node_pool.value["min_nodes"]
