@@ -21,6 +21,7 @@ kube-prometheus-stack:
       enabled: true
       ingressClassName: networking-traefik
       annotations:
+        external-dns.alpha.kubernetes.io/exclude: "true"
         cert-manager.io/cluster-issuer: letsencrypt-prod
         traefik.ingress.kubernetes.io/service.serversscheme: http
         traefik.ingress.kubernetes.io/router.entrypoints: websecure-tsnet

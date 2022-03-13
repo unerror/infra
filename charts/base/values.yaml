@@ -5,6 +5,8 @@ cert-manager:
     defaultIssuerName: letsencrypt-prod
   installCRDs: true
 external-dns:
+  extraArgs:
+    annotation-filter: external-dns.alpha.kubernetes.io/exclude notin (true)
   crd:
     create: true
   metrics:
