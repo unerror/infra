@@ -49,8 +49,6 @@ spec:
         # Store the state in a k8s secret
         - name: KUBE_SECRET
           value: {{ .Values.tailscale.state }}
-        - name: USER_SPACE
-          value: "false"
         - name: AUTH_KEY
           valueFrom:
             secretKeyRef:
