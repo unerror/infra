@@ -15,8 +15,8 @@ tailscale:
   proxy:
     enabled: true
     env:
-      - name: USER_SPACE
-        value: "FALSE"
+      - name: USERSPACE
+        value: "false"
       - name: DEST_IP
         value: 10.118.0.0/20
       - name: ROUTES
