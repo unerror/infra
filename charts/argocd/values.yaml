@@ -1,4 +1,7 @@
 argo-cd:
+  global:
+    image:
+      tag: v2.3.1
   configs:
     knownHosts:
       data:
