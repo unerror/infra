@@ -81,7 +81,7 @@ argo-cd:
       requests:
         cpu: 250m
         memory: 256Mi
-    replicas: 3
+    replicas: 2
     affinity:
       podAntiAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
