@@ -129,6 +129,7 @@ argo-cd:
                   operator: In
                   values:
                     - repo-server
+            topologyKey: kubernetes.io/hostname
           - labelSelector:
               matchExpressions:
                 - key: app.kubernetes.io/name
