@@ -129,6 +129,12 @@ argo-cd:
                   operator: In
                   values:
                     - repo-server
+          - labelSelector:
+              matchExpressions:
+                - key: app.kubernetes.io/name
+                  operator: In
+                  values:
+                    - prometheus
             topologyKey: "kubernetes.io/hostname"
     env:
       - name: ARGOCD_EXEC_TIMEOUT
