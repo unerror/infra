@@ -16,9 +16,11 @@ tailscale:
     enabled: true
     env:
       - name: USER_SPACE
-        value: "true"
+        value: "FALSE"
+      - name: DEST_IP
+        value: 10.118.0.0/20
       - name: ROUTES
-        value: 10.0.0.0/8
+        value: 10.0.0.0/8,10.118.0.0/20
       - name: EXTRA_ARGS
         value: "--hostname une-k8s-relay --advertise-tags=tag:une-k8s --snat-subnet-routes=true --netfilter-mode=on"
 
