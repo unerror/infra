@@ -5,7 +5,7 @@ tailscale:
     tag: v1.22.1
   imagePullSecrets:
     - name: do-docker-registry
-  secret: networking-tailscale-auth
+  secret: networking-tailscale-auth-relay
   state: networking-tailscale-state
   additionalStates:
     - networking-tailscale-state-traefik-sidecar
@@ -66,7 +66,7 @@ traefik:
           - name: AUTH_KEY
             valueFrom:
               secretKeyRef:
-                name: networking-tailscale-auth
+                name: networking-tailscale-auth-traefik
                 key: AUTH_KEY
                 optional: true
   ingressClass:
