@@ -17,8 +17,6 @@ tailscale:
     env:
       - name: USERSPACE
         value: "false"
-      - name: DEST_IP
-        value: 10.118.0.0/20
       - name: ROUTES
         value: 10.0.0.0/8,10.118.0.0/20
       - name: EXTRA_ARGS
