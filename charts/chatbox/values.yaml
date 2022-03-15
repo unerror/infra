@@ -147,6 +147,11 @@ matrix-synapse:
               number: 8090
   wellknown:
     enabled: true
+    server:
+      m.server: "matrix.unerror.com:443"
+    client:
+      m.homeserver:
+        base_url: "https://matrix.unerror.com"
   extraConfig:
     app_service_config_files:
       - /appservice-irc-registration.yaml

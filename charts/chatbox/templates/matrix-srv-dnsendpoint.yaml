@@ -1,0 +1,17 @@
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: {{ include "chatbox.fullname" . }}-matrix-srv-dns
+  labels:
+    {{- include "chatbox.labels" . | nindent 4 }}
+  {{- with .Values.irc.service.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  endpoints:
+    - dnsName: matrix.unerror.com
+      recordTTL: 300
+      recordType: SRV
+      targets:
+        - 10 0 443 matrix.unerror.com
