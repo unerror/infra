@@ -20,7 +20,7 @@ actions-runner-controller:
       hosts:
         - host: action-ci-runners.unerror.network
           paths:
-            - path: /*
+            - path: /actions-runner-controller-github-webhook-server
               pathType: ImplementationSpecific
 
       tls:
