@@ -18,6 +18,10 @@ actions-runner-controller:
         traefik.ingress.kubernetes.io/router.tls.options: default
       hosts:
         - host: action-ci-runners.unerror.network
+          paths:
+            - path: /*
+              pathType: ImplementationSpecific
+
       tls:
         - host: [action-ci-runners.unerror.network]
           secretName: action-ci-runners-tls
