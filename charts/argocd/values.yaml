@@ -29,14 +29,14 @@ argo-cd:
       serviceMonitor:
         enabled: true
     args:
-      kubectl-parallelism-limit: 10
+      kubectl-parallelism-limit: 25
     resources:
       limits:
-        cpu: 500m
-        memory: 768Mi
+        cpu: 750m
+        memory: 896Mi
       requests:
-        cpu: 250m
-        memory: 256Mi
+        cpu: 400m
+        memory: 384Mi
     extraArgs:
       - --repo-server-timeout-seconds
       - "500"
@@ -111,29 +111,12 @@ argo-cd:
         enabled: true
     resources:
       limits:
-        cpu: 500m
-        memory: 768Mi
+        cpu: 750m
+        memory: 896Mi
       requests:
-        cpu: 250m
-        memory: 256Mi
-    replicas: 2
-    affinity:
-      podAntiAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchExpressions:
-                - key: app.kubernetes.io/component
-                  operator: In
-                  values:
-                    - repo-server
-            topologyKey: kubernetes.io/hostname
-          - labelSelector:
-              matchExpressions:
-                - key: app.kubernetes.io/name
-                  operator: In
-                  values:
-                    - prometheus
-            topologyKey: "kubernetes.io/hostname"
+        cpu: 400m
+        memory: 384Mi
+    replicas: 3
     env:
       - name: ARGOCD_EXEC_TIMEOUT
         value: "5m"
