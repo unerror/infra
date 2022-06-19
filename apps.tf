@@ -48,7 +48,7 @@ resource "argocd_application" "chatbox" {
 resource "argocd_application" "actions-runner-controller" {
   metadata {
     name      = "actions-runner-controller"
-    namespace = "ci-runners"
+    namespace = "default"
   }
 
   wait = true
