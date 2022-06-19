@@ -56,7 +56,7 @@ resource "argocd_application" "actions-runner-controller" {
   spec {
     source {
       repo_url        = var.infra_repo
-      path            = "charts/actions-runner-controller"
+      path            = "charts/ci-runners"
       target_revision = "HEAD"
       helm {
         value_files = ["values.yaml", "secrets://secrets.yaml"]
