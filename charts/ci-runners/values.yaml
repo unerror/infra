@@ -2,22 +2,22 @@ actions-runner-controller:
   replicaCount: 1
   authSecret:
     create: true
-    metrics:
-      serviceMonitor: true
-    githubWebhookServer:
+  metrics:
+    serviceMonitor: true
+  githubWebhookServer:
+    enabled: true
+    secret:
       enabled: true
-      secret:
-        enabled: true
-        create: true
-      ingress:
-        enabled: true
-        ingressClassName: networking-traefik
-        annotations:
-          traefik.ingress.kubernetes.io/router.entrypoints: websecure
-          traefik.ingress.kubernetes.io/router.tls: "true"
-          traefik.ingress.kubernetes.io/router.tls.options: default
-        hosts:
-          - host: action-ci-runners.unerror.network
-        tls:
-          - host: [action-ci-runners.unerror.network]
-            secretName: action-ci-runners-tls
+      create: true
+    ingress:
+      enabled: true
+      ingressClassName: networking-traefik
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: "true"
+        traefik.ingress.kubernetes.io/router.tls.options: default
+      hosts:
+        - host: action-ci-runners.unerror.network
+      tls:
+        - host: [action-ci-runners.unerror.network]
+          secretName: action-ci-runners-tls
