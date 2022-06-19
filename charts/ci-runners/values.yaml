@@ -16,6 +16,7 @@ actions-runner-controller:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: "true"
         traefik.ingress.kubernetes.io/router.tls.options: default
+        cert-manager.io/cluster-issuer: letsencrypt-prod
       hosts:
         - host: action-ci-runners.unerror.network
           paths:
@@ -26,6 +27,3 @@ actions-runner-controller:
         - hosts:
             - action-ci-runners.unerror.network
           secretName: action-ci-runners-tls
-          issuerRef:
-            name: letsencrypt-prod
-            kind: ClusterIssuer
