@@ -24,4 +24,4 @@ actions-runner-controller:
 
       tls:
         - host: [action-ci-runners.unerror.network]
-          secretName: actions-runner-controller-serving-cert
+          secretName: action-ci-runners-tls
