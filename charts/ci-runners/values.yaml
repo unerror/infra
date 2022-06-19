@@ -23,7 +23,8 @@ actions-runner-controller:
               pathType: ImplementationSpecific
 
       tls:
-        - host: [action-ci-runners.unerror.network]
+        - hosts:
+            - action-ci-runners.unerror.network
           secretName: action-ci-runners-tls
           issuerRef:
             name: letsencrypt-prod
