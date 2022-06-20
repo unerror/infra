@@ -7,10 +7,13 @@ spec:
   template:
     spec:
       organization: {{ .org }}
-      securityContext:
-        privileged: true
       ephemeral: true
       dockerdWithinRunnerContainer: true
+      containers:
+      - name: runner
+        securityContext:
+          privileged: true
+
 ---
 apiVersion: actions.summerwind.dev/v1alpha1
 kind: HorizontalRunnerAutoscaler
