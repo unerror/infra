@@ -1,3 +1,4 @@
+fullnameOverride: ""
 actions-runner-controller:
   replicaCount: 1
   authSecret:
@@ -27,3 +28,8 @@ actions-runner-controller:
         - hosts:
             - action-ci-runners.unerror.network
           secretName: action-ci-runners-tls
+
+runners:
+  - org: unerror
+    min: 1
+    max: 5
