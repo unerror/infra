@@ -6,6 +6,8 @@ metadata:
 spec:
   template:
     spec:
+      image: summerwind/actions-runner-dind
+      dockerdWithinRunnerContainer: true
       organization: {{ .org }}
       ephemeral: true
       containers:
