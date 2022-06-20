@@ -1,0 +1,27 @@
+{{- range .Values.runners }}
+kind: RunnerDeployment
+metadata:
+  name: {{ include "ci-runners.fullname" $ }}-runners
+spec:
+  template:
+    spec:
+      organization: {{ .org }}
+---
+kind: HorizontalRunnerAutoscaler
+spec:
+  minReplicas: {{ .min }}
+  maxReplicas: {{ .max }}
+  scaleTargetRef:
+    name: {{ include "ci-runners.fullname" $ }}-runners
+    # Uncomment the below in case the target is not RunnerDeployment but RunnerSet
+    #kind: RunnerSet
+  scaleUpTriggers:
+  - githubEvent:
+      checkRun:
+        types: ["created"]
+        status: "queued"
+        # Optionally restrict autoscaling to being triggered by events from specific repositories within your organization still
+        # repositories: ["myrepo", "myanotherrepo"]
+    amount: 1
+    duration: "5m"
+{{- end }}
