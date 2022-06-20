@@ -16,7 +16,6 @@ spec:
           type: "super_t"
           user: "system_u"
       ephemeral: true
-      dockerEnabled: true
       dockerdWithinRunnerContainer: true
 ---
 apiVersion: actions.summerwind.dev/v1alpha1
