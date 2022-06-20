@@ -1,4 +1,5 @@
 {{- range .Values.runners }}
+apiVersion: actions.summerwind.dev/v1alpha1
 kind: RunnerDeployment
 metadata:
   name: {{ include "ci-runners.fullname" $ }}-runners
@@ -7,6 +8,7 @@ spec:
     spec:
       organization: {{ .org }}
 ---
+apiVersion: actions.summerwind.dev/v1alpha1
 kind: HorizontalRunnerAutoscaler
 spec:
   minReplicas: {{ .min }}
