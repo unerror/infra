@@ -8,7 +8,6 @@ spec:
     spec:
       organization: {{ .org }}
       ephemeral: true
-      dockerdWithinRunnerContainer: true
       containers:
       - name: runner
         securityContext:
