@@ -10,6 +10,8 @@ spec:
 ---
 apiVersion: actions.summerwind.dev/v1alpha1
 kind: HorizontalRunnerAutoscaler
+metadata:
+  name: {{ include "ci-runners.fullname" $ }}-runners-{{ .org }}-autoscaler
 spec:
   minReplicas: {{ .min }}
   maxReplicas: {{ .max }}
