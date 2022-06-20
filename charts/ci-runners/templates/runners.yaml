@@ -8,10 +8,6 @@ spec:
     spec:
       organization: {{ .org }}
       ephemeral: true
-      securityContext:
-        capabilities:
-          add:
-          - NET_ADMIN
       dockerdWithinRunnerContainer: true
       containers:
       - name: runner
