@@ -16,6 +16,10 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           echo "${{secrets.SOPS_AGE_KEY}}" > ./keyfile.age
+      - name: Tailscale
+        uses: tailscale/github-action@v1
+        with:
+          authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
