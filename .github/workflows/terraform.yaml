@@ -24,7 +24,7 @@ jobs:
             #tailscale_args: "--socket=/tmp/tailscaled.sock"
           args: "--netfilter-mode=on --snat-subnet-routes=true"
       - name: Setup Node environment
-        uses: actions/setup-node
+        uses: actions/setup-node@v3
         with:
           node-version: 16
       - name: Setup Terraform
