@@ -17,7 +17,7 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{secrets.SOPS_AGE_KEY}}" > ./keyfile.age
       - name: Tailscale
-        uses: enmand/tailscale-github-action@ae76a3865a64b895a14bac945e35949128174c2f
+        uses: enmand/tailscale-github-action@bda1d0f886708f8f86bc489d6138e6963551f887
         with:
           authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
           tailscaled_args: "--socket=/tmp/tailscaled.sock"
