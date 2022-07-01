@@ -17,7 +17,7 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{secrets.SOPS_AGE_KEY}}" > ./keyfile.age
       - name: Tailscale
-        uses: tailscale/github-action@v1
+        uses: tailscale/github-action@93adf6fb64ed736bdb5aa1f11c9b09f839a9a70c
         with:
           authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
           args: "--socket=/tmp/tailscaled.sock --netfilter-mode=on --snat-subnet-routes=true"
