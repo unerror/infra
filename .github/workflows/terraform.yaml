@@ -17,10 +17,11 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{secrets.SOPS_AGE_KEY}}" > ./keyfile.age
       - name: Tailscale
-        uses: tailscale/github-action@93adf6fb64ed736bdb5aa1f11c9b09f839a9a70c
+        uses: enmand/tailscale-github-action@ae76a3865a64b895a14bac945e35949128174c2f
         with:
           authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
-          args: "--socket=/tmp/tailscaled.sock --netfilter-mode=on --snat-subnet-routes=true"
+          tailscaled_args: "--socket=/tmp/tailscaled.sock"
+          args: "--netfilter-mode=on --snat-subnet-routes=true"
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
