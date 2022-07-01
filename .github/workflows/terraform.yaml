@@ -20,8 +20,8 @@ jobs:
         uses: enmand/tailscale-github-action@bda1d0f886708f8f86bc489d6138e6963551f887
         with:
           authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
-          tailscaled_args: "--socket=/tmp/tailscaled.sock"
-          tailscale_args: "--socket=/tmp/tailscaled.sock"
+            #tailscaled_args: "--socket=/tmp/tailscaled.sock"
+            #tailscale_args: "--socket=/tmp/tailscaled.sock"
           args: "--netfilter-mode=on --snat-subnet-routes=true"
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
