@@ -21,7 +21,7 @@ jobs:
         with:
           authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
           tailscaled_args: "--socket=/tmp/tailscaled.sock"
-          args: "--netfilter-mode=on --snat-subnet-routes=true"
+          args: "--socket=/tmp/tailscaled.sock --netfilter-mode=on --snat-subnet-routes=true"
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
