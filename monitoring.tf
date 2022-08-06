@@ -1,4 +1,4 @@
-resource "argocd_application" "monitoring" {
+/*resource "argocd_application" "monitoring" {
   metadata {
     name = "monitoring"
   }
@@ -44,4 +44,4 @@ resource "argocd_application" "monitoring" {
     argocd_project.infra,
     argocd_repository.infra-git
   ]
-}
+}*/
