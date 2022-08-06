@@ -1,6 +1,6 @@
 do_region = "tor1"
 
-database_users = ["homeassistant", "matrix"]
+database_users = ["homeassistant", "matrix", "vaultwarden"]
 database_dbs = {
   homeassistant = {
     pool_size = 2
@@ -36,6 +36,11 @@ database_dbs = {
   matrix_reminder_bot = {
     pool_size = 2
     user      = "matrix"
+  }
+
+  vaultwarden = {
+    pool_size = 2
+    user     = "vaultwarden"
   }
 }
 
