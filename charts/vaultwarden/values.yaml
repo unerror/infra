@@ -1,67 +1,68 @@
-image:
-  # -- image repository
-  repository: vaultwarden/server
-  # -- image pull policy
-  pullPolicy: IfNotPresent
-  # -- image tag
-  # @default -- chart.appVersion
-  tag:
+vaultwarden:
+  image:
+    # -- image repository
+    repository: vaultwarden/server
+    # -- image pull policy
+    pullPolicy: IfNotPresent
+    # -- image tag
+    # @default -- chart.appVersion
+    tag:
 
-strategy:
-  type: Recreate
+  strategy:
+    type: Recreate
 
-env:
-  # -- Config dir
-  DATA_FOLDER: "config"
+  env:
+    # -- Config dir
+    DATA_FOLDER: "config"
 
-service:
-  main:
-    ports:
-      http:
-        port: 80
-      websocket:
-        enabled: true
-        port: 3012
+  service:
+    main:
+      ports:
+        http:
+          port: 80
+        websocket:
+          enabled: true
+          port: 3012
 
-        cert-manager.io/cluster-issuer: letsencrypt-prod
-        traefik.ingress.kubernetes.io/service.serversscheme: http
-        traefik.ingress.kubernetes.io/router.entrypoints: websecure-tsnet
-        traefik.ingress.kubernetes.io/router.tls: "true"
+          cert-manager.io/cluster-issuer: letsencrypt-prod
+          traefik.ingress.kubernetes.io/service.serversscheme: http
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure-tsnet
+          traefik.ingress.kubernetes.io/router.tls: "true"
+        hosts:
+          - grafana.i.unerror.network
+        tls:
+          - hosts:
+              - grafana.i.unerror.network
+            secretName: grafana-ingress-tls
+
+  ingress:
+    main:
+      enabled: false
+      traefik.ingress.kubernetes.io/router.tls:
       hosts:
-        - grafana.i.unerror.network
-      tls:
-        - hosts:
-            - grafana.i.unerror.network
-          secretName: grafana-ingress-tls
+        - host: warden.unerror.network
+          paths:
+            - path: /
+              pathType: Prefix
+              service:
+                port: http
+            - path: /notifications/hub/negotiate
+              pathType: Prefix
+              service:
+                port: http
+            - path: /notifications/hub
+              pathType: Prefix
+              service:
+                port: websocket
 
-ingress:
-  main:
+  persistence:
+    ssl:
+      enabled: true
+      type: secret
+      name: postgres-ca-cert
+    config:
+      enabled: true
+  mariadb:
     enabled: false
-    traefik.ingress.kubernetes.io/router.tls:
-    hosts:
-      - host: warden.unerror.network
-        paths:
-          - path: /
-            pathType: Prefix
-            service:
-              port: http
-          - path: /notifications/hub/negotiate
-            pathType: Prefix
-            service:
-              port: http
-          - path: /notifications/hub
-            pathType: Prefix
-            service:
-              port: websocket
-
-persistence:
-  ssl:
-    enabled: true
-    type: secret
-    name: postgres-ca-cert
-  config:
-    enabled: true
-mariadb:
-  enabled: false
-postgresql:
-  enabled: false
+  postgresql:
+    enabled: false

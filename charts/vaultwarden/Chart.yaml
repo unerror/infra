@@ -1,0 +1,11 @@
+apiVersion: v2
+name: vaultwarden
+description: A Helm chart for Kubernetes
+ype: application
+version: 0.1.0
+appVersion: "1.25.2"
+
+dependencies:
+  - name: vaultwarden
+    version: 5.3.2
+    repository: https://k8s-at-home.com/charts/
