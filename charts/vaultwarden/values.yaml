@@ -24,21 +24,16 @@ vaultwarden:
           enabled: true
           port: 3012
 
-          cert-manager.io/cluster-issuer: letsencrypt-prod
-          traefik.ingress.kubernetes.io/service.serversscheme: http
-          traefik.ingress.kubernetes.io/router.entrypoints: websecure-tsnet
-          traefik.ingress.kubernetes.io/router.tls: "true"
-        hosts:
-          - grafana.i.unerror.network
-        tls:
-          - hosts:
-              - grafana.i.unerror.network
-            secretName: grafana-ingress-tls
-
   ingress:
     main:
-      enabled: false
-      traefik.ingress.kubernetes.io/router.tls:
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+        traefik.ingress.kubernetes.io/router.tls: "true"
+      enabled: true
+      tls:
+        - hosts:
+            - warden.unerror.network
+          secretName: vaultwarden-ingress-tls
       hosts:
         - host: warden.unerror.network
           paths:
