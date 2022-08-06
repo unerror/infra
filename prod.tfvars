@@ -40,7 +40,7 @@ database_dbs = {
 
   vaultwarden = {
     pool_size = 2
-    user     = "vaultwarden"
+    user      = "vaultwarden"
   }
 }
 
