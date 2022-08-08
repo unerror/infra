@@ -15,6 +15,7 @@ vaultwarden:
     # -- Config dir
     DATA_FOLDER: "config"
     DATABASE_MAX_CONNS: 3
+    SIGNUPS_ALLOWED: false
 
   service:
     main:
