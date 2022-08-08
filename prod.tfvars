@@ -40,6 +40,7 @@ database_dbs = {
 
   vaultwarden = {
     pool_size = 2
+    mode      = session
     user      = "vaultwarden"
   }
 }
