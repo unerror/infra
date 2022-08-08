@@ -14,6 +14,7 @@ vaultwarden:
   env:
     # -- Config dir
     DATA_FOLDER: "config"
+    DATABASE_MAX_CONNS: 3
 
   service:
     main:
