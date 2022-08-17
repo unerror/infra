@@ -7,7 +7,7 @@ on:
 jobs:
   terraform:
     name: "Terraform"
-    runs-on: [self-hosted, linux]
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
