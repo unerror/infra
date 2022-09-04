@@ -25,15 +25,8 @@ tailscale:
 doRegistryToken: ""
 
 coturn:
-  coturn:
-    traefik:
-      tcp:
-        entrypoint: turn-tcp
-    service:
-      type: ClusterIP
-    image:
-      tag: "4.5.2"
-
+  certificate:
+    host: turn.unerror.network
 traefik:
   # todo: when DO supports Dualstack IPv4/IPv6 kubelets, remove this and use tailnet IPv6 as the
   # ExternalIP on a Service
