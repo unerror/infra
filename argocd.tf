@@ -44,6 +44,10 @@ resource "argocd_application" "argocd" {
   metadata {
     name      = "argocd"
     namespace = "default"
+
+    annotations = {
+      "argocd.argoproj.io/refresh" = "normal"
+    }
   }
 
   wait = true
