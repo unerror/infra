@@ -4,10 +4,10 @@ fullnameOverride: ""
 irc:
   replicaCount: 1
   image:
-    repository: ergochat/ergo
+    repository: ghcr.io/ergochat/ergo
+    tag: v2.10.0
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "latest"
   imagePullSecrets: []
   podAnnotations: {}
   podSecurityContext: {}
