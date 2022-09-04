@@ -2,6 +2,9 @@ resource "argocd_application" "chatbox" {
   metadata {
     name      = "chatbox"
     namespace = "default"
+    annotations = {
+      "argocd.argoproj.io/refresh" = "normal"
+    }
   }
 
   wait = true
@@ -49,6 +52,10 @@ resource "argocd_application" "vaultwarden" {
   metadata {
     name      = "vaultwarden"
     namespace = "default"
+
+    annotations = {
+      "argocd.argoproj.io/refresh" = "normal"
+    }
   }
 
   wait = true

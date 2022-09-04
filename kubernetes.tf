@@ -174,6 +174,10 @@ resource "argocd_project" "infra" {
 resource "argocd_application" "base" {
   metadata {
     name = "base"
+
+    annotations = {
+      "argocd.argoproj.io/refresh" = "normal"
+    }
   }
 
   wait = true
@@ -221,6 +225,10 @@ resource "argocd_application" "base" {
 resource "argocd_application" "certs" {
   metadata {
     name = "certs"
+
+    annotations = {
+      "argocd.argoproj.io/refresh" = "normal"
+    }
   }
 
   wait = true
@@ -270,6 +278,10 @@ resource "argocd_application" "csi-s3" {
   metadata {
     name      = "csi-s3"
     namespace = "default"
+
+    annotations = {
+      "argocd.argoproj.io/refresh" = "normal"
+    }
   }
 
   wait = true
