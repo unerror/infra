@@ -25,9 +25,29 @@ tailscale:
 doRegistryToken: ""
 
 coturn:
-  certificate:
-    host: turn.unerror.network
-    issuerName: letsencrypt-prod
+  image:
+    repository: coturn/coturn
+    tag: 4.5.2
+  service:
+    type: ClusterIP
+    port: 3478
+  ingress:
+    enabled: true
+    annotations:
+      external-dns.alpha.kubernetes.io/target: lb-trfk.unerror.network
+      external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    hosts:
+      - host: turn.unerror.network
+        paths:
+          - path: /
+            pathType: Prefix
+    tls:
+      - secretName: turn-une-tls
+        hosts:
+          - turn.unerror.network
+  className: networking-traefik
+
 traefik:
   # todo: when DO supports Dualstack IPv4/IPv6 kubelets, remove this and use tailnet IPv6 as the
   # ExternalIP on a Service

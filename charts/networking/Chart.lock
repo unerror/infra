@@ -1,9 +1,9 @@
 dependencies:
 - name: coturn
-  repository: https://iits-consulting.github.io/coturn-chart/
-  version: 2.0.3
+  repository: https://savercorp.github.io/helm-charts/
+  version: 0.0.1
 - name: traefik
   repository: https://helm.traefik.io/traefik
   version: 10.24.1
-digest: sha256:208843b540e183499296264633a7aa55a15e3b626c99fbd15dbc0ecd5194e29f
-generated: "2022-08-29T16:35:50.932757089Z"
+digest: sha256:e279bedd0ed547bb3f9602d5a4b5dffb699ee5295982504d5349b5c60c41040f
+generated: "2022-09-04T23:32:58.211579-03:00"
