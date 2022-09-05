@@ -7,10 +7,12 @@ resource "digitalocean_vpc" "kubernetes-tor1" {
 resource "argocd_application" "networking" {
   metadata {
     name = "networking"
+  }
 
-    annotations = {
-      "argocd.argoproj.io/refresh" = "normal"
-    }
+  lifecycle {
+    ignore_changes = [
+      metadata.0.annotations["argocd.argoproj.io/refresh"]
+    ]
   }
 
   wait = true
