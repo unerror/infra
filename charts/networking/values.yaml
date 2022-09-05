@@ -26,7 +26,8 @@ doRegistryToken: ""
 
 coturn:
   certificate:
-    host: turn.unerror.network
+    host: turn.unerror.networak
+    issuerName: letsencrypt-prod
 traefik:
   # todo: when DO supports Dualstack IPv4/IPv6 kubelets, remove this and use tailnet IPv6 as the
   # ExternalIP on a Service
