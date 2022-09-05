@@ -2,9 +2,12 @@ resource "argocd_application" "chatbox" {
   metadata {
     name      = "chatbox"
     namespace = "default"
-    annotations = {
-      "argocd.argoproj.io/refresh" = "normal"
-    }
+  }
+
+  lifecycle {
+    ignore_changes = [
+      metadata.0.annotations["argocd.argoproj.io/refresh"]
+    ]
   }
 
   wait = true
@@ -52,10 +55,12 @@ resource "argocd_application" "vaultwarden" {
   metadata {
     name      = "vaultwarden"
     namespace = "default"
+  }
 
-    annotations = {
-      "argocd.argoproj.io/refresh" = "normal"
-    }
+  lifecycle {
+    ignore_changes = [
+      metadata.0.annotations["argocd.argoproj.io/refresh"]
+    ]
   }
 
   wait = true

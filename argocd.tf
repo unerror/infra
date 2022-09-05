@@ -44,10 +44,12 @@ resource "argocd_application" "argocd" {
   metadata {
     name      = "argocd"
     namespace = "default"
+  }
 
-    annotations = {
-      "argocd.argoproj.io/refresh" = "normal"
-    }
+  lifecycle {
+    ignore_changes = [
+      metadata.0.annotations["argocd.argoproj.io/refresh"]
+    ]
   }
 
   wait = true
