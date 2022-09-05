@@ -2,7 +2,7 @@ tailscale:
   replicas: 1
   image:
     repository: registry.digitalocean.com/une-k8s/networking/tailscale
-    tag: v1.22.1
+    tag: v1.31.7
   imagePullSecrets:
     - name: do-docker-registry
   secret: networking-tailscale-auth-relay
