@@ -71,7 +71,7 @@ traefik:
     kind: Deployment
     additionalContainers:
       - name: tailscale-sidecar
-        image: registry.digitalocean.com/une-k8s/networking/tailscale:v1.22.1
+        image: registry.digitalocean.com/une-k8s/networking/tailscale:v1.31.7
         env:
           - name: KUBE_SECRET
             value: networking-tailscale-state-traefik-sidecar
