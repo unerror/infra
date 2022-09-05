@@ -1,6 +1,6 @@
 dependencies:
 - name: actions-runner-controller
   repository: https://actions-runner-controller.github.io/actions-runner-controller
-  version: 0.19.1
-digest: sha256:dc6b672e69a9822d73263f532d38c1e5ab3787ae779076909923a1c6089b9dee
-generated: "2022-06-19T13:49:36.240083-03:00"
+  version: 0.20.2
+digest: sha256:77bdcec9b50c7a87368a524d3d16d62f96bb262cb979c1050ffc19fa2334ef75
+generated: "2022-07-15T07:19:57.974007877Z"
