@@ -1,21 +1,21 @@
 image:
   provisioner:
-    repository: quay.io/k8scsi/csi-provisioner
+    repository: k8s.gcr.io/sig-storage/csi-provisioner
     pullPolicy: IfNotPresent
-    tag: "v2.1.0"
+    tag: "v2.1.2"
   csi:
     repository: ctrox/csi-s3
     pullPolicy: Always
     tag: "v1.2.0-rc.1"
   driver:
-    repository: quay.io/k8scsi/csi-node-driver-registrar
+    repository: k8s.gcr.io/sig-storage/csi-node-driver-registrar
     pullPolicy: IfNotPresent
-    tag: "v1.2.0"
+    tag: "v2.5.1"
   attacher:
-    repository: quay.io/k8scsi/csi-attacher
+    repository: k8s.gcr.io/sig-storage/csi-attacher
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "v3.1.0"
+    tag: "v3.5.0"
   
 
 imagePullSecrets: []
