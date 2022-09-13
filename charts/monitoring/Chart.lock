@@ -4,9 +4,9 @@ dependencies:
   version: 39.12.0
 - name: promtail
   repository: https://grafana.github.io/helm-charts
-  version: 6.3.1
+  version: 6.4.0
 - name: metrics-server
   repository: https://kubernetes-sigs.github.io/metrics-server
   version: 3.8.2
-digest: sha256:c7d7af1a82db5ca678195b9e6479f662c5bd2a91f6dbc9428dabe0088976e4d0
-generated: "2022-09-10T15:32:40.052576107Z"
+digest: sha256:11fc7f38b4439d35cd61f1c1ed6aafc4f0924029cea9a8aca48b284e6afa8ce1
+generated: "2022-09-13T15:36:07.464440934Z"
