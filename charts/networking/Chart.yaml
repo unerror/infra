@@ -10,5 +10,5 @@ dependencies:
     version: 0.0.1
     repository: https://savercorp.github.io/helm-charts/
   - name: traefik
-    version: 10.24.2
+    version: 12.0.7
     repository: https://helm.traefik.io/traefik
