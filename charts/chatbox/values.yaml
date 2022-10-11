@@ -159,7 +159,6 @@ matrix-synapse:
     auto_join_rooms:
       - "#offtopic:unerror.com"
     account_threepid_delegates:
-      email: http://chatbox-ma1sd:8090
       msisdn: http://chatbox-ma1sd:8090
     trusted_third_party_id_servers: [matrix.unerror.com]
     password_providers:
@@ -377,10 +376,6 @@ ma1sd:
                   body:
                     text: /etc/ma1sd/threepids/email/unbind-notification.eml
                     html: /etc/ma1sd/threepids/sms/unbind-notification.txt
-    threepid:
-      email:
-        identity:
-          from: chatbox@unerror.com
 
 element-web:
   ingress:
