@@ -86,7 +86,7 @@ matrix-synapse:
   externalPostgresql:
     port: 25061
     username: matrix
-    database: synapse
+    database: homeserver_synapse
     sslmode: require
     host: private-db-tor1-do-user-133480-0.b.db.ondigitalocean.com
     extraArgs:
