@@ -50,7 +50,7 @@ jobs:
           SOPS_AGE_KEY_FILE: ./keyfile.age
           SOPS_AGE_RECIPIENTS: ${{secrets.SOPS_AGE_RECIPIENTS}}
       - name: Update Pull Request
-        uses: actions/github-script@v6.3.1
+        uses: actions/github-script@v6.3.3
         if: github.event_name == 'pull_request'
         env:
           PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
