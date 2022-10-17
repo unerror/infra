@@ -2,12 +2,7 @@ do_region = "tor1"
 
 database_users = ["homeassistant", "matrix", "vaultwarden"]
 database_dbs = {
-  homeassistant = {
-    pool_size = 2
-    user      = "homeassistant"
-  }
-
-  synapse = {
+  homeserver_synapse = {
     pool_size = 2
     user      = "matrix"
   }
