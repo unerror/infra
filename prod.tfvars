@@ -4,7 +4,6 @@ database_users = ["homeassistant", "matrix", "vaultwarden"]
 database_dbs = {
   homeserver_synapse = {
     pool_size = 2
-    user      = "matrix"
   }
 
   matrix_appservice_irc = {

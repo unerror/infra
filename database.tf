@@ -32,7 +32,7 @@ resource "digitalocean_database_connection_pool" "pools" {
   mode       = lookup(each.value, "mode", "transaction")
   size       = each.value.pool_size
   db_name    = digitalocean_database_db.dbs[each.key].name
-  user       = digitalocean_database_user.users[each.value.user].name
+  user       = length(each.value.user) == 0 ? digitalocean_database_user.users[each.value.user].name : null
 
   depends_on = [
     digitalocean_database_user.users,
