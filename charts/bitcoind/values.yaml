@@ -3,6 +3,7 @@ bitcoind:
     persistence:
       enabled: true
       size: 500Gi
+      storageClassName: s3-default
 
     p2p:
       enabled: true
