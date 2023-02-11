@@ -4,12 +4,12 @@ dependencies:
   version: 0.1.6
 - name: matrix-synapse
   repository: https://ananace.gitlab.io/charts/
-  version: 2.7.7
+  version: 2.7.9
 - name: element-web
   repository: https://ananace.gitlab.io/charts/
   version: 1.1.29
 - name: matrix-appservice-irc
   repository: file://./vendor/matrix-appservice-irc
   version: 0.1.17
-digest: sha256:82672d4bae07547d2f3e5f115233d78fd63af6b361e145bab98a049a9b23c440
-generated: "2022-11-09T13:02:07.753306504Z"
+digest: sha256:6a0b8ed6f7302f02e282aa49698861d30d5cb8bc927dcbb70af2c2e1255e3f82
+generated: "2023-02-11T17:19:05.405335507Z"
