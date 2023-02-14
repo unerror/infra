@@ -39,3 +39,8 @@ variable "argocd_server" {
 variable "infra_repo" {
   type = string
 }
+
+variable "postgres_version" {
+  type    = string
+  default = "13.9"
+}

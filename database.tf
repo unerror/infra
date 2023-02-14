@@ -1,7 +1,7 @@
 resource "digitalocean_database_cluster" "db-tor1" {
   name       = "db-tor1"
   engine     = "pg"
-  version    = "13"
+  version    = var.postgres_version
   size       = "db-s-1vcpu-1gb"
   region     = var.do_region
   node_count = 1
