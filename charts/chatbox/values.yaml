@@ -217,17 +217,6 @@ matrix-synapse:
       - curl -Lo /tmp/rest-provider.zip https://github.com/devplayer0/matrix-synapse-rest-password-provider/archive/master.zip
       - cd /tmp && unzip rest-provider.zip
       - cd /tmp/matrix-synapse-rest-password-provider-master && python setup.py install
-    livenessProbe:
-      # Give the extra commands a chance to run
-      initialDelaySeconds: 20
-      periodSeconds: 30
-      timeoutSeconds: 5
-      failureThreshold: 5
-    readinessProbe:
-      initialDelaySeconds: 20
-      periodSeconds: 30
-      timeoutSeconds: 5
-      failureThreshold: 5
     annotations:
       prometheus.io/scrape: "true"
       prometheus.io/path: /_synapse/metrics
@@ -256,17 +245,6 @@ matrix-synapse:
         - curl -Lo /tmp/rest-provider.zip https://github.com/devplayer0/matrix-synapse-rest-password-provider/archive/master.zip
         - cd /tmp && unzip rest-provider.zip
         - cd /tmp/matrix-synapse-rest-password-provider-master && python setup.py install
-      livenessProbe:
-        # Give the extra commands a chance to run
-        initialDelaySeconds: 20
-        periodSeconds: 30
-        timeoutSeconds: 5
-        failureThreshold: 5
-      readinessProbe:
-        initialDelaySeconds: 20
-        periodSeconds: 30
-        timeoutSeconds: 5
-        failureThreshold: 5
       extraEnv:
         - name: LD_PRELOAD
           value: /usr/lib/x86_64-linux-gnu/libjemalloc.so.2
