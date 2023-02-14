@@ -260,12 +260,12 @@ matrix-synapse:
         # Give the extra commands a chance to run
         initialDelaySeconds: 20
         periodSeconds: 30
-        timeoutSeconds: 5s
+        timeoutSeconds: 5
         failureThreshold: 5
       readinessProbe:
         initialDelaySeconds: 20
         periodSeconds: 30
-        timeoutSeconds: 5s
+        timeoutSeconds: 5
         failureThreshold: 5
       extraEnv:
         - name: LD_PRELOAD
