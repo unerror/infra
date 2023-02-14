@@ -88,7 +88,7 @@ matrix-synapse:
     username: matrix
     database: homeserver_synapse
     sslmode: require
-    host: private-db-tor1-do-user-133480-0.b.db.ondigitalocean.com
+    host: private-k8s-tor-do-user-133480-0.b.db.ondigitalocean.com
     extraArgs:
       cp_max: 10
       cp_min: 5
