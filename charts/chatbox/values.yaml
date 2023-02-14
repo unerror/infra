@@ -219,7 +219,15 @@ matrix-synapse:
       - cd /tmp/matrix-synapse-rest-password-provider-master && python setup.py install
     livenessProbe:
       # Give the extra commands a chance to run
-      initialDelaySeconds: 30
+      initialDelaySeconds: 20
+      periodSeconds: 30
+      timeoutSeconds: 5s
+      failureThreshold: 5
+    readinessProbe:
+      initialDelaySeconds: 20
+      periodSeconds: 30
+      timeoutSeconds: 5s
+      failureThreshold: 5
     annotations:
       prometheus.io/scrape: "true"
       prometheus.io/path: /_synapse/metrics
@@ -250,7 +258,15 @@ matrix-synapse:
         - cd /tmp/matrix-synapse-rest-password-provider-master && python setup.py install
       livenessProbe:
         # Give the extra commands a chance to run
-        initialDelaySeconds: 30
+        initialDelaySeconds: 20
+        periodSeconds: 30
+        timeoutSeconds: 5s
+        failureThreshold: 5
+      readinessProbe:
+        initialDelaySeconds: 20
+        periodSeconds: 30
+        timeoutSeconds: 5s
+        failureThreshold: 5
       extraEnv:
         - name: LD_PRELOAD
           value: /usr/lib/x86_64-linux-gnu/libjemalloc.so.2
