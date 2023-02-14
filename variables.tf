@@ -42,5 +42,5 @@ variable "infra_repo" {
 
 variable "postgres_version" {
   type    = string
-  default = "13"
+  default = "13.9"
 }
