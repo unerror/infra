@@ -196,14 +196,14 @@ resource "argocd_application" "base" {
     }
 
     sync_policy {
-      automated = {
+      automated {
         allow_empty = false
         prune       = true
         self_heal   = true
       }
 
       retry {
-        backoff = {
+        backoff {
           duration     = ""
           max_duration = ""
         }
@@ -250,14 +250,14 @@ resource "argocd_application" "certs" {
     }
 
     sync_policy {
-      automated = {
+      automated {
         allow_empty = false
         prune       = true
         self_heal   = true
       }
 
       retry {
-        backoff = {
+        backoff {
           duration     = ""
           max_duration = ""
         }
@@ -304,14 +304,14 @@ resource "argocd_application" "csi-s3" {
     }
 
     sync_policy {
-      automated = {
+      automated {
         allow_empty = false
         prune       = true
         self_heal   = true
       }
 
       retry {
-        backoff = {
+        backoff {
           duration     = ""
           max_duration = ""
         }
