@@ -65,14 +65,14 @@ resource "argocd_application" "argocd" {
     }
 
     sync_policy {
-      automated = {
+      automated {
         allow_empty = false
         prune       = true
         self_heal   = true
       }
 
       retry {
-        backoff = {
+        backoff {
           duration     = ""
           max_duration = ""
         }

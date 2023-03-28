@@ -23,14 +23,14 @@ resource "argocd_application" "chatbox" {
     }
 
     sync_policy {
-      automated = {
+      automated {
         allow_empty = false
         prune       = true
         self_heal   = true
       }
 
       retry {
-        backoff = {
+        backoff {
           duration     = ""
           max_duration = ""
         }
@@ -76,14 +76,14 @@ resource "argocd_application" "vaultwarden" {
     }
 
     sync_policy {
-      automated = {
+      automated {
         allow_empty = false
         prune       = true
         self_heal   = true
       }
 
       retry {
-        backoff = {
+        backoff {
           duration     = ""
           max_duration = ""
         }
