@@ -17,11 +17,10 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{secrets.SOPS_AGE_KEY}}" > ./keyfile.age
       - name: Tailscale
-        uses: enmand/tailscale-github-action@bda1d0f886708f8f86bc489d6138e6963551f887
+        uses: tailscale/github-action@main
         with:
           authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
-            #tailscaled_args: "--socket=/tmp/tailscaled.sock"
-            #tailscale_args: "--socket=/tmp/tailscaled.sock"
+          version: "1.38.2"
           args: "--netfilter-mode=on --snat-subnet-routes=true"
       - name: Setup Node environment
         uses: actions/setup-node@v3
