@@ -4,9 +4,9 @@ annotations:
   artifacthub.io/containsSecurityUpdates: "false"
   artifacthub.io/images: |
     - name: matrix-appservice-irc
-      image: matrixdotorg/matrix-appservice-irc:release-0.37.1
+      image: matrixdotorg/matrix-appservice-irc:release-0.31.0
 apiVersion: v2
-appVersion: 0.37.1
+appVersion: 0.34.0
 description: Matrix <--> IRC Bridge
 home: https://github.com/matrix-org/matrix-appservice-irc
 keywords:
@@ -23,4 +23,4 @@ sources:
   - https://github.com/matrix-org/matrix-appservice-irc
   - https://hub.docker.com/r/matrixdotorg/matrix-appservice-irc
 type: application
-version: 0.1.18
+version: 0.1.17
