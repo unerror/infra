@@ -470,6 +470,11 @@ matrix-appservice-irc:
       media_url: https://matrix.unerror.com
       url: https://matrix.unerror.com
     ircService:
+      ident:
+        enabled: true
+      provisioning:
+        enabled: true
+        widget: true
       bridgeInfoState:
         enabled: true
         initial: true
