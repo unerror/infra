@@ -462,7 +462,7 @@ matrix-appservice-irc:
           regex: '@irc_.*:unerror\.com'
     rate_limited: false
     sender_localpart: irc_bot
-    url: http://chatbox-matrix-appservice-irc:9999
+    url: http://chatbox-matrix-appservice-irc:8090
   config:
     homeserver:
       domain: unerror.com

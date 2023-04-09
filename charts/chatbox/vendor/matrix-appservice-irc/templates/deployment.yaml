@@ -76,7 +76,7 @@ spec:
           {{- end }}
           ports:
             - name: http
-              containerPort: 9999
+              containerPort: 8090
               protocol: TCP
 {{- if and (.Values.registration.as_token) (gt (len .Values.registration.as_token) 0) }}
           livenessProbe:
@@ -105,7 +105,7 @@ spec:
             - sh
             - -c
             - |
-              node /app/app.js -r -f /data/appservice-registration-irc.yaml -u "http://{{ include "matrix-appservice-irc.fullname" . }}:9999" -c /config/config.yaml -l "{{ .Values.registration.sender_localpart }}" && \
+              node /app/app.js -r -f /data/appservice-registration-irc.yaml -u "http://{{ include "matrix-appservice-irc.fullname" . }}:8090" -c /config/config.yaml -l "{{ .Values.registration.sender_localpart }}" && \
               cat /data/appservice-registration-irc.yaml && \
               sleep 99d
 {{- end }}

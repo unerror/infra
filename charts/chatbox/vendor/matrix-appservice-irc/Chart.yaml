@@ -23,4 +23,4 @@ sources:
   - https://github.com/matrix-org/matrix-appservice-irc
   - https://hub.docker.com/r/matrixdotorg/matrix-appservice-irc
 type: application
-version: 0.1.18
+version: 0.1.19
