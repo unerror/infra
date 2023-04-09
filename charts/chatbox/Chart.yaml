@@ -17,4 +17,4 @@ dependencies:
     version: 1.1.43
   - name: matrix-appservice-irc
     repository: file://./vendor/matrix-appservice-irc
-    version: 0.1.17
+    version: 0.1.18
