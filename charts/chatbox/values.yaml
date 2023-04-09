@@ -546,6 +546,7 @@ matrix-appservice-irc:
                   initial: true
                 room: "!CndlWZukCBAXQKSTgg:unerror.com"
           modePowerMap:
+            a: 100
             o: 50
             v: 1
           name: Unerror IRC
