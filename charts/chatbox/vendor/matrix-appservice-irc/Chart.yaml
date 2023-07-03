@@ -6,7 +6,7 @@ annotations:
     - name: matrix-appservice-irc
       image: matrixdotorg/matrix-appservice-irc:release-0.37.1
 apiVersion: v2
-appVersion: 0.37.1
+appVersion: 1.0.0
 description: Matrix <--> IRC Bridge
 home: https://github.com/matrix-org/matrix-appservice-irc
 keywords:
@@ -23,4 +23,4 @@ sources:
   - https://github.com/matrix-org/matrix-appservice-irc
   - https://hub.docker.com/r/matrixdotorg/matrix-appservice-irc
 type: application
-version: 0.1.19
+version: 0.2.0
