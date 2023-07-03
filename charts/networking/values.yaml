@@ -78,7 +78,7 @@ traefik:
           - name: USER_SPACE
             value: "false"
           - name: EXTRA_ARGS
-            value: "--advertise-tags=tag:une-k8s --snat-subnet-routes=true --netfilter-mode=on"
+            value: "--hostname=une-k8s-traefik --advertise-tags=tag:une-k8s --snat-subnet-routes=true --netfilter-mode=on"
           - name: AUTH_KEY
             valueFrom:
               secretKeyRef:
