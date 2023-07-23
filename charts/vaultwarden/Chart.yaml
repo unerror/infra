@@ -3,7 +3,7 @@ name: vaultwarden
 description: A Helm chart for Kubernetes
 ype: application
 version: 0.1.0
-appVersion: "1.25.2"
+appVersion: "1.29.0"
 
 dependencies:
   - name: vaultwarden
