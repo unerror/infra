@@ -63,6 +63,7 @@ traefik:
   securityContext:
     runAsUser: 0
     runAsNonRoot: false
+    allowPrivilegeEscalation: true
     privileged: true
   deployment:
     replicas: 3
