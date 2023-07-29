@@ -43,8 +43,12 @@ jobs:
       - name: Terraform Plan
         id: plan
         if: github.event_name == 'pull_request'
-        run: terraform plan -no-color -var-file=prod.tfvars
-        continue-on-error: true
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 2
+          retry_wait_seconds: 20
+          max_attempts: 3
+          command: terraform plan -no-color -var-file=prod.tfvars
         env:
           SOPS_AGE_KEY_FILE: ./keyfile.age
           SOPS_AGE_RECIPIENTS: ${{secrets.SOPS_AGE_RECIPIENTS}}
@@ -82,7 +86,12 @@ jobs:
         run: exit 1
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -auto-approve -var-file=prod.tfvars
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 2
+          retry_wait_seconds: 20
+          max_attempts: 3
+          command: terraform apply -auto-approve -var-file=prod.tfvars
         env:
           SOPS_AGE_KEY_FILE: ./keyfile.age
           SOPS_AGE_RECIPIENTS: ${{secrets.SOPS_AGE_RECIPIENTS}}
