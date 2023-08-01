@@ -46,8 +46,8 @@ jobs:
         uses: nick-fields/retry@v2
         with:
           timeout_minutes: 2
-          retry_wait_seconds: 20
-          max_attempts: 3
+          retry_wait_seconds: 10
+          max_attempts: 10
           command: terraform plan -no-color -var-file=prod.tfvars
         env:
           SOPS_AGE_KEY_FILE: ./keyfile.age
