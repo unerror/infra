@@ -14,4 +14,4 @@ dependencies:
     version: 6.13.1
   - name: metrics-server
     repository: https://kubernetes-sigs.github.io/metrics-server
-    version: 3.10.0
+    version: 3.11.0
