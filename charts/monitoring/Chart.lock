@@ -1,12 +1,12 @@
 dependencies:
 - name: kube-prometheus-stack
   repository: https://prometheus-community.github.io/helm-charts
-  version: 48.3.1
+  version: 48.3.2
 - name: promtail
   repository: https://grafana.github.io/helm-charts
   version: 6.14.1
 - name: metrics-server
   repository: https://kubernetes-sigs.github.io/metrics-server
   version: 3.11.0
-digest: sha256:986e1d5337b8ff4d360768e8db492b32de3db393af07474d87b2410ae133f15b
-generated: "2023-08-05T01:39:22.585109961Z"
+digest: sha256:8672cfff4397b48421d6af114c2b70ab73ab9e0c2c8487f84a3e055adfa3fc2b
+generated: "2023-08-21T15:01:42.616756002Z"
