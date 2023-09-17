@@ -2,7 +2,7 @@
 # Use of this source code is governed by a BSD-style
 # license that can be found in the LICENSE file.
 
-ARG TAILSCALE_VERSION="v1.44.0"
+ARG TAILSCALE_VERSION="v1.48.2"
 FROM ghcr.io/tailscale/tailscale:${TAILSCALE_VERSION}
 COPY run.sh /run.sh
 RUN chmod a+x /run.sh
