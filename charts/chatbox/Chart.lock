@@ -5,11 +5,14 @@ dependencies:
 - name: matrix-synapse
   repository: https://ananace.gitlab.io/charts/
   version: 3.7.0
+- name: sliding-sync-proxy
+  repository: https://ananace.gitlab.io/charts/
+  version: 0.2.4
 - name: element-web
   repository: https://ananace.gitlab.io/charts/
   version: 1.2.10
 - name: matrix-appservice-irc
   repository: file://./vendor/matrix-appservice-irc
   version: 0.2.0
-digest: sha256:1589ea840682ff8b889b23aaec6c518899fed9247b4607d619ffe9d6ba949a0a
-generated: "2023-08-17T19:02:52.55803193Z"
+digest: sha256:a2db25c0f63ae93f0dd135544d9e3939f2eb43dec208c5a85b7522c670202f18
+generated: "2023-09-21T19:46:10.982085-03:00"
