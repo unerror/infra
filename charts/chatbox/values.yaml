@@ -70,6 +70,31 @@ tls:
     kind: ClusterIssuer
     group: cert-manager.io
 
+sliding-sync-proxy:
+  matrixServer: "https://matrix.unerror.com"
+  postgresql:
+    enabled: false
+  externalPostgresql:
+    host: private-db-tor1-do-user-133480-0.b.db.ondigitalocean.com
+    sslmode: require
+    database: sliding_sync_proxy
+    username: matrix
+    port: 25061
+  ingress:
+    enabled: true
+    serveSimpleClient: false
+    className: networking-traefik
+    annotations:
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      traefik.ingress.kubernetes.io/router.tls: "true"
+      traefik.ingress.kubernetes.io/router.tls.options: default
+    hosts:
+      - matrix-x.unerror.com
+    tls:
+      - secretName: sliding-sync-proxy-tls
+        hosts:
+          - matrix-x.unerror.com
+
 matrix-synapse:
   serverName: unerror.com
   publicServerName: matrix.unerror.com
@@ -150,6 +175,8 @@ matrix-synapse:
     client:
       m.homeserver:
         base_url: "https://matrix.unerror.com"
+      org.matrix.msc3575.proxy:
+        url: "https://matrix-x.unerror.com"
   extraConfig:
     app_service_config_files:
       - /appservice-irc-registration.yaml
