@@ -79,7 +79,7 @@ sliding-sync-proxy:
     sslmode: require
     database: sliding_sync_proxy
     username: matrix
-    port: 25061
+    port: "25061"
   ingress:
     enabled: true
     serveSimpleClient: false
@@ -109,7 +109,7 @@ matrix-synapse:
   postgresql:
     enabled: false
   externalPostgresql:
-    port: "25061"
+    port: 25061
     username: matrix
     database: homeserver_synapse
     sslmode: require
