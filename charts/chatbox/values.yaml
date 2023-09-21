@@ -109,7 +109,7 @@ matrix-synapse:
   postgresql:
     enabled: false
   externalPostgresql:
-    port: 25061
+    port: "25061"
     username: matrix
     database: homeserver_synapse
     sslmode: require
