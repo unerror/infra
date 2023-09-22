@@ -74,7 +74,10 @@ sliding-sync-proxy:
   matrixServer: "https://matrix.unerror.com"
   postgresql:
     enabled: false
-  # externalPostgresql is defined as extraEnv in secrets
+  externalPostgresql:
+    # externalPostgresql is defined as extraEnv in secrets
+    host: fake
+    password: fake
   ingress:
     enabled: true
     serveSimpleClient: false
