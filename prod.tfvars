@@ -10,6 +10,7 @@ database_dbs = {
   sliding_sync_proxy = {
     pool_size = 2
     user      = "matrix"
+    mode      = "session"
   }
 
   matrix_appservice_irc = {
