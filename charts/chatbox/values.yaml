@@ -74,12 +74,7 @@ sliding-sync-proxy:
   matrixServer: "https://matrix.unerror.com"
   postgresql:
     enabled: false
-  externalPostgresql:
-    host: private-db-tor1-do-user-133480-0.b.db.ondigitalocean.com
-    sslmode: require
-    database: sliding_sync_proxy
-    username: matrix
-    port: 25061
+  # externalPostgresql is defined as extraEnv in secrets
   ingress:
     enabled: true
     serveSimpleClient: false
