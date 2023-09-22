@@ -79,7 +79,7 @@ sliding-sync-proxy:
     sslmode: require
     database: sliding_sync_proxy
     username: matrix
-    port: "25061"
+    port: 25061
   ingress:
     enabled: true
     serveSimpleClient: false
