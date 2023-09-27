@@ -1,9 +1,9 @@
 dependencies:
 - name: cert-manager
   repository: https://charts.jetstack.io
-  version: v1.13.0
+  version: v1.13.1
 - name: external-dns
   repository: https://charts.bitnami.com/bitnami
   version: 6.26.1
-digest: sha256:ef2a70e317b01a6ed1c3b735fcf6fc5c0ab52d6d5530397bf75dd758bccc7a3c
-generated: "2023-09-22T14:03:27.28034368Z"
+digest: sha256:318c81b7f2b1f187d0a09abcb20876a31a1cb833c544355203a96d9aa89590f7
+generated: "2023-09-27T09:17:52.03029479Z"
