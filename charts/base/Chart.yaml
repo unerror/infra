@@ -10,5 +10,5 @@ dependencies:
     version: v1.13.1
     repository: https://charts.jetstack.io
   - name: external-dns
-    version: 6.26.2
+    version: 6.26.3
     repository: https://charts.bitnami.com/bitnami
