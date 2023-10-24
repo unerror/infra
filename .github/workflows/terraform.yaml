@@ -24,7 +24,7 @@ jobs:
           tags: tag:une-k8s
           args: "--netfilter-mode=on --snat-subnet-routes=true"
       - name: Setup Node environment
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 16
       - name: Setup Terraform
