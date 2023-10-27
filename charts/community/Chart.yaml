@@ -1,0 +1,11 @@
+apiVersion: v2
+name: community
+description: Unerror Community
+type: application
+version: 0.1.0
+appVersion: latest
+
+dependencies:
+  - name: discourse
+    version: 3.1.2
+    repository: https://registry-1.docker.io/bitnamicharts

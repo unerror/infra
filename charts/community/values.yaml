@@ -1,0 +1,34 @@
+discourse:
+  auth:
+    email: community@unerror.network
+    username: Unerror
+  host: forums.unerror.network
+  hostAliases: 
+    - forums.unerror.com
+    - forum.unerror.com
+    - forum.unerror.network
+  siteName: Unerror Community
+  smtp:
+    enabled: true
+    host: smtp.sendgrid.net
+    port: 587
+    protocol: tls
+  postgresql:
+    enabled: false
+  externalDatabase:
+    host: private-db-tor1-do-user-133480-0.b.db.ondigitalocean.com
+    database: discourse
+    create: false
+  ingress:
+    enabled: true
+    ingressClassName: networking-traefik
+    annotations:
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      traefik.ingress.kubernetes.io/router.tls: "true"
+      traefik.ingress.kubernetes.io/router.tls.options: default
+    hostname: forums.unerror.network
+    tls: true
+    extraHosts:
+      - forums.unerror.com
+      - forum.unerror.network
+      - forum.unerror.com
