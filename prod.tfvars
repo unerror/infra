@@ -1,6 +1,6 @@
 do_region = "tor1"
 
-database_users = ["homeassistant", "matrix", "vaultwarden"]
+database_users = ["homeassistant", "matrix", "vaultwarden", "discourse"]
 database_dbs = {
   homeserver_synapse = {
     pool_size = 2
@@ -43,6 +43,11 @@ database_dbs = {
     pool_size = 2
     mode      = "session"
     user      = "vaultwarden"
+  }
+
+  discourse = {
+    pool_size = 2
+    user      = "discourse"
   }
 }
 
