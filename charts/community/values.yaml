@@ -12,6 +12,8 @@ discourse:
   persistence:
     enabled: true
     storageClass: s3-default
+    accessModes:
+      - ReadWriteMany
   postgresql:
     enabled: false
   externalDatabase:
