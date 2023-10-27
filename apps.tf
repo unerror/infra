@@ -128,14 +128,6 @@ resource "argocd_application" "community" {
         prune       = true
         self_heal   = true
       }
-
-      retry {
-        backoff {
-          duration     = ""
-          max_duration = ""
-        }
-        limit = "0"
-      }
     }
 
     destination {
