@@ -633,3 +633,39 @@ matrix-appservice-irc:
           sendConnectionMessages: true
     database:
       engine: "postgres"
+
+matrix-meetings-widget:
+  env:
+    - name: REACT_APP_BOT_USER_ID
+      value: '@meetings-bot:unerror.com'
+    - name: REACT_APP_DISPLAY_ALL_MEETINGS
+      value: 'true'
+
+matrix-meetings-bot:
+  settings:
+    additionalEnv:
+      - name: HOMESERVER_URL
+        value: 'https://unerror.com'
+      - name: MATRIX_LINK_SHARE
+        value: 'https://unerror.com/#/'
+      - name: BOT_DISPLAYNAME
+        value: 'NeoDateFix Bot${PR_SUFFIX}'
+      - name: CALENDAR_ROOM_NAME
+        value: 'NeoDateFix${PR_SUFFIX}'
+      - name: LOG_LEVEL
+        value: 'info'
+      - name: AUTO_DELETION_OFFSET
+        value: '60'
+
+# Controls for the state that is shared with users who receive an invite
+# to a room
+room_prejoin_state:
+  # Additional state event types to share with users when they are invited
+  # to a room.
+  #
+  # By default, this list is empty (so only the default event types are shared).
+  #
+  additional_event_types:
+    - m.space.parent
+    - net.nordeck.meetings.metadata
+    - m.room.power_levels
