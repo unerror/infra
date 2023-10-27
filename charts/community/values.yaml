@@ -11,7 +11,6 @@ discourse:
     protocol: tls
   persistence:
     enabled: true
-    storageClass: s3-default
     accessModes:
       - ReadWriteMany
   postgresql:
