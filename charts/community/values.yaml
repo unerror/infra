@@ -12,6 +12,9 @@ discourse:
   discourse:
     readinessProbe:
       enabled: false
+  sidekiq:
+    readinessProbe:
+      enabled: false
   persistence:
     enabled: true
   postgresql:
