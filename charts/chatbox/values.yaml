@@ -37,7 +37,7 @@ irc:
     size: 1Gi
     accessModes:
       - ReadWriteMany
-    storageClass: csi-s3
+    storageClass: s3-default
   server:
     tls:
       enabled: true

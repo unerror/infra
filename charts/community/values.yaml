@@ -11,7 +11,7 @@ discourse:
     protocol: tls
   persistence:
     enabled: true
-    storageClass: csi-s3
+    storageClass: s3-default
   postgresql:
     enabled: false
   externalDatabase:
