@@ -20,7 +20,7 @@ discourse:
     host: private-db-tor1-do-user-133480-0.b.db.ondigitalocean.com
     database: discourse
     port: 25061
-    create: false
+    create: true
   ingress:
     enabled: true
     ingressClassName: networking-traefik
