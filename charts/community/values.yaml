@@ -10,7 +10,8 @@ discourse:
     port: 587
     protocol: tls
   discourse:
-    readinessProbe: false
+    readinessProbe:
+      enabled: false
   persistence:
     enabled: true
   postgresql:
