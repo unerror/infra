@@ -9,6 +9,9 @@ discourse:
     host: smtp.sendgrid.net
     port: 587
     protocol: tls
+  persistence:
+    enabled: true
+    storageClass: csi-s3
   postgresql:
     enabled: false
   externalDatabase:
