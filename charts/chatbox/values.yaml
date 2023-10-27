@@ -205,7 +205,7 @@ matrix-synapse:
       notif_from: Unerror Network Matrix <chatbox@unerror.com>
       require_transport_security: true
       smtp_host: smtp.sendgrid.net
-      smtp_port: 465
+      smtp_port: 587
       enable_tls: true
     url_preview_enabled: true
     url_preview_ip_range_blacklist:
