@@ -21,5 +21,7 @@ dependencies:
   - name: matrix-appservice-irc
     repository: file://./vendor/matrix-appservice-irc
     version: 0.2.0
-  - name: matrix-meetings
-    repository: file://../matrix-meetings/charts/matrix-meetings
+  - name: matrix-meetings-bot
+    repository: https://github.com/nordeck/matrix-meetings/charts/matrix-meetings-bot/
+  - name: matrix-meetings-widget
+    repository: https://github.com/nordeck/matrix-meetings/charts/matrix-meetings-widget/
