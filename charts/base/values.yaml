@@ -20,3 +20,41 @@ external-dns:
     - crd
     - ingress
     - service
+casdoor:
+  dataSourceName:
+  config: |
+    appname = unerror-auth
+    httpport = 8000
+    runmode = prod
+    SessionOn = true
+    copyrequestbody = true
+    driverName = postgres
+    dataSourceName = {{ .Values.casdoor.dataSourceName }}
+    dbName = casdoor
+    redisEndpoint =
+    defaultStorageProvider =
+    isCloudIntranet = false
+    authState = "uneauth"
+    socks5Proxy = ""
+    verificationCodeTimeout = 10
+    initScore = 0
+    logPostOnly = true
+    origin = auth.unerror.network
+    enableGzip = true
+  ingress:
+    enabled: true
+    className: networking-traefik
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      traefik.ingress.kubernetes.io/router.tls: "true"
+      traefik.ingress.kubernetes.io/router.tls.options: default
+    hosts:
+      - host: auth.unerror.network
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+    tls:
+      - hosts:
+        - auth.unerror.network
+        secretName: casdoor-ingress-tls
