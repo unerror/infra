@@ -12,3 +12,6 @@ dependencies:
   - name: external-dns
     version: 6.27.0
     repository: https://charts.bitnami.com/bitnami
+  - name: casdoor
+    repository: file://./vendor/casdoor/manifests/casdoor
+    version: 0.1.0
