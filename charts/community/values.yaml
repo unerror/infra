@@ -1,4 +1,6 @@
 discourse:
+  image:
+    debug: true
   auth:
     email: community@unerror.network
     username: Unerror
