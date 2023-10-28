@@ -21,6 +21,8 @@ discourse:
       enabled: false
   persistence:
     enabled: true
+    accessModes:
+      - ReadWriteMany
   postgresql:
     enabled: false
   externalDatabase:
