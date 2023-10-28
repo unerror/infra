@@ -13,12 +13,6 @@ discourse:
     host: smtp.sendgrid.net
     port: 587
     protocol: tls
-  discourse:
-    readinessProbe:
-      enabled: false
-  sidekiq:
-    readinessProbe:
-      enabled: false
   persistence:
     enabled: true
     accessModes:
