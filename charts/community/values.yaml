@@ -3,6 +3,8 @@ discourse:
     email: community@unerror.network
     username: Unerror
   host: forums.unerror.network
+  discourse:
+    host: forums.unerror.network
   siteName: Unerror Community
   smtp:
     enabled: true
