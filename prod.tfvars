@@ -8,7 +8,7 @@ database_dbs = {
   }
 
   sliding_sync_proxy = {
-    pool_size = 2
+    pool_size = 1
     user      = "matrix"
     mode      = "session"
   }
@@ -19,7 +19,7 @@ database_dbs = {
   }
 
   matrix_dimension = {
-    pool_size = 2
+    pool_size = 1
     user      = "matrix"
   }
 
@@ -29,13 +29,13 @@ database_dbs = {
   }
 
   matrix_mautrix_hangouts = {
-    pool_size = 2
+    pool_size = 1
     mode      = "session"
     user      = "matrix"
   }
 
   matrix_reminder_bot = {
-    pool_size = 2
+    pool_size = 1
     user      = "matrix"
   }
 
@@ -48,6 +48,11 @@ database_dbs = {
   discourse = {
     pool_size = 2
     user      = "discourse"
+  }
+
+  casdoor = {
+    pool_size = 2
+    user      = "casdoor"
   }
 }
 
