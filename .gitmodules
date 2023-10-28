@@ -1,0 +1,3 @@
+[submodule "charts/base/vendor/casdoor"]
+	path = charts/base/vendor/casdoor
+	url = https://github.com/casdoor/casdoor
