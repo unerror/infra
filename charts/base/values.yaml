@@ -20,8 +20,8 @@ external-dns:
     - crd
     - ingress
     - service
+casdoorDataSourceName: ""
 casdoor:
-  dataSourceName:
   config: |
     appname = unerror-auth
     httpport = 8000
@@ -29,7 +29,7 @@ casdoor:
     SessionOn = true
     copyrequestbody = true
     driverName = postgres
-    dataSourceName = {{ .Values.casdoor.dataSourceName }}
+    dataSourceName = {{ .Values.casdoorDataSourceName }}
     dbName = casdoor
     redisEndpoint =
     defaultStorageProvider =
