@@ -176,6 +176,18 @@ matrix-synapse:
       org.matrix.msc3575.proxy:
         url: "https://matrix-x.unerror.com"
   extraConfig:
+    oidc_providers:
+    - idp_id: "oidc"
+      idp_name: "Unerror Auth"
+      issuer: "https://auth.unerror.network/"
+      client_id: "569033edde20009501ab"
+      client_secret: "f87809d9060c00cf995e888e5966f611d4ee2fcf"
+      scopes: ["openid", "profile"]
+      allow_existing_users: true
+      user_mapping_provider:
+        config:
+          localpart_template: "{{ user.preferred_username }}"
+          confirm_localpart: true
     app_service_config_files:
       - /appservice-irc-registration.yaml
     max_upload_size: 128M
