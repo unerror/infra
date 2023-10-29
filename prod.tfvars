@@ -52,6 +52,7 @@ database_dbs = {
 
   casdoor = {
     pool_size = 2
+    mode      = "session"
     user      = "casdoor"
   }
 }
