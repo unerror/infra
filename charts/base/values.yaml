@@ -22,6 +22,8 @@ external-dns:
     - service
 casdoorDataSourceName: ""
 casdoor:
+  image:
+    tag: v1.444.0
   config: |
     appname = unerror-auth
     httpport = 8000
