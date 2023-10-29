@@ -24,25 +24,6 @@ casdoorDataSourceName: ""
 casdoor:
   image:
     tag: v1.444.0
-  config: |
-    appname = unerror-auth
-    httpport = 8000
-    runmode = prod
-    SessionOn = true
-    copyrequestbody = true
-    driverName = postgres
-    dataSourceName = {{ .Values.casdoorDataSourceName }}
-    dbName = casdoor
-    redisEndpoint =
-    defaultStorageProvider =
-    isCloudIntranet = false
-    authState = "uneauth"
-    socks5Proxy = ""
-    verificationCodeTimeout = 10
-    initScore = 0
-    logPostOnly = true
-    origin = auth.unerror.network
-    enableGzip = true
   ingress:
     enabled: true
     className: networking-traefik
