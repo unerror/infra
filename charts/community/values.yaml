@@ -6,6 +6,8 @@ discourse:
     username: Unerror
   host: forums.unerror.network
   discourse:
+    readinessProbe:
+      enabled: false
     host: forums.unerror.network
     plugins:
       - https://github.com/discourse/discourse-chat-integration
