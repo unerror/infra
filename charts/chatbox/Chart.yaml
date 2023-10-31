@@ -11,7 +11,7 @@ dependencies:
     repository: file://./vendor/ma1sd/
   - name: matrix-synapse
     repository: https://ananace.gitlab.io/charts/
-    version: 3.7.9
+    version: 3.7.10
   - name: sliding-sync-proxy
     repository: https://ananace.gitlab.io/charts/
     version: 0.2.5
