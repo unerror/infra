@@ -28,6 +28,9 @@ discourse:
     enabled: true
   postgresql:
     enabled: false
+  redis:
+    auth:
+      username: discourse
   externalDatabase:
     host: private-db-tor1-do-user-133480-0.b.db.ondigitalocean.com
     database: discourse
