@@ -23,7 +23,7 @@ external-dns:
 casdoorDataSourceName: ""
 casdoor:
   image:
-    tag: v1.446.1
+    tag: v1.446.0
   ingress:
     enabled: true
     className: networking-traefik
