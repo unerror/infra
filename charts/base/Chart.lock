@@ -1,12 +1,12 @@
 dependencies:
 - name: cert-manager
   repository: https://charts.jetstack.io
-  version: v1.13.1
+  version: v1.13.2
 - name: external-dns
   repository: https://charts.bitnami.com/bitnami
-  version: 6.27.0
+  version: 6.28.0
 - name: casdoor
   repository: file://./vendor/casdoor/manifests/casdoor
   version: 0.1.0
-digest: sha256:e7ef453f20c6f05a0836a7a4325f1c052faf5852dd189a405ffd357537d0207e
-generated: "2023-10-28T20:14:21.851804-03:00"
+digest: sha256:2bdc268a9ce940774def31e6a3a2c6f39aae6ad7da43ee680cf7464029b80832
+generated: "2023-11-01T17:39:15.285765-03:00"
