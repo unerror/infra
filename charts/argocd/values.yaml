@@ -55,6 +55,7 @@ argo-cd:
       policy.default: role:readonly
       policy.csv: |
         g, unerror:unerror-team, role:admin
+      g, enmand@gmail.com, role:admin
         g, terraform, role:admin
     config:
       url: https://argo.i.unerror.network
