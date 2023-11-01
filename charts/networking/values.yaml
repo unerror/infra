@@ -137,7 +137,8 @@ traefik:
     web:
       name: web
       nodePort: 32080
-      redirectTo: websecure
+      redirectTo:
+        port: websecure
     websecure:
       name: websecure
       nodePort: 32443
