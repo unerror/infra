@@ -4,7 +4,7 @@ dependencies:
   version: 0.1.6
 - name: matrix-synapse
   repository: https://ananace.gitlab.io/charts/
-  version: 3.7.10
+  version: 3.7.12
 - name: sliding-sync-proxy
   repository: https://ananace.gitlab.io/charts/
   version: 0.2.5
@@ -14,5 +14,5 @@ dependencies:
 - name: matrix-appservice-irc
   repository: file://./vendor/matrix-appservice-irc
   version: 0.2.0
-digest: sha256:d5d5f09183ce5f9ee6db7906d55e482a7bcc6ee5f15648d6c1abf0d7bfe03cc7
-generated: "2023-11-13T15:50:12.999393527Z"
+digest: sha256:07ea23d6780580b3fc4ddb257904c5b7591bb9a5ca6d7509201f2f25be650fcf
+generated: "2023-11-17T15:13:38.724320388Z"
