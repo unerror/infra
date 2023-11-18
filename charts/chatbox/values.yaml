@@ -642,10 +642,20 @@ matrix-meetings-widget:
       value: 'true'
 
 matrix-meetings-bot:
+  ingress:
+    enabled: true
+    annotations:
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      traefik.ingress.kubernetes.io/router.tls: "true"
+      traefik.ingress.kubernetes.io/router.tls.options: default
+    hosts:
+      - meetingsbot.matrix.unerror.network
+    tls:
+      - secretName: chatbox-crt-secret
   settings:
     additionalEnv:
       - name: HOMESERVER_URL
-        value: 'https://unerror.com'
+        value: 'https://meetingsbot.matrix.unerror.com'
       - name: MATRIX_LINK_SHARE
         value: 'https://unerror.com/#/'
       - name: BOT_DISPLAYNAME
