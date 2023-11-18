@@ -54,8 +54,7 @@ argo-cd:
     rbacConfig:
       policy.default: role:readonly
       policy.csv: |
-        g, org_unerror:staff, role:admin
-        g, enmand, role:admin
+        g, org_unerror/staff, role:admin
         g, terraform, role:admin
     config:
       url: https://argo.i.unerror.network
