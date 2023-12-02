@@ -1,8 +1,9 @@
 datadog-operator:
-  apiKey: ""
+  apiKey: "s"
 datadog:
   apiSecret:
-    secretName: monitoring-datadog-operator-apikey
+    operatorSecretName: monitoring-datadog-operator-apikey
+    secretName: datadog-secret
   logs:
     enabled: true
     containerCollectAll: true

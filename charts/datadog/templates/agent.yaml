@@ -6,7 +6,7 @@ spec:
   global:
     credentials:
       apiSecret:
-        secretName: {{ .Values.datadog.apiSecret.secretName }}
+        secretName: {{ .Values.datadog.apiSecret.operatorSecretName }}
         keyName: api-key
   features:
     logCollection:
