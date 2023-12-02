@@ -17,3 +17,6 @@ datadog:
     enabled: true
   networkMonitoring:
     enabled: true
+  clusterName: une-k8s
+  tags:
+    - env:none
