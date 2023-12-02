@@ -1,0 +1,20 @@
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiSecret:
+        secretName: {{ .Values.datadog.apiSecret.secretName }}
+        keyName: api-key
+  features:
+    logCollection:
+      enabled: {{ .Values.datadog.logs.enabled }}
+      containerCollectAll: {{ .Values.datadog.logs.containerCollectAll }}
+    cws:
+      enabled: {{ .Values.datadog.securityAgent.enabled }}
+    usm:
+      enabled: {{ .Values.datadog.serviceMonitoring.enabled }}
+    npm:
+      enabled: {{ .Values.datadog.networkMonitoring.enabled }}
