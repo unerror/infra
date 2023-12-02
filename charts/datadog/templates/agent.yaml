@@ -8,6 +8,9 @@ spec:
       apiSecret:
         secretName: {{ .Values.datadog.apiSecret.operatorSecretName }}
         keyName: api-key
+      appSecret:
+        secretName: {{ .Values.datadog.appSecret.operatorSecretName }}
+        keyName: app-key
   features:
     logCollection:
       enabled: {{ .Values.datadog.logs.enabled }}

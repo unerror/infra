@@ -1,8 +1,12 @@
 datadog-operator:
-  apiKey: "s"
+  apiKey: ""
+  appKey: ""
 datadog:
   apiSecret:
     operatorSecretName: monitoring-datadog-operator-apikey
+    secretName: datadog-secret
+  appSecret:
+    operatorSecretName: monitoring-datadog-operator-appkey
     secretName: datadog-secret
   logs:
     enabled: true
