@@ -1,5 +1,4 @@
 datadog-operator:
-  apiKeySecretName: datadog-secret
   apiKey: ""
 datadog:
   logs:
