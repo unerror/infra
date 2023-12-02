@@ -1,6 +1,8 @@
 datadog-operator:
   apiKey: ""
   appKey: ""
+  watchNamespaces:
+    - ""
 datadog:
   apiSecret:
     operatorSecretName: monitoring-datadog-operator-apikey
