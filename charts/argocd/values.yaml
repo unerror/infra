@@ -11,6 +11,18 @@ argo-cd:
       serviceMonitor:
         enabled: true
   controller:
+    podAnnotations:
+      ad.datadoghq.com/argocd-application-controller.checks: |
+        {
+          "argocd": {
+            "init_config": {},
+            "instances": [
+              {
+                "app_controller_endpoint": "http://%%host%%:8082/metrics"
+              }
+            ]
+          }
+        }
     metrics:
       enabled: true
       serviceMonitor:
@@ -33,6 +45,18 @@ argo-cd:
       - --operation-processors
       - "10"
   server:
+    podAnnotations:
+      ad.datadoghq.com/argocd-server.checks: |
+        {
+          "argocd": {
+            "init_config": {},
+            "instances": [
+              {
+                "api_server_endpoint": "http://%%host%%:8083/metrics"
+              }
+            ]
+          }
+        }
     metrics:
       enabled: true
       serviceMonitor:
@@ -94,6 +118,18 @@ argo-cd:
         - argo.unerror.network
         - argo.i.unerror.network
   repoServer:
+    podAnnotations:
+      ad.datadoghq.com/argocd-repo-server.checks: |
+        {
+          "argocd": {
+            "init_config": {},
+            "instances": [
+              {
+                "repo_server_endpoint": "http://%%host%%:8084/metrics"
+              }
+            ]
+          }
+        }
     metrics:
       enabled: true
       serviceMonitor:
