@@ -4,9 +4,9 @@ dependencies:
   version: v1.13.2
 - name: external-dns
   repository: https://charts.bitnami.com/bitnami
-  version: 6.28.4
+  version: 6.28.5
 - name: casdoor
   repository: file://./vendor/casdoor/manifests/casdoor
   version: 0.1.0
-digest: sha256:d6d3e4d396459bff7e22cee55003907a4923407595393813fbc56adb25cd8085
-generated: "2023-11-18T21:09:50.960753-04:00"
+digest: sha256:b49d2abb2179ec0a2e6271c9f5af638a092c1d5cf1d1fff667f6c136490e7187
+generated: "2023-12-02T19:35:28.47775-04:00"
