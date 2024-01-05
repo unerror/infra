@@ -60,12 +60,15 @@ tls:
     - unerror.network
     - matrix.unerror.com
     - synapse.unerror.com
+    - synapse.matrix.unerror.com
     - unerror.com
     - www.unerror.com
     - element.unerror.com
     - element.unerror.network
     - chat.unerror.com
     - chat.unerror.network
+    - meetings-widget.matrix.unerror.com
+    - matrix-meetings-bot.matrix.unerror.com
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer
@@ -152,13 +155,16 @@ matrix-synapse:
       - hosts:
           - matrix.unerror.com
           - synapse.unerror.com
+          - synapse.matrix.unerror.com
         secretName: chatbox-crt-secret
     hosts:
       - matrix.unerror.com
       - synapse.unerror.com
+      - synapse.matrix.unerror.com
     csHosts:
       - matrix.unerror.com
       - synapse.unerror.com
+      - synapse.matrix.unerror.com
     wkHosts:
       - unerror.com
       - www.unerror.com
@@ -654,11 +660,11 @@ matrix-meetings-widget:
       traefik.ingress.kubernetes.io/router.tls: "true"
       traefik.ingress.kubernetes.io/router.tls.options: default
     hosts:
-      - meetings-widget.matrix.unerror.network
+      - meetings-widget.matrix.unerror.com
     tls:
       - secretName: chatbox-crt-secret
   settings:
-    hostname: unerror.com
+    hostname: matrix.unerror.com
 
 matrix-meetings-bot:
   image:
@@ -674,7 +680,7 @@ matrix-meetings-bot:
       traefik.ingress.kubernetes.io/router.tls: "true"
       traefik.ingress.kubernetes.io/router.tls.options: default
     hosts:
-    - host: meetings-widget.matrix.unerror.network
+    - host: matrix-meetings-bot.matrix.unerror.com
       paths:
         - path: /
           pathType: ImplementationSpecific
