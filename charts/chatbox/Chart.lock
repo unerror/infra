@@ -14,5 +14,11 @@ dependencies:
 - name: matrix-appservice-irc
   repository: file://./vendor/matrix-appservice-irc
   version: 0.2.0
-digest: sha256:7467d03063212a9ead2fbf07945ec23e0dd6da829fb5a6ef6a9070965b4025c9
-generated: "2024-01-04T16:05:56.989132811Z"
+- name: matrix-meetings-bot
+  repository: file://./vendor/matrix-meetings/charts/matrix-meetings-bot/
+  version: 0.1.0
+- name: matrix-meetings-widget
+  repository: file://./vendor/matrix-meetings/charts/matrix-meetings-widget/
+  version: 0.1.0
+digest: sha256:dde173b8268757930015a87daa72340af31e9a92b0bca7e95535def689671a42
+generated: "2024-01-05T15:25:58.293429-04:00"
