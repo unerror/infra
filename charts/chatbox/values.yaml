@@ -59,6 +59,7 @@ tls:
     - matrix.unerror.network
     - unerror.network
     - matrix.unerror.com
+    - synapse.unerror.com
     - unerror.com
     - www.unerror.com
     - element.unerror.com
@@ -150,11 +151,14 @@ matrix-synapse:
     tls:
       - hosts:
           - matrix.unerror.com
+          - synapse.unerror.com
         secretName: chatbox-crt-secret
     hosts:
       - matrix.unerror.com
+      - synapse.unerror.com
     csHosts:
       - matrix.unerror.com
+      - synapse.unerror.com
     wkHosts:
       - unerror.com
       - www.unerror.com
@@ -635,8 +639,13 @@ matrix-appservice-irc:
       engine: "postgres"
 
 matrix-meetings-widget:
+  image:
+    repository: ghcr.io/nordeck/matrix-meetings-widget
+    pullPolicy: IfNotPresent
+    tag: 1cb9ffb
   ingress:
     enabled: true
+    className: networking-traefik
     annotations:
       traefik.ingress.kubernetes.io/router.entrypoints: websecure
       traefik.ingress.kubernetes.io/router.tls: "true"
@@ -645,6 +654,8 @@ matrix-meetings-widget:
       - meetings-widget.matrix.unerror.network
     tls:
       - secretName: chatbox-crt-secret
+  settings:
+    hostname: unerror.com
   env:
     - name: REACT_APP_BOT_USER_ID
       value: '@meetings-bot:unerror.com'
@@ -652,130 +663,57 @@ matrix-meetings-widget:
       value: 'true'
 
 matrix-meetings-bot:
+  image:
+    repository: ghcr.io/nordeck/matrix-meetings-bot
+    pullPolicy: IfNotPresent
+    tag: ba8e630
+
+  ingress:
+    enabled: true
+    className: networking-traefik
+    annotations:
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      traefik.ingress.kubernetes.io/router.tls: "true"
+      traefik.ingress.kubernetes.io/router.tls.options: default
+    hosts:
+    - host: meetings-widget.matrix.unerror.network
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+    tls:
+    - secretName: chatbox-crt-secret
+
   settings:
-    replicaCount: 1
+    widgetUrl: https://meetings-widget.matrix.unerror.network
+    config: {}
+    additionalEnv:
+      ## Configure the URL of the homeserver to use
+      - name: HOMESERVER_URL
+        value: 'https://matrix.unerror.com'
+      - name: MATRIX_LINK_SHARE
+        value: 'https://matrix.unerror.com/#/'
+      - name: BOT_DISPLAYNAME
+        value: "Meetings Bot"
+      - name: CALENDAR_ROOM_NAME
+        value: "Meetings Calendar"
+      - name: LOG_LEVEL
+        value: 'info'
+      - name: AUTO_DELETION_OFFSET
+        value: '60'
 
-    image:
-      repository: ghcr.io/nordeck/matrix-meetings-bot
-      pullPolicy: IfNotPresent
-      # Overrides the image tag whose default is the chart appVersion.
-      tag: ""
+      ## Configure the access token (can be skipped if init.readBotTokenFromDB.enabled is activated)
+      # - name: ACCESS_TOKEN
+      #   secretKeyRef:
+      #     name: pg-credentials
+      #     key: db_host
 
-    imagePullSecrets: []
-    nameOverride: ""
-    fullnameOverride: ""
-
-    serviceAccount:
-      ## Specifies whether a service account should be created
-      create: false
-      ## Annotations to add to the service account
-      annotations: {}
-      ## The name of the service account to use.
-      ## If not set and create is true, a name is generated using the fullname template
-      name: ""
-
-    podAnnotations: {}
-
-    podSecurityContext:
-      fsGroup: 101
-
-    securityContext:
-      capabilities:
-        drop:
-          - ALL
-      readOnlyRootFilesystem: true
-      runAsNonRoot: true
-
-    service:
-      type: ClusterIP
-      port: 3000
-
-    ingress:
-      enabled: false
-      className: ""
-      annotations: {}
-        # kubernetes.io/ingress.class: nginx
-      # kubernetes.io/tls-acme: "true"
-      hosts:
-        - host: https://meetings-widget.matrix.unerror.network
-          paths:
-            - path: /
-              pathType: ImplementationSpecific
-      tls: []
-
-    resources: {}
-
-    nodeSelector: {}
-
-    tolerations: []
-
-    affinity: {}
-
-    ## Persist configuration to a persistent volume
-    persistence:
-      enabled: false
-      existingClaim:
-      storageClassName:
-      accessModes:
-        - ReadWriteMany
-      size: 8Gi
-
-    additionalVolumes: []
-
-    ## Application settings for the bot
-    settings:
-      ## The deployment url of the widget that should be used for the registered widgets
-      widgetUrl: https://meetings-widget.matrix.unerror.network
-
-      # Optional configuration that will override the defaults if enabled
-      config: {}
-        ## provide a custom DEFAULT_EVENTS_CONFIG to override the defaults
-        # defaultEventsConfig: |
-        #   {
-        #     "state_events": [],
-        #     "room_events": []
-        #   }
-
-        # provide a custom DEFAULT_EVENTS_CONFIG to override the defaults
-        #defaultWidgetLayoutsConfig: |
-      #  []
-
-      ## Add any environment variable from `docs/configuration.md` to customize the
-      ## bot. All mandatory configuration options are listed below. Some are already
-      ## automatically set by the helm chart.
-      additionalEnv:
-        ## Configure the URL of the homeserver to use
-        - name: HOMESERVER_URL
-          value: 'https://unerror.com'
-        - name: MATRIX_LINK_SHARE
-          value: 'https://unerror.com/#/'
-        - name: BOT_DISPLAYNAME
-          value: "Meetings Bot"
-        - name: CALENDAR_ROOM_NAME
-          value: "Meetings Calendar"
-        - name: LOG_LEVEL
-          value: 'info'
-        - name: AUTO_DELETION_OFFSET
-          value: '60'
-
-        ## Configure the access token (can be skipped if init.readBotTokenFromDB.enabled is activated)
-        # - name: ACCESS_TOKEN
-        #   secretKeyRef:
-        #     name: pg-credentials
-        #     key: db_host
-
-        ## Other optional variables
-        #- name: LOG_LEVEL
-      #  value: 'debug'
+      ## Other optional variables
+      #- name: LOG_LEVEL
+    #  value: 'debug'
 
 # Controls for the state that is shared with users who receive an invite
 # to a room
 room_prejoin_state:
-  # Additional state event types to share with users when they are invited
-  # to a room.
-  #
-  # By default, this list is empty (so only the default event types are shared).
-  #
   additional_event_types:
     - m.space.parent
     - net.nordeck.meetings.metadata
