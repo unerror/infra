@@ -1,3 +1,6 @@
 [submodule "charts/base/vendor/casdoor"]
 	path = charts/base/vendor/casdoor
 	url = https://github.com/casdoor/casdoor
+[submodule "charts/chatbox/vendor/matrix-meetings"]
+	path = charts/chatbox/vendor/matrix-meetings
+	url = git@github.com:nordeck/matrix-meetings.git
