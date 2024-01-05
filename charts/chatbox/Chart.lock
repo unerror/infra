@@ -20,5 +20,5 @@ dependencies:
 - name: matrix-meetings-widget
   repository: file://./vendor/matrix-meetings/charts/matrix-meetings-widget/
   version: 0.1.0
-digest: sha256:dde173b8268757930015a87daa72340af31e9a92b0bca7e95535def689671a42
-generated: "2024-01-05T15:25:58.293429-04:00"
+digest: sha256:7b691fafc78aa48b6e7b53a1bb57032c03dd6d31e060f2294ecfc46a873ec10c
+generated: "2024-01-05T16:15:45.384442-04:00"
