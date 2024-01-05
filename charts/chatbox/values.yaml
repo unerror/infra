@@ -656,11 +656,6 @@ matrix-meetings-widget:
       - secretName: chatbox-crt-secret
   settings:
     hostname: unerror.com
-  env:
-    - name: REACT_APP_BOT_USER_ID
-      value: '@meetings-bot:unerror.com'
-    - name: REACT_APP_DISPLAY_ALL_MEETINGS
-      value: 'true'
 
 matrix-meetings-bot:
   image:
@@ -686,31 +681,6 @@ matrix-meetings-bot:
   settings:
     widgetUrl: https://meetings-widget.matrix.unerror.network
     config: {}
-    additionalEnv:
-      ## Configure the URL of the homeserver to use
-      - name: HOMESERVER_URL
-        value: 'https://matrix.unerror.com'
-      - name: MATRIX_LINK_SHARE
-        value: 'https://matrix.unerror.com/#/'
-      - name: BOT_DISPLAYNAME
-        value: "Meetings Bot"
-      - name: CALENDAR_ROOM_NAME
-        value: "Meetings Calendar"
-      - name: LOG_LEVEL
-        value: 'info'
-      - name: AUTO_DELETION_OFFSET
-        value: '60'
-
-      ## Configure the access token (can be skipped if init.readBotTokenFromDB.enabled is activated)
-      # - name: ACCESS_TOKEN
-      #   secretKeyRef:
-      #     name: pg-credentials
-      #     key: db_host
-
-      ## Other optional variables
-      #- name: LOG_LEVEL
-    #  value: 'debug'
-
   # Controls for the state that is shared with users who receive an invite
   # to a room
   room_prejoin_state:
