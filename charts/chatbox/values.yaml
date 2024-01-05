@@ -711,10 +711,10 @@ matrix-meetings-bot:
       #- name: LOG_LEVEL
     #  value: 'debug'
 
-# Controls for the state that is shared with users who receive an invite
-# to a room
-room_prejoin_state:
-  additional_event_types:
-    - m.space.parent
-    - net.nordeck.meetings.metadata
-    - m.room.power_levels
+  # Controls for the state that is shared with users who receive an invite
+  # to a room
+  room_prejoin_state:
+    additional_event_types:
+      - m.space.parent
+      - net.nordeck.meetings.metadata
+      - m.room.power_levels
