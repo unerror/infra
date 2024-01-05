@@ -67,7 +67,7 @@ tls:
     - element.unerror.network
     - chat.unerror.com
     - chat.unerror.network
-    - meetings-widget.matrix.unerror.com
+    - chatbox-matrix-meetings-widget.matrix.unerror.com
     - matrix-meetings-bot.matrix.unerror.com
   issuerRef:
     name: letsencrypt-prod
@@ -659,8 +659,6 @@ matrix-meetings-widget:
       traefik.ingress.kubernetes.io/router.entrypoints: websecure
       traefik.ingress.kubernetes.io/router.tls: "true"
       traefik.ingress.kubernetes.io/router.tls.options: default
-    hosts:
-      - meetings-widget.matrix.unerror.com
     tls:
       - secretName: chatbox-crt-secret
   settings:
@@ -688,7 +686,7 @@ matrix-meetings-bot:
     - secretName: chatbox-crt-secret
 
   settings:
-    widgetUrl: https://meetings-widget.matrix.unerror.network
+    widgetUrl: https://chatbox-matrix-meetings-widget.matrix.unerror.com
     config: {}
   # Controls for the state that is shared with users who receive an invite
   # to a room
