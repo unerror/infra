@@ -356,6 +356,9 @@ matrix-synapse:
 
         ## Inbound federation transaction request
         - "/_matrix/federation/v1/send/"
+
+        ## Health check
+        - "/health"
     pusher:
       enabled: true
     federation_sender:
