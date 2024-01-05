@@ -60,15 +60,14 @@ tls:
     - unerror.network
     - matrix.unerror.com
     - synapse.unerror.com
-    - synapse.matrix.unerror.com
     - unerror.com
     - www.unerror.com
     - element.unerror.com
     - element.unerror.network
     - chat.unerror.com
     - chat.unerror.network
-    - chatbox-matrix-meetings-widget.matrix.unerror.com
-    - matrix-meetings-bot.matrix.unerror.com
+    - chatbox-matrix-meetings-widget.unerror.com
+    - matrix-meetings-bot.unerror.com
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer
@@ -155,16 +154,13 @@ matrix-synapse:
       - hosts:
           - matrix.unerror.com
           - synapse.unerror.com
-          - synapse.matrix.unerror.com
         secretName: chatbox-crt-secret
     hosts:
       - matrix.unerror.com
       - synapse.unerror.com
-      - synapse.matrix.unerror.com
     csHosts:
       - matrix.unerror.com
       - synapse.unerror.com
-      - synapse.matrix.unerror.com
     wkHosts:
       - unerror.com
       - www.unerror.com
@@ -656,14 +652,13 @@ matrix-meetings-widget:
     enabled: true
     className: networking-traefik
     annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+      external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
       traefik.ingress.kubernetes.io/router.entrypoints: websecure
       traefik.ingress.kubernetes.io/router.tls: "true"
       traefik.ingress.kubernetes.io/router.tls.options: default
-      cert-manager.io/cluster-issuer: letsencrypt-prod
-    tls:
-      - secretName: chatbox-crt-secret
   settings:
-    hostname: matrix.unerror.com
+    hostname: unerror.com
 
 matrix-meetings-bot:
   image:
@@ -679,7 +674,7 @@ matrix-meetings-bot:
       traefik.ingress.kubernetes.io/router.tls: "true"
       traefik.ingress.kubernetes.io/router.tls.options: default
     hosts:
-    - host: matrix-meetings-bot.matrix.unerror.com
+    - host: matrix-meetings-bot.unerror.com
       paths:
         - path: /
           pathType: ImplementationSpecific
@@ -687,7 +682,7 @@ matrix-meetings-bot:
     - secretName: chatbox-crt-secret
 
   settings:
-    widgetUrl: https://chatbox-matrix-meetings-widget.matrix.unerror.com
+    widgetUrl: https://chatbox-matrix-meetings-widget.unerror.com
     config: {}
   # Controls for the state that is shared with users who receive an invite
   # to a room
