@@ -2,3 +2,4 @@
 .terraform
 charts/*/charts
 .idea
+charts/*/Chart.lock

@@ -1,9 +1,0 @@
-dependencies:
-- name: coturn
-  repository: https://savercorp.github.io/helm-charts/
-  version: 0.0.1
-- name: traefik
-  repository: https://helm.traefik.io/traefik
-  version: 26.0.0
-digest: sha256:5a5446f4694d154a958d8c29f066908ea11ed7227c62b89451317e4329b1e85b
-generated: "2023-12-05T10:22:11.61072104Z"
