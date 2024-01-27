@@ -70,18 +70,19 @@ resource "argocd_application" "actions-runner-controller" {
     }
 
     sync_policy {
-      automated = {
+      automated {
         allow_empty = false
         prune       = true
         self_heal   = true
       }
 
       retry {
-        backoff = {
-          duration     = ""
-          max_duration = ""
+        backoff {
+          duration     = "30s"
+          max_duration = "2m"
+          factor       = 2
         }
-        limit = "0"
+        limit = 5
       }
     }
 
