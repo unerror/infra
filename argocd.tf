@@ -40,12 +40,12 @@ resource "argocd_repository" "infra-git" {
   ssh_private_key = data.sops_file.secrets.data["github_bot_sshkey"]
 }
 
-resource "argocd_repository" "oci-ghcr-actions-runner-controller" {
+resource "argocd_repository" "oci-ghcr" {
   enable_oci                = true
   githubapp_id              = data.sops_file.secrets.data["github_app_id"]
   githubapp_installation_id = data.sops_file.secrets.data["github_app_installation_id"]
   githubapp_private_key     = data.sops_file.secrets.data["github_app_private_key"]
-  repo                      = "ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set-controller"
+  repo                      = "ghcr.io"
   password                  = data.sops_file.secrets.data["github_bot_token"]
   type                      = "helm"
 }
