@@ -3,6 +3,14 @@ gha-runner-scale-set-controller:
     create: true
     name: gha-runner-controller-sa
 gha-runner-scale-set:
+  githubConfigUrl: "https://github.com/unerror"
+  maxRunners: 5
+  minRunners: 0
+  controllerServiceAccount:
+    namespace: default
+    name: gha-runner-controller-sa
+gha-runner-scale-set-dwn-rs:
+  githubConfigUrl: "https://github.com/enmand/dwn-rs"
   maxRunners: 5
   minRunners: 0
   controllerServiceAccount:
