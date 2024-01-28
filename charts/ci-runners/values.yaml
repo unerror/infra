@@ -21,6 +21,6 @@ gha-runner-scale-set-dwn-rs:
     spec:
       containers:
         - name: runner
-          image: "ghcr.io/quipper/actions-runner/cache:main-ubuntu20"
+          image: ghcr.io/quipper/actions-runner:main-ubuntu20
           imagePullPolicy: Always
           command: ["/home/runner/run.sh"]
