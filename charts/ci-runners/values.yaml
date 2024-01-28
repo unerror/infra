@@ -1,3 +1,10 @@
-actions-runner-controller:
+gha-runner-scale-set-controller:
+  serviceAccount:
+    create: true
+    name: gha-runner-controller-sa
+gha-runner-scale-set:
   maxRunners: 5
   minRunners: 0
+  controllerServiceAccount:
+    namespace: default
+    name: gha-runner-controller-sa
