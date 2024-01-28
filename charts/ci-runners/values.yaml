@@ -17,3 +17,10 @@ gha-runner-scale-set-dwn-rs:
   controllerServiceAccount:
     namespace: default
     name: gha-runner-controller-sa
+  template:
+    spec:
+      containers:
+        - name: runner
+          image: "ghcr.io/quipper/actions-runner/cache:main-ubuntu20"
+          imagePullPolicy: Always
+          command: ["/home/runner/run.sh"]
