@@ -40,6 +40,15 @@ resource "argocd_repository" "infra-git" {
   ssh_private_key = data.sops_file.secrets.data["github_bot_sshkey"]
 }
 
+resource "argocd_repository" "oci-ghcr" {
+  enable_oci                = true
+  githubapp_id              = data.sops_file.secrets.data["github_app_id"]
+  githubapp_installation_id = data.sops_file.secrets.data["github_app_installation_id"]
+  githubapp_private_key     = data.sops_file.secrets.data["github_app_private_key"]
+  repo                      = "ghcr.io"
+  type                      = "helm"
+}
+
 resource "argocd_application" "argocd" {
   metadata {
     name      = "argocd"
