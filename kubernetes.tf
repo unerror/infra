@@ -77,6 +77,22 @@ resource "kubernetes_secret" "dockerlogin" {
   ]
 }
 
+resource "kubernetes_secret" "ghcr-login" {
+  metadata {
+    name = "ghcr-registry"
+  }
+
+  data = {
+    ".dockerconfigjson" = data.sops_file.secrets.data["ghcr_login"]
+  }
+
+  type = "kubernetes.io/dockerconfigjson"
+
+  depends_on = [
+    digitalocean_kubernetes_cluster.une-k8s
+  ]
+}
+
 resource "kubernetes_namespace" "une-sys" {
   metadata {
     name = "une-sys"
