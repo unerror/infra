@@ -13,6 +13,8 @@ gha-runner-scale-set-dwn-rs:
   githubConfigUrl: "https://github.com/enmand/dwn-rs"
   maxRunners: 5
   minRunners: 0
+  runnerGroup: "enmand-dwn-rs"
+  runnerScaleSetName: "dwn-rs"
   controllerServiceAccount:
     namespace: default
     name: gha-runner-controller-sa
