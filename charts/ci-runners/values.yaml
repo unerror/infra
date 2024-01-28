@@ -2,10 +2,6 @@ gha-runner-scale-set-controller:
   serviceAccount:
     create: true
     name: gha-runner-controller-sa
-gha-runner-scale-set-controller-dwn-rs:
-  serviceAccount:
-    create: true
-    name: gha-runner-controller-sa-dwn-rs
 gha-runner-scale-set:
   githubConfigUrl: "https://github.com/unerror"
   maxRunners: 5
@@ -21,4 +17,4 @@ gha-runner-scale-set-dwn-rs:
   runnerScaleSetName: "dwn-rs"
   controllerServiceAccount:
     namespace: default
-    name: gha-runner-controller-sa-dwn-rs
+    name: gha-runner-controller-sa
