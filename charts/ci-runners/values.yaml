@@ -1,32 +1,3 @@
 actions-runner-controller:
-  replicaCount: 1
-  authSecret:
-    create: true
-  githubWebhookServer:
-    enabled: true
-    secret:
-      enabled: true
-      create: true
-    ingress:
-      enabled: true
-      ingressClassName: networking-traefik
-      annotations:
-        traefik.ingress.kubernetes.io/router.entrypoints: websecure
-        traefik.ingress.kubernetes.io/router.tls: "true"
-        traefik.ingress.kubernetes.io/router.tls.options: default
-        cert-manager.io/cluster-issuer: letsencrypt-prod
-      hosts:
-        - host: action-ci-runners.unerror.network
-          paths:
-            - path: /actions-runner-controller-github-webhook-server
-              pathType: ImplementationSpecific
-
-      tls:
-        - hosts:
-            - action-ci-runners.unerror.network
-          secretName: action-ci-runners-tls
-
-runners:
-  - org: unerror
-    min: 1
-    max: 5
+  maxRunners: 5
+  minRunners: 0
