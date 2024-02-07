@@ -10,7 +10,7 @@ dependencies:
     version: v1.14.1
     repository: https://charts.jetstack.io
   - name: external-dns
-    version: 6.31.5
+    version: 6.31.6
     repository: https://charts.bitnami.com/bitnami
   - name: casdoor
     repository: file://./vendor/casdoor/manifests/casdoor
