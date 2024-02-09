@@ -44,6 +44,28 @@ argo-cd:
       - "20"
       - --operation-processors
       - "10"
+  configs:
+    rbac:
+      policy.default: role:readonly
+      policy.csv: |
+        g, org_unerror/staff, role:admin
+        g, terraform, role:admin
+    cm:
+      url: https://argo.i.unerror.network
+      accounts.terraform: apiKey
+      helm.valuesFileSchemes: >-
+        secrets+gpg-import, secrets+gpg-import-kubernetes,
+        secrets+age-import, secrets+age-import-kubernetes,
+        secrets,
+        https,
+        file
+      repositories: |
+        - type: helm
+          name: stable
+          url: https://charts.helm.sh/stable
+        - type: helm
+          name: argo-cd
+          url: https://argoproj.github.io/argo-helm
   server:
     podAnnotations:
       ad.datadoghq.com/server.checks: |
@@ -75,27 +97,6 @@ argo-cd:
       issuer:
         kind: ClusterIssuer
         name: letsencrypt-prod
-    rbacConfig:
-      policy.default: role:readonly
-      policy.csv: |
-        g, org_unerror/staff, role:admin
-        g, terraform, role:admin
-    config:
-      url: https://argo.i.unerror.network
-      accounts.terraform: apiKey
-      helm.valuesFileSchemes: >-
-        secrets+gpg-import, secrets+gpg-import-kubernetes,
-        secrets+age-import, secrets+age-import-kubernetes,
-        secrets,
-        https,
-        file
-      repositories: |
-        - type: helm
-          name: stable
-          url: https://charts.helm.sh/stable
-        - type: helm
-          name: argo-cd
-          url: https://argoproj.github.io/argo-helm
     ingress:
       enabled: false
     ingressRoute:
