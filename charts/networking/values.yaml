@@ -18,7 +18,7 @@ tailscale:
       - name: USERSPACE
         value: "false"
       - name: ROUTES
-        value: 10.0.0.0/8,10.118.0.0/20
+        value: 10.245.0.0/16,10.244.5.128/25,10.118.0.0/20
       - name: EXTRA_ARGS
         value: "--hostname une-k8s-relay --advertise-tags=tag:une-k8s --snat-subnet-routes=true --netfilter-mode=on"
 
