@@ -147,12 +147,6 @@ traefik:
       nodePort: 32443
       tls:
         enabled: true
-    metrics:
-      name: metrics
-      port: 9100
-      expose: false
-      exposedPort: 9100
-      protocol: TCP
   service:
     annotations:
       service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: "true"
