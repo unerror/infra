@@ -124,19 +124,22 @@ traefik:
       port: 6667
       exposedPort: 6667
       protocol: TCP
-      expose: true
+      expose:
+        default: true
     ircs:
       name: ircs
       port: 6697
       exposedPort: 6697
       protocol: TCP
-      expose: true
+      expose:
+        default: true
     turn-tcp:
       name: turn-tcp
       port: 3478
       exposedPort: 3478
       protocol: TCP
-      expose: true
+      expose:
+        default: true
     web:
       name: web
       nodePort: 32080
