@@ -47,6 +47,12 @@ resource "argocd_repository" "oci-ghcr" {
   type       = "helm"
 }
 
+resource "argocd_repository" "oci-dockerhub" {
+  enable_oci = true
+  repo       = "oci://registry-1.docker.io/casbin"
+  type       = "helm"
+}
+
 resource "argocd_application" "argocd" {
   metadata {
     name      = "argocd"
