@@ -2,7 +2,7 @@ tailscale:
   replicas: 1
   image:
     repository: registry.digitalocean.com/une-k8s/networking/tailscale
-    tag: v1.58.2
+    tag: v1.62.1
   imagePullSecrets:
     - name: do-docker-registry
   secret: networking-tailscale-auth-relay
@@ -72,7 +72,7 @@ traefik:
     kind: Deployment
     additionalContainers:
       - name: tailscale-sidecar
-        image: registry.digitalocean.com/une-k8s/networking/tailscale:v1.58.2
+        image: registry.digitalocean.com/une-k8s/networking/tailscale:v1.62.1
         env:
           - name: KUBE_SECRET
             value: networking-tailscale-state-traefik-sidecar
