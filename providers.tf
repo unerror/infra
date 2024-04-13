@@ -6,12 +6,6 @@ provider "digitalocean" {
 
 }
 
-provider "helm" {
-  registry {
-    url = "oci://registry-1.docker.io/casbin/casdoor-helm-charts"
-  }
-}
-
 provider "argocd" {
   server_addr = var.argocd_server
   auth_token  = data.sops_file.secrets.data["argocd_token"]

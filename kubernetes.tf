@@ -15,6 +15,10 @@ provider "helm" {
       digitalocean_kubernetes_cluster.une-k8s.kube_config[0].cluster_ca_certificate
     )
   }
+
+  registry {
+    url = "oci://registry-1.docker.io/casbin/casdoor-helm-charts"
+  }
 }
 
 data "digitalocean_kubernetes_versions" "latest" {}
