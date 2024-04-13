@@ -18,8 +18,8 @@ provider "helm" {
 
   registry {
     url      = "oci://registry-1.docker.io/casbin/casdoor-helm-charts"
-    username = ""
-    password = ""
+    username = data.sops_file.secrets.data["dockerhub_login.username"]
+    password = data.sops_file.secrets.data["dockerhub_login.password"]
   }
 }
 
