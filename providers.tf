@@ -8,7 +8,7 @@ provider "digitalocean" {
 
 provider "helm" {
   registry {
-    url = "oci://registry-1.docker.io/casbin"
+    url = "oci://registry-1.docker.io/casbin/casdoor-helm-charts"
   }
 }
 
