@@ -17,7 +17,9 @@ provider "helm" {
   }
 
   registry {
-    url = "oci://registry-1.docker.io/casbin/casdoor-helm-charts"
+    url      = "oci://registry-1.docker.io/casbin/casdoor-helm-charts"
+    username = ""
+    password = ""
   }
 }
 
