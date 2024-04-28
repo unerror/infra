@@ -17,9 +17,25 @@ provider "helm" {
   }
 
   registry {
-    url      = "oci://registry-1.docker.io/casbin/casdoor-helm-charts"
-    username = data.sops_file.secrets.data["dockerhub_login.username"]
-    password = data.sops_file.secrets.data["dockerhub_login.password"]
+    url      = "oci://registry-1.docker.io"
+    username = data.sops_file.secrets.data["dockerhub_username"]
+    password = data.sops_file.secrets.data["dockerhub_password"]
+  }
+}
+
+resource "null_resource" "helm_login" {
+  triggers = {
+    always_run = timestamp()
+  }
+
+  provisioner "local-exec" {
+    command = <<-EOT
+      HELM_EXPERIMENTAL_OCI=1 \
+      helm registry login \
+        --username ${data.sops_file.secrets.data["dockerhub_username"]} \
+        --password '${data.sops_file.secrets.data["dockerhub_password"]}' \
+        oci://registry-1.docker.io
+    EOT
   }
 }
 
@@ -240,6 +256,7 @@ resource "argocd_application" "base" {
   }
 
   depends_on = [
+    null_resource.helm_login,
     helm_release.argocd,
     argocd_project.infra,
     argocd_repository.infra-git
