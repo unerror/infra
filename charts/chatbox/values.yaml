@@ -5,7 +5,7 @@ irc:
   replicaCount: 1
   image:
     repository: ghcr.io/ergochat/ergo
-    tag: v2.13.0
+    tag: v2.13.1
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
   imagePullSecrets: []
