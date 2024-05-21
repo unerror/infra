@@ -17,7 +17,7 @@ provider "helm" {
   }
 
   registry {
-    url      = "oci://registry-1.docker.io"
+    url      = "oci://registry-1.docker.io/casbin"
     username = data.sops_file.secrets.data["dockerhub_username"]
     password = data.sops_file.secrets.data["dockerhub_password"]
   }
@@ -34,7 +34,7 @@ resource "null_resource" "helm_login" {
       helm registry login \
         --username ${data.sops_file.secrets.data["dockerhub_username"]} \
         --password '${data.sops_file.secrets.data["dockerhub_password"]}' \
-        oci://registry-1.docker.io
+        oci://registry-1.docker.io/casbin
     EOT
   }
 }
