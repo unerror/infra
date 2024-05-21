@@ -26,7 +26,8 @@ data "digitalocean_project" "unerror-network" {
 # Kubernetes Cluster and default nodepool configuration
 # (WARNING: changing the defualt node pool size foces a replacement of the whole cluster)
 resource "digitalocean_kubernetes_cluster" "une-k8s" {
-  name = "une-k8s"
+  surge_upgrade = true
+  name          = "une-k8s"
 
   region = var.do_region
   # Grab the latest version slug from `doctl kubernetes options versions`
