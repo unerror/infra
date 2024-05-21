@@ -49,7 +49,7 @@ resource "argocd_repository" "oci-ghcr" {
 
 resource "argocd_repository" "oci-dockerhub" {
   enable_oci = true
-  repo       = "oci://registry-1.docker.io/casbin/casdoor-helm-charts"
+  repo       = "oci://registry-1.docker.io/casbin"
   type       = "helm"
 }
 

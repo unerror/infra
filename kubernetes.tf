@@ -15,28 +15,6 @@ provider "helm" {
       digitalocean_kubernetes_cluster.une-k8s.kube_config[0].cluster_ca_certificate
     )
   }
-
-  registry {
-    url      = "oci://registry-1.docker.io/casbin"
-    username = data.sops_file.secrets.data["dockerhub_username"]
-    password = data.sops_file.secrets.data["dockerhub_password"]
-  }
-}
-
-resource "null_resource" "helm_login" {
-  triggers = {
-    always_run = timestamp()
-  }
-
-  provisioner "local-exec" {
-    command = <<-EOT
-      HELM_EXPERIMENTAL_OCI=1 \
-      helm registry login \
-        --username ${data.sops_file.secrets.data["dockerhub_username"]} \
-        --password '${data.sops_file.secrets.data["dockerhub_password"]}' \
-        oci://registry-1.docker.io/casbin
-    EOT
-  }
 }
 
 data "digitalocean_kubernetes_versions" "latest" {}
@@ -256,7 +234,6 @@ resource "argocd_application" "base" {
   }
 
   depends_on = [
-    null_resource.helm_login,
     helm_release.argocd,
     argocd_project.infra,
     argocd_repository.infra-git

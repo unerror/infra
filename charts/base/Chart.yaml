@@ -12,6 +12,7 @@ dependencies:
   - name: external-dns
     version: 7.2.0
     repository: https://charts.bitnami.com/bitnami
-  - name: casdoor
-    repository: oci://registry-1.docker.io/casbin/casdoor-helm-charts
+  - name: casdoor-helm-charts
+    alias: casdoor
+    repository: oci://registry-1.docker.io/casbin
     version: v1.595.0
