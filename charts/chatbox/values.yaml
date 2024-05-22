@@ -419,8 +419,8 @@ matrix-synapse:
         - "/_synapse/admin/v1/media/"
         - "/_synapse/admin/v1/quarantine_media/"
         - "/_synapse/admin/v1/users/.*/media$"
-    paths:
-      - "/_matrix/media/.*"
+      paths:
+        - "/_matrix/media/.*"
     frontend_proxy:
       enabled: true
       listeners: [client]
