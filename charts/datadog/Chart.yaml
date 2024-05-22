@@ -8,7 +8,7 @@ appVersion: 1.2.0
 dependencies:
   - name: datadog-operator
     repository: https://helm.datadoghq.com
-    version: 1.6.0
+    version: 1.7.0
   - name: metrics-server
     repository: https://kubernetes-sigs.github.io/metrics-server
     version: 3.12.1
