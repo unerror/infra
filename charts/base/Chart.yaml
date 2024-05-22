@@ -10,7 +10,7 @@ dependencies:
     version: v1.14.5
     repository: https://charts.jetstack.io
   - name: external-dns
-    version: 7.5.0
+    version: 7.5.1
     repository: https://charts.bitnami.com/bitnami
   - name: casdoor-helm-charts
     alias: casdoor
