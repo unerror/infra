@@ -1,13 +1,13 @@
 {{- if (index .Values "argo-cd").server.ingressRoute.enabled -}}
 {{- $fullName := include "argocd.fullname" . -}}
-apiVersion: traefik.containo.us/v1alpha1
+apiVersion: traefik.io/v1alpha1
 kind: ServersTransport
 metadata:
   name: {{ $fullName }}-transport
 spec:
   insecureSkipVerify: true
 ---
-apiVersion: traefik.containo.us/v1alpha1
+apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
   name: {{ $fullName }}
@@ -33,7 +33,7 @@ spec:
   tls:
     secretName: {{ (index .Values "argo-cd").server.ingressRoute.tls.secretName }}
 ---
-apiVersion: traefik.containo.us/v1alpha1
+apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
   name: {{ $fullName }}-webhook
