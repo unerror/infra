@@ -647,7 +647,7 @@ matrix-meetings-widget:
   image:
     repository: ghcr.io/nordeck/matrix-meetings-widget
     pullPolicy: IfNotPresent
-    tag: 5e6c023
+    tag: 1.6.1
   ingress:
     enabled: true
     className: networking-traefik
@@ -664,7 +664,7 @@ matrix-meetings-bot:
   image:
     repository: ghcr.io/nordeck/matrix-meetings-bot
     pullPolicy: IfNotPresent
-    tag: 5e6c023
+    tag: 2.8.0
   ingress:
     enabled: true
     className: networking-traefik
