@@ -22,8 +22,6 @@ external-dns:
     - service
 casdoorDataSourceName: ""
 casdoor:
-  image:
-    tag: v1.446.0
   ingress:
     enabled: true
     className: networking-traefik
@@ -39,5 +37,5 @@ casdoor:
             pathType: ImplementationSpecific
     tls:
       - hosts:
-        - auth.unerror.network
+          - auth.unerror.network
         secretName: casdoor-ingress-tls
