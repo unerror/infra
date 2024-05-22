@@ -410,6 +410,7 @@ matrix-synapse:
     federation_sender:
       enabled: true
     media_repository:
+      listeners: [media]
       enabled: true
       csPaths:
         - "/_matrix/media/.*"
