@@ -97,6 +97,8 @@ traefik:
     kubernetesIngress:
       publishedService:
         enabled: true
+    kubernetesGateway:
+      experimentalChannel: true
   logs:
     access:
       enabled: true
