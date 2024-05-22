@@ -647,7 +647,7 @@ matrix-meetings-widget:
   image:
     repository: ghcr.io/nordeck/matrix-meetings-widget
     pullPolicy: IfNotPresent
-    tag: 1cb9ffb
+    tag: 5e6c023
   ingress:
     enabled: true
     className: networking-traefik
@@ -664,8 +664,7 @@ matrix-meetings-bot:
   image:
     repository: ghcr.io/nordeck/matrix-meetings-bot
     pullPolicy: IfNotPresent
-    tag: ba8e630
-
+    tag: 5e6c023
   ingress:
     enabled: true
     className: networking-traefik
@@ -674,12 +673,12 @@ matrix-meetings-bot:
       traefik.ingress.kubernetes.io/router.tls: "true"
       traefik.ingress.kubernetes.io/router.tls.options: default
     hosts:
-    - host: matrix-meetings-bot.unerror.com
-      paths:
-        - path: /
-          pathType: ImplementationSpecific
+      - host: matrix-meetings-bot.unerror.com
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
     tls:
-    - secretName: chatbox-crt-secret
+      - secretName: chatbox-crt-secret
 
   settings:
     widgetUrl: https://chatbox-matrix-meetings-widget.unerror.com
