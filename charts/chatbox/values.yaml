@@ -532,19 +532,21 @@ element-web:
   defaultServer:
     url: https://matrix.unerror.com
     name: Unerror Network Matrix
+  nginxConfig: |-
+    add_header X-Frame-Options SAMEORIGIN;
+    add_header X-Content-Type-Options nosniff;
+    add_header X-XSS-Protection "1; mode=block";
+    add_header Content-Security-Policy "frame-ancestors 'self'";
   config:
     disable_custom_urls: false
     disable_guests: false
     disable_login_language_selector: false
     disable_3pid_login: false
     brand: element
-    #integrations_ui_url: https://scalar.vector.im/
-    #integrations_rest_url: https://scalar.vector.im/api
-    #integrations_widgets_urls:
-    #  - https://scalar.vector.im/_matrix/integrations/v1
-    #  - https://scalar.vector.im/api
-    #  - https://scalar-staging.vector.im/_matrix/integrations/v1
-    #  - https://scalar-staging.vector.im/api
+    default_server_config:
+      m.homeserver:
+        base_url: "https://matrix.unerror.network"
+        server_name": "matrix.org"
     bug_report_endpoint_url: https://element.io/bugreports/submit
     defaultCountryCode: US
     showLabsSettings: true
