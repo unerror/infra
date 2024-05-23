@@ -101,7 +101,8 @@ matrix-synapse:
   publicServerName: matrix.unerror.com
   config:
     turnUris: ["turn:turn.unerror.network?transport=tcp"]
-    enableRegistration: true
+    enableRegistration: false
+    reportStats: false
   signingkey:
     job:
       enabled: false
@@ -165,28 +166,20 @@ matrix-synapse:
       - unerror.com
       - www.unerror.com
     paths:
-      - path: /_matrix/identity
-        pathType: ImplementationSpecific
+      - path: /_matrix/media
+        pathType: Prefix
         backend:
           service:
-            name: chatbox-ma1sd
-            port:
-              number: 8090
+            name: matrix-media-repo
+            port: 8000
     csPaths:
-      - path: /_matrix/client/r0/user_directory
-        pathType: ImplementationSpecific
+      - path: /_matrix/media
+        pathType: Prefix
         backend:
           service:
-            name: chatbox-ma1sd
-            port:
-              number: 8090
-      - path: /_matrix/client/(api/v1|r0|unstable)/login
-        pathType: ImplementationSpecific
-        backend:
-          service:
-            name: chatbox-ma1sd
-            port:
-              number: 8090
+          name: matrix-media-repo
+          port:
+            number: 8000
   wellknown:
     enabled: true
     server:
@@ -198,17 +191,17 @@ matrix-synapse:
         url: "https://matrix-x.unerror.com"
   extraConfig:
     oidc_providers:
-    - idp_id: "oidc"
-      idp_name: "Unerror Auth"
-      issuer: "https://auth.unerror.network/"
-      client_id: "569033edde20009501ab"
-      client_secret: "f87809d9060c00cf995e888e5966f611d4ee2fcf"
-      scopes: ["openid", "profile"]
-      allow_existing_users: true
-      user_mapping_provider:
-        config:
-          localpart_template: "{{ user.preferred_username }}"
-          confirm_localpart: true
+      - idp_id: "oidc"
+        idp_name: "Unerror Auth"
+        issuer: "https://auth.unerror.network/"
+        client_id: "569033edde20009501ab"
+        client_secret: "f87809d9060c00cf995e888e5966f611d4ee2fcf"
+        scopes: ["openid", "profile"]
+        allow_existing_users: true
+        user_mapping_provider:
+          config:
+            localpart_template: "{{ user.preferred_username }}"
+            confirm_localpart: true
     app_service_config_files:
       - /appservice-irc-registration.yaml
     max_upload_size: 128M
@@ -216,20 +209,7 @@ matrix-synapse:
     allow_guest_access: false
     auto_join_rooms:
       - "#offtopic:unerror.com"
-    account_threepid_delegates:
-      msisdn: http://chatbox-ma1sd:8090
     trusted_third_party_id_servers: [matrix.unerror.com]
-    password_providers:
-      - module: rest_auth_provider.RestAuthProvider
-        config:
-          endpoint: "http://chatbox-ma1sd:8090"
-          policy:
-            registration:
-              profile:
-                name: true
-            login:
-              profile:
-                name: false
     email:
       app_name: Unerror Network Matrix
       client_base_url: https://matrix.unerror.com
@@ -270,11 +250,6 @@ matrix-synapse:
       - name: appservice-irc-registration
         mountPath: /appservice-irc-registration.yaml
         subPath: appservice-registration-irc.yaml
-    extraCommands:
-      - apt-get update -qyy && apt-get install curl unzip -yqq
-      - curl -Lo /tmp/rest-provider.zip https://github.com/devplayer0/matrix-synapse-rest-password-provider/archive/master.zip
-      - cd /tmp && unzip rest-provider.zip
-      - cd /tmp/matrix-synapse-rest-password-provider-master && python setup.py install
     annotations:
       prometheus.io/scrape: "true"
       prometheus.io/path: /_synapse/metrics
@@ -298,11 +273,6 @@ matrix-synapse:
         prometheus.io/scrape: "true"
         prometheus.io/path: /_synapse/metrics
         prometheus.io/port: "9090"
-      extraCommands:
-        - apt-get update -qyy && apt-get install curl unzip -yqq
-        - curl -Lo /tmp/rest-provider.zip https://github.com/devplayer0/matrix-synapse-rest-password-provider/archive/master.zip
-        - cd /tmp && unzip rest-provider.zip
-        - cd /tmp/matrix-synapse-rest-password-provider-master && python setup.py install
       extraEnv:
         - name: LD_PRELOAD
           value: /usr/lib/x86_64-linux-gnu/libjemalloc.so.2
@@ -410,7 +380,6 @@ matrix-synapse:
     federation_sender:
       enabled: true
     media_repository:
-      listeners: [media]
       enabled: true
       csPaths:
         - "/_matrix/media/.*"
@@ -429,89 +398,8 @@ matrix-synapse:
         - "/_matrix/client/(api/v1|r0|v3|unstable)/keys/upload"
     synchrotron:
       enabled: true
-
-ma1sd:
-  image:
-    tag: 2.5.0
-  serviceAccount:
-    create: false
-  persistence:
-    enabled: false
-  ingress:
-    enabled: false
-    ingressClassName: networking-traefik
-    annotations:
-      traefik.ingress.kubernetes.io/router.entrypoints: websecure
-      traefik.ingress.kubernetes.io/router.tls: "true"
-      traefik.ingress.kubernetes.io/router.tls.options: default
-    hosts:
-      - host: matrix.unerror.com
-    tls:
-      - hosts:
-          - matrix.unerror.com
-        secretName: chatbox-crt-secret
-  config:
-    dns:
-      overwrite:
-        homeserver:
-          client:
-            - name: matrix.unerror.com
-              value: "http://chatbox-synapse-matrix-synapse:8008"
-    hashing:
-      algorithms:
-        - none
-        - sha256
-      delay: 2m
+    user_dir:
       enabled: true
-      hashStorageType: sql
-      pepperLength: 20
-      requests: 10
-      rotationPolicy: per_requests
-    key:
-      path: /etc/ma1sd/signing.key
-    matrix:
-      domain: unerror.com
-      v1: true
-      v2: true
-    server:
-      name: unerror.com
-      publicUrl: https://matrix.unerror.com
-    storage:
-      backend: postgresql
-    synapseSql:
-      enabled: true
-      type: postgresql
-    view:
-      session:
-        onTokenSubmit:
-          success: "/etc/ma1sd/templates/session/tokenSubmitSuccess-page.html"
-          failure: "/etc/ma1sd/templates/session/tokenSubmitSuccess.html"
-    notification:
-      handler:
-        email: "sendgrid"
-      handlers:
-        sendgrid:
-          identity:
-            from: chatbox@unerror.com
-            name: Unerror Chatbox Matrix
-          templates:
-            invite:
-              subject: You've been invited into a room on Unerror Network Matrix
-              body:
-                text: /etc/ma1sd/threepids/sms/invite-template.txt
-                html: /etc/ma1sd/threepids/email/invite-template.eml
-            session:
-              validation:
-                subject: Unerror Network Matrix Session Validation
-                body:
-                  text: /etc/ma1sd/threepids/sms/validate-template.txt
-                  html: /etc/ma1sd/threepids/email/validate-template.eml
-              unbind:
-                notification:
-                  subject: Unerror Network Matrix Session Unbind
-                  body:
-                    text: /etc/ma1sd/threepids/email/unbind-notification.eml
-                    html: /etc/ma1sd/threepids/sms/unbind-notification.txt
 
 element-web:
   ingress:
