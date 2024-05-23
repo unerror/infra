@@ -408,23 +408,13 @@ element-web:
     add_header X-XSS-Protection "1; mode=block";
     add_header Content-Security-Policy "frame-ancestors 'self'";
   config:
-    disable_custom_urls: false
-    disable_guests: false
-    disable_login_language_selector: false
-    disable_3pid_login: false
     default_server_config:
       m.homeserver:
         base_url: "https://matrix.unerror.com"
-        server_name": "matrix.org"
+        server_name": "matrix.unerror.com"
     bug_report_endpoint_url: https://element.io/bugreports/submit
     default_country_code: US
     show_labs_settings: true
-    features:
-      feature_pinning: labs
-      feature_custom_status: labs
-      feature_custom_tags: labs
-      feature_state_counters: labs
-    default_federate: true
     room_directory:
       servers:
         - unerror.com
