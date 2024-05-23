@@ -165,22 +165,6 @@ matrix-synapse:
     wkHosts:
       - unerror.com
       - www.unerror.com
-    paths:
-      - path: /_matrix/media
-        pathType: Prefix
-        backend:
-          service:
-            name: matrix-media-repo
-            port:
-              number: 8000
-    csPaths:
-      - path: /_matrix/media
-        pathType: Prefix
-        backend:
-          service:
-            name: matrix-media-repo
-            port:
-              number: 8000
   wellknown:
     enabled: true
     server:
@@ -398,8 +382,6 @@ matrix-synapse:
       csPaths:
         - "/_matrix/client/(api/v1|r0|v3|unstable)/keys/upload"
     synchrotron:
-      enabled: true
-    user_dir:
       enabled: true
 
 element-web:
