@@ -384,6 +384,7 @@ matrix-synapse:
 
 element-web:
   ingress:
+    className: networking-traefik
     enabled: true
     annotations:
       traefik.ingress.kubernetes.io/router.entrypoints: websecure
