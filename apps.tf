@@ -51,53 +51,53 @@ resource "argocd_application" "chatbox" {
   ]
 }
 
-resource "argocd_application" "actions-runner-controller" {
-  metadata {
-    name      = "actions-runner-controller"
-    namespace = "default"
-  }
-
-  wait = true
-
-  spec {
-    source {
-      repo_url        = var.infra_repo
-      path            = "charts/ci-runners"
-      target_revision = "HEAD"
-      helm {
-        value_files = ["values.yaml", "secrets://secrets.yaml"]
-      }
-    }
-
-    sync_policy {
-      automated {
-        allow_empty = false
-        prune       = true
-        self_heal   = true
-      }
-
-      retry {
-        backoff {
-          duration     = "30s"
-          max_duration = "2m"
-          factor       = 2
-        }
-        limit = 5
-      }
-    }
-
-    destination {
-      server    = "https://kubernetes.default.svc"
-      namespace = "default"
-    }
-  }
-
-  depends_on = [
-    helm_release.argocd,
-    argocd_project.infra,
-    argocd_repository.infra-git
-  ]
-}
+# resource "argocd_application" "actions-runner-controller" {
+#   metadata {
+#     name      = "actions-runner-controller"
+#     namespace = "default"
+#   }
+#
+#   wait = true
+#
+#   spec {
+#     source {
+#       repo_url        = var.infra_repo
+#       path            = "charts/ci-runners"
+#       target_revision = "HEAD"
+#       helm {
+#         value_files = ["values.yaml", "secrets://secrets.yaml"]
+#       }
+#     }
+#
+#     sync_policy {
+#       automated {
+#         allow_empty = false
+#         prune       = true
+#         self_heal   = true
+#       }
+#
+#       retry {
+#         backoff {
+#           duration     = "30s"
+#           max_duration = "2m"
+#           factor       = 2
+#         }
+#         limit = 5
+#       }
+#     }
+#
+#     destination {
+#       server    = "https://kubernetes.default.svc"
+#       namespace = "default"
+#     }
+#   }
+#
+#   depends_on = [
+#     helm_release.argocd,
+#     argocd_project.infra,
+#     argocd_repository.infra-git
+#   ]
+# }
 
 resource "argocd_application" "vaultwarden" {
   metadata {
