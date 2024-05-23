@@ -178,9 +178,9 @@ matrix-synapse:
         pathType: Prefix
         backend:
           service:
-          name: matrix-media-repo
-          port:
-            number: 8000
+            name: matrix-media-repo
+            port:
+              number: 8000
   wellknown:
     enabled: true
     server:
