@@ -335,6 +335,9 @@ matrix-synapse:
         ## The presence event stream
         - "/_matrix/client/(api/v1|r0|v3|unstable)/presence/"
 
+        ## Health check
+        - "/health"
+
       paths:
         ## Federation requests
         - "/_matrix/federation/v1/event/"
@@ -358,6 +361,7 @@ matrix-synapse:
 
         ## Inbound federation transaction request
         - "/_matrix/federation/v1/send/"
+
         ## Health check
         - "/health"
     pusher:
@@ -612,7 +616,6 @@ matrix-meetings-bot:
             pathType: ImplementationSpecific
     tls:
       - secretName: chatbox-crt-secret
-
   settings:
     widgetUrl: https://chatbox-matrix-meetings-widget.unerror.com
     config: {}
