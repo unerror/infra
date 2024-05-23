@@ -171,7 +171,8 @@ matrix-synapse:
         backend:
           service:
             name: matrix-media-repo
-            port: 8000
+            port:
+              number: 8000
     csPaths:
       - path: /_matrix/media
         pathType: Prefix
