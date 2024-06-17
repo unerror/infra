@@ -7,5 +7,5 @@ appVersion: latest
 
 dependencies:
   - name: discourse
-    version: 13.2.4
+    version: 13.2.5
     repository: oci://registry-1.docker.io/bitnamicharts
