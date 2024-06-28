@@ -11,7 +11,7 @@ dependencies:
     version: 3.9.6
   - name: sliding-sync-proxy
     repository: https://ananace.gitlab.io/charts/
-    version: 0.2.12
+    version: 0.2.13
   - name: element-web
     repository: https://ananace.gitlab.io/charts/
     version: 1.3.25
