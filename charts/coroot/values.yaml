@@ -19,7 +19,13 @@ coroot:
         - hosts:
             - metrics.i.unerror.network
           secretName: metrics-internal-ingress-tls
-
   clickhouse:
     persistence:
       size: 25Gi
+  corootClusterAgent:
+    config:
+      coroot_url: http://monitoring-coroot:8080
+  node-agent:
+    tracesEndpoint: http://monitoring-coroot:8080/v1/traces
+    logsEndpoint: http://monitoring-coroot:8080/v1/logs
+    profilesEndpoint: http://monitoring-coroot:8080/v1/profiles
