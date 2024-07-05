@@ -3,7 +3,7 @@ coroot:
     ingress:
       enabled: true
       className: networking-traefik
-      hostname: metrics.unerror.network
+      hostname: metrics.i.unerror.network
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-prod
         traefik.ingress.kubernetes.io/router.entrypoints: websecure-tsnet
