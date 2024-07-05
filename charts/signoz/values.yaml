@@ -6,17 +6,17 @@ signoz:
     ingress:
       enabled: true
       className: networking-traefik
-    annotations:
-      cert-manager.io/cluster-issuer: letsencrypt-prod
-      traefik.ingress.kubernetes.io/router.entrypoints: websecure
-      traefik.ingress.kubernetes.io/router.tls: "true"
-      traefik.ingress.kubernetes.io/router.tls.options: default
-    hosts:
-      - host: metrics.unerror.network
-        paths:
-          - path: /
-            pathType: ImplementationSpecific
-    tls:
-      - hosts:
-          - metrics.unerror.network
-        secretName: metrics-ingress-tls
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: "true"
+        traefik.ingress.kubernetes.io/router.tls.options: default
+      hosts:
+        - host: metrics.unerror.network
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
+      tls:
+        - hosts:
+            - metrics.unerror.network
+          secretName: metrics-ingress-tls
