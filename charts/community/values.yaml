@@ -9,8 +9,8 @@ discourse:
     readinessProbe:
       enabled: false
     plugins:
-    - https://github.com/discourse/discourse-chat-integration
-    - https://github.com/discourse/discourse-openid-connect
+      - https://github.com/discourse/discourse-chat-integration
+      - https://github.com/discourse/discourse-openid-connect
     # - https://github.com/codergautam/disable-email-verification-discourse
     # - https://github.com/discourse/discourse-subscriptions
     # - https://github.com/discourse/discourse-solved
@@ -28,24 +28,6 @@ discourse:
     enabled: true
   postgresql:
     enabled: false
-  redis:
-    master:
-      podAnnotations:
-        ad.datadoghq.com/redis.checks: |
-          {
-            "redisdb": {
-              "init_config": {},
-              "instances": [
-                {
-                  "host": "%%host%%",
-                  "port":"6379",
-                  "password":"%%env_REDIS_PASSWORD%%"
-                }
-              ]
-            }
-          }
-
-
     auth:
       username: discourse
   externalDatabase:
