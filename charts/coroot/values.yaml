@@ -10,15 +10,15 @@ coroot:
         traefik.ingress.kubernetes.io/router.tls: "true"
         traefik.ingress.kubernetes.io/router.tls.options: default
       hosts:
-        - host: metrics.unerror.network
+        - host: metrics.i.unerror.network
           paths:
             - path: /
               pathType: ImplementationSpecific
               port: 3301
       tls:
         - hosts:
-            - metrics.unerror.network
-          secretName: metrics-ingress-tls
+            - metrics.i.unerror.network
+          secretName: metrics-internal-ingress-tls
 
   clickhouse:
     persistence:
