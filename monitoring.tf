@@ -23,14 +23,6 @@ resource "argocd_application" "monitoring" {
         prune       = true
         self_heal   = true
       }
-
-      retry {
-        backoff {
-          duration     = ""
-          max_duration = ""
-        }
-        limit = "0"
-      }
     }
 
     destination {
