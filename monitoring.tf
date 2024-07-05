@@ -10,7 +10,7 @@ resource "argocd_application" "monitoring" {
 
     source {
       repo_url        = var.infra_repo
-      path            = "charts/monitoring"
+      path            = "charts/signoz"
       target_revision = "HEAD"
       helm {
         value_files = ["values.yaml"]
