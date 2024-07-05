@@ -116,9 +116,6 @@ traefik:
     - "--entryPoints.websecure-tsnet.address=[::]:443"
     - "--entryPoints.webwebsecure-tsnet.http.tls=true"
     - "--providers.kubernetesgateway.experimentalchannel=true"
-    - "--metrics.datadog=true"
-    - "--metrics.datadog.addrouterslabels=true"
-    - "--metrics.datadog.address=datadog-agent.une-sys.svc.cluster.local:8125"
   tlsOptions:
     default:
       preferServerCipherSuites: true

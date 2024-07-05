@@ -120,21 +120,6 @@ matrix-synapse:
       cp_max: 10
       cp_min: 5
   redis:
-    master:
-      podAnnotations:
-        ad.datadoghq.com/redis.checks: |
-          {
-            "redisdb": {
-              "init_config": {},
-              "instances": [
-                {
-                  "host": "%%host%%",
-                  "port":"6379",
-                  "password":"%%env_REDIS_PASSWORD%%"
-                }
-              ]
-            }
-          }
     enabled: true
   volumePermissions:
     enabled: false

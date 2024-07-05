@@ -11,18 +11,6 @@ argo-cd:
       serviceMonitor:
         enabled: true
   controller:
-    podAnnotations:
-      ad.datadoghq.com/application-controller.checks: |
-        {
-          "argocd": {
-            "init_config": {},
-            "instances": [
-              {
-                "app_controller_endpoint": "http://%%host%%:8082/metrics"
-              }
-            ]
-          }
-        }
     metrics:
       enabled: true
       serviceMonitor:
@@ -67,18 +55,6 @@ argo-cd:
           name: argo-cd
           url: https://argoproj.github.io/argo-helm
   server:
-    podAnnotations:
-      ad.datadoghq.com/server.checks: |
-        {
-          "argocd": {
-            "init_config": {},
-            "instances": [
-              {
-                "api_server_endpoint": "http://%%host%%:8083/metrics"
-              }
-            ]
-          }
-        }
     metrics:
       enabled: true
       serviceMonitor:
@@ -119,18 +95,6 @@ argo-cd:
         - argo.unerror.network
         - argo.i.unerror.network
   repoServer:
-    podAnnotations:
-      ad.datadoghq.com/repo-server.checks: |
-        {
-          "argocd": {
-            "init_config": {},
-            "instances": [
-              {
-                "repo_server_endpoint": "http://%%host%%:8084/metrics"
-              }
-            ]
-          }
-        }
     metrics:
       enabled: true
       serviceMonitor:
