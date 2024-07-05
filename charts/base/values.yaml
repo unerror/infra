@@ -8,7 +8,7 @@ external-dns:
   extraArgs:
     annotation-filter: external-dns.alpha.kubernetes.io/exclude notin (true)
   crd:
-    create: false # create for now in this chart, to avoid bitnami/charts#25967
+    create: true
   metrics:
     enabled: true
     serviceMonitor:
