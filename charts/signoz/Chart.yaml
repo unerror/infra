@@ -1,0 +1,11 @@
+apiVersion: v2
+name: signoz
+description: Kubernetes Infrastructure Monitoring for Unerror
+type: application
+version: 0.0.1
+appVersion: 0.49.1
+
+dependencies:
+  - name: signoz
+    version: 0.45.1
+    repository: https://charts.signoz.io

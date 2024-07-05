@@ -1,4 +1,4 @@
-/*resource "argocd_application" "monitoring" {
+resource "argocd_application" "monitoring" {
   metadata {
     name = "monitoring"
   }
@@ -13,7 +13,7 @@
       path            = "charts/monitoring"
       target_revision = "HEAD"
       helm {
-        value_files = ["secrets://secrets.yaml"]
+        value_files = ["values.yaml"]
       }
     }
 
@@ -44,7 +44,7 @@
     argocd_project.infra,
     argocd_repository.infra-git
   ]
-}*/
+}
 
 # resource "argocd_application" "monitoring" {
 #   metadata {
