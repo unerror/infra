@@ -16,6 +16,7 @@ signoz:
           paths:
             - path: /
               pathType: ImplementationSpecific
+              port: 3301
       tls:
         - hosts:
             - metrics.unerror.network
