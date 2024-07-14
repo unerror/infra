@@ -64,11 +64,11 @@ kubernetes_vpc_cidr = "10.118.0.0/20"
 kubernetes_tags     = ["kubernetes", "unerror", "unerror-network"]
 kubernetes_node_pools = [{
   name       = "worker-pool"
-  size       = "s-4vcpu-8gb"
-  node_count = 2
+  size       = "s-2vcpu-4gb"
+  node_count = 3
   auto_scale = true
-  max_nodes  = 3
-  min_nodes  = 2
+  max_nodes  = 5
+  min_nodes  = 3
 }]
 
 argocd_server = "argo.i.unerror.network:443"
