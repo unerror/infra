@@ -166,6 +166,7 @@ webdav:
       external-dns.alpha.kubernetes.io/target: lb-trfk.unerror.network
       external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
       traefik.ingress.kubernetes.io/router.entrypoints: websecure-tsnet
+      cert-manager.io/cluster-issuer: letsencrypt-prod
       traefik.ingress.kubernetes.io/router.tls: "true"
       traefik.ingress.kubernetes.io/router.tls.options: default
     tls:
