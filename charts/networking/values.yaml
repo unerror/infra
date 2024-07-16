@@ -158,7 +158,7 @@ traefik:
       external-dns.alpha.kubernetes.io/hostname: lb-trfk.unerror.network
       external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
 
-k8s-webdav:
+webdav:
   ingress:
     className: networking-traefik
     host: cloudsaves.i.unerror.network
