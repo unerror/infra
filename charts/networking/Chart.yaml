@@ -12,6 +12,6 @@ dependencies:
   - name: traefik
     version: 29.0.0
     repository: https://helm.traefik.io/traefik
-  - name: k8s-webdav
+  - name: webdav
     repository: https://danuk.github.io/k8s-webdav/
     version: 0.0.7
