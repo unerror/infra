@@ -5,6 +5,9 @@ discourse:
     email: community@unerror.network
     username: Unerror
   host: forums.unerror.network
+  sidekiq:
+    readinessProbe:
+      enabled: false
   discourse:
     readinessProbe:
       enabled: false
