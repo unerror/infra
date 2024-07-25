@@ -11,13 +11,13 @@ discourse:
     plugins:
       - https://github.com/discourse/discourse-chat-integration
       - https://github.com/discourse/discourse-openid-connect
-    # - https://github.com/codergautam/disable-email-verification-discourse
-    # - https://github.com/discourse/discourse-subscriptions
-    # - https://github.com/discourse/discourse-solved
-    # - https://github.com/discourse/discourse-follow
-    # - https://github.com/discourse/discourse-topic-voting
-    # - https://github.com/discourse/discourse-encrypt
-    # - https://github.com/discourse/discourse-yearly-review
+      # - https://github.com/codergautam/disable-email-verification-discourse
+      - https://github.com/discourse/discourse-subscriptions
+      - https://github.com/discourse/discourse-solved
+      - https://github.com/discourse/discourse-follow
+      - https://github.com/discourse/discourse-topic-voting
+      # - https://github.com/discourse/discourse-encrypt
+      - https://github.com/discourse/discourse-yearly-review
   siteName: Unerror Community
   smtp:
     enabled: true
