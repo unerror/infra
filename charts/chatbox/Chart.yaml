@@ -8,7 +8,7 @@ appVersion: "latest"
 dependencies:
   - name: matrix-synapse
     repository: https://ananace.gitlab.io/charts/
-    version: 3.9.9
+    version: 3.9.10
   - name: sliding-sync-proxy
     repository: https://ananace.gitlab.io/charts/
     version: 0.2.13
