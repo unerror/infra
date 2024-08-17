@@ -126,14 +126,6 @@ resource "helm_release" "base" {
   }
 }
 
-resource "time_sleep" "base-chart-install" {
-  depends_on = [
-    helm_release.base
-  ]
-
-  create_duration = "20s"
-}
-
 resource "helm_release" "certs" {
   name = "certs"
 
@@ -142,10 +134,6 @@ resource "helm_release" "certs" {
 
   values = [
     file("./charts/certs/values.yaml")
-  ]
-
-  depends_on = [
-    time_sleep.base-chart-install
   ]
 }
 
