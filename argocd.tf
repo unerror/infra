@@ -28,10 +28,6 @@ resource "helm_release" "argocd" {
       type  = "auto"
     }
   }
-
-  depends_on = [
-    time_sleep.base-chart-install
-  ]
 }
 
 resource "argocd_repository" "infra-git" {

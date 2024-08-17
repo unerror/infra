@@ -12,7 +12,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
         with:
-          submodules: 'true'
+          submodules: "true"
       - name: Setup AGE keyfile
         id: age-keyfile
         run: |
@@ -32,14 +32,19 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
-          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
           terraform_version: 1.2.x
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       - name: Terraform Format
         id: fmt
         run: terraform fmt -check
       - name: Terraform Init
         id: init
         run: terraform init
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       - name: Terraform Validate
         id: validate
         run: terraform validate -no-color
@@ -53,6 +58,8 @@ jobs:
           max_attempts: 10
           command: terraform plan -no-color -var-file=prod.tfvars
         env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           SOPS_AGE_KEY_FILE: ./keyfile.age
           SOPS_AGE_RECIPIENTS: ${{secrets.SOPS_AGE_RECIPIENTS}}
       - name: Update Pull Request
@@ -96,5 +103,7 @@ jobs:
           max_attempts: 3
           command: terraform apply -auto-approve -var-file=prod.tfvars
         env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           SOPS_AGE_KEY_FILE: ./keyfile.age
           SOPS_AGE_RECIPIENTS: ${{secrets.SOPS_AGE_RECIPIENTS}}
