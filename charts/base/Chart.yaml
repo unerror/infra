@@ -15,4 +15,4 @@ dependencies:
   - name: casdoor-helm-charts
     alias: casdoor
     repository: oci://registry-1.docker.io/casbin
-    version: v1.695.0
+    version: v1.706.0
