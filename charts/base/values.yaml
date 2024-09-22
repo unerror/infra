@@ -1,4 +1,6 @@
 cert-manager:
+  webhook:
+    timeoutSeconds: 29
   ingressShim:
     defaultIssuerGroup: cert-manager.io
     defaultIssuerKind: ClusterIssuer
