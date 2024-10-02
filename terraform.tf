@@ -23,7 +23,7 @@ terraform {
     }
     argocd = {
       source  = "oboukili/argocd"
-      version = "6.1.1"
+      version = "7.0.0"
     }
     digitalocean = {
       source  = "digitalocean/digitalocean"
