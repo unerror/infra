@@ -10,7 +10,7 @@ dependencies:
     version: 0.0.1
     repository: https://savercorp.github.io/helm-charts/
   - name: traefik
-    version: 31.1.1
+    version: 32.1.1
     repository: https://helm.traefik.io/traefik
   - name: webdav
     repository: https://danuk.github.io/k8s-webdav/
